@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-64:/values-cs/values-cs.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-70:/values-cs/values-cs.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/res/values-cs/values-cs.xml",
@@ -37,6 +37,23 @@
                         "startOffsets": "4015,4287,4524",
                         "endColumns": "75,79,76",
                         "endOffsets": "4086,4362,4596"
+                    }
+                },
+                {
+                    "source": "/home/rafael/.gradle/caches/transforms-3/67a11b39af4c8d004f7fbafda0bf650b/transformed/zxing-android-embedded-4.3.0/res/values-cs/values-cs.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,114,161,311",
+                        "endColumns": "58,46,149,83",
+                        "endOffsets": "109,156,306,390"
+                    },
+                    "to": {
+                        "startLines": "118,119,120,121",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "9799,9858,9905,10055",
+                        "endColumns": "58,46,149,83",
+                        "endOffsets": "9853,9900,10050,10134"
                     }
                 },
                 {

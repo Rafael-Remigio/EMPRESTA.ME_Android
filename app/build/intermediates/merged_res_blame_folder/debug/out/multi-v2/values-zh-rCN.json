@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-64:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-70:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/res/values-zh-rCN/values-zh-rCN.xml",
@@ -54,6 +54,23 @@
                         "startOffsets": "3467,3544,3692,3777,3937,4283,4357,7842,7920,7995,8060,8194,8267,8421,8590,8656",
                         "endColumns": "76,75,84,90,76,73,76,77,74,64,64,72,74,67,65,115",
                         "endOffsets": "3539,3615,3772,3863,4009,4352,4429,7915,7990,8055,8120,8262,8337,8484,8651,8767"
+                    }
+                },
+                {
+                    "source": "/home/rafael/.gradle/caches/transforms-3/67a11b39af4c8d004f7fbafda0bf650b/transformed/zxing-android-embedded-4.3.0/res/values-zh-rCN/values-zh-rCN.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,104,151,238",
+                        "endColumns": "48,46,86,68",
+                        "endOffsets": "99,146,233,302"
+                    },
+                    "to": {
+                        "startLines": "116,117,118,119",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "8772,8821,8868,8955",
+                        "endColumns": "48,46,86,68",
+                        "endOffsets": "8816,8863,8950,9019"
                     }
                 },
                 {
