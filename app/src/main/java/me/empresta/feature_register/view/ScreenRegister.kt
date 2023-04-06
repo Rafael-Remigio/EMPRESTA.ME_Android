@@ -15,14 +15,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.empresta.Black
-import me.empresta.BrightOrange
-import me.empresta.Grey
-import me.empresta.White
+import me.empresta.*
 
 
 @Composable
-fun ScreenRegister(){
+fun ScreenRegister(
+    navController: NavController){
 
 
     val scaffoldState = rememberScaffoldState()
@@ -103,7 +101,7 @@ fun ScreenRegister(){
             Box(modifier = Modifier.padding(5.dp))
 
 
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = { navController.navigate(EmprestameScreen.Feed.name)},
                 content = {Text(text = "Register", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
                 colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
                 modifier=Modifier.width(200.dp).height(60.dp),
@@ -136,7 +134,7 @@ fun ScreenRegister(){
         Box(modifier = Modifier.padding(10.dp))
 
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = { navController.navigate(EmprestameScreen.Feed.name) },
             content = {Text(text = "Load my Data", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
             colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
             modifier=Modifier.width(200.dp).height(60.dp),

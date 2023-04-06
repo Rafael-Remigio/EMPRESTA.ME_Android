@@ -114,4 +114,8 @@
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
     <string msgid="1672349317127674378" name="tab">"Fitxa"</string>
     <string msgid="5946805113151406391" name="template_percent">"Ehuneko <ns1:g id="PERCENTAGE">%1$d</ns1:g>."</string>
+    <string name="zxing_app_name">Barra-kode Eskanerra</string>
+    <string name="zxing_button_ok">Ados</string>
+    <string name="zxing_msg_camera_framework_bug">Barkatu, Android kamerak arazo bat izan du. Behar bada gailua berrabiarazi beharko duzu.</string>
+    <string name="zxing_msg_default_status">Kokatu barra-kode bat laukizuzenaren barruan eskaneatzeko.</string>
 </resources>
