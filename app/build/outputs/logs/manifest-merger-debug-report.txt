@@ -4,6 +4,7 @@ ADDED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidMani
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
+MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.activity:activity-compose:1.6.1] /home/rafael/.gradle/caches/transforms-3/58523d70836e945cbce5c22410b8b8f4/transformed/activity-compose-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1] /home/rafael/.gradle/caches/transforms-3/aa04827ef95adbd2f90a6fe092beb9ee/transformed/lifecycle-viewmodel-compose-2.5.1/AndroidManifest.xml:17:1-24:12
@@ -28,8 +29,8 @@ MERGED from [androidx.compose.ui:ui-graphics:1.3.3] /home/rafael/.gradle/caches/
 MERGED from [androidx.compose.ui:ui-unit:1.3.3] /home/rafael/.gradle/caches/transforms-3/4ee58d8016aae54a58593f3a7a3beba5/transformed/ui-unit-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.ui:ui-geometry:1.3.3] /home/rafael/.gradle/caches/transforms-3/34a85ab4c11e2066a827e9803319d84f/transformed/ui-geometry-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime:1.3.3] /home/rafael/.gradle/caches/transforms-3/bed0a8e8645430145a1b23e8bd9056b4/transformed/runtime-1.3.3/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/c93d4ca366170a55e3da27d272262fac/transformed/navigation-runtime-ktx-2.4.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.navigation:navigation-runtime:2.4.1] /home/rafael/.gradle/caches/transforms-3/a2d1085825d65887825daaffc097c3ee/transformed/navigation-runtime-2.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/3b5d8a5ef781da1272b9663ed16ab22f/transformed/navigation-runtime-ktx-2.5.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.5.3] /home/rafael/.gradle/caches/transforms-3/ec4bd8c9817634b0c25a157c90449182/transformed/navigation-runtime-2.5.3/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.material:material:1.8.0] /home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/rafael/.gradle/caches/transforms-3/fe5722c2d28764b765710ac6c318c6e8/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.camera:camera-view:1.2.2] /home/rafael/.gradle/caches/transforms-3/a1cca42d45a19a38734680624db5b60e/transformed/camera-view-1.2.2/AndroidManifest.xml:17:1-22:12
@@ -40,8 +41,8 @@ MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/rafael/.gradle/caches/t
 MERGED from [androidx.fragment:fragment:1.3.6] /home/rafael/.gradle/caches/transforms-3/93ac10b68cc6b2ecdb3339310a897f91/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.6.1] /home/rafael/.gradle/caches/transforms-3/b8c98a0537bfebf3feab4e6d73c21896/transformed/activity-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.activity:activity-ktx:1.6.1] /home/rafael/.gradle/caches/transforms-3/d9927077d2bfcb6f54ed7d747fd95171/transformed/activity-ktx-1.6.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.navigation:navigation-common-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/77fe6b939cefe7c8ee9d082be9fdbc7e/transformed/navigation-common-ktx-2.4.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.navigation:navigation-common:2.4.1] /home/rafael/.gradle/caches/transforms-3/4f83763965561c319331e979718061dd/transformed/navigation-common-2.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/9f92e8908c55b347327e74f83e73ea3e/transformed/navigation-common-ktx-2.5.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.5.3] /home/rafael/.gradle/caches/transforms-3/a2d0ea161f54ce2794f6cb37fd9ac5fc/transformed/navigation-common-2.5.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/dc804ff42597da713ad05c49ffae2f0b/transformed/lifecycle-viewmodel-ktx-2.5.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/rafael/.gradle/caches/transforms-3/408114025130bb6daf47149094ff07ef/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/rafael/.gradle/caches/transforms-3/4a59aef806fb7c7447a1dadffb6842fc/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -72,12 +73,12 @@ MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/rafael/.gradle/
 MERGED from [androidx.compose.ui:ui-util:1.3.3] /home/rafael/.gradle/caches/transforms-3/c2d5723d5f29962e760c460a6903b56d/transformed/ui-util-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.0] /home/rafael/.gradle/caches/transforms-3/cc6480639cb5dc42735f8293e1e59a36/transformed/savedstate-ktx-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate:1.2.0] /home/rafael/.gradle/caches/transforms-3/6c799608a67394e2261b50f8508ea239/transformed/savedstate-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /home/rafael/.gradle/caches/transforms-3/d64e7ca6b93f4a6c092b1dd37cf249d6/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:17:1-37:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/bd2013a7ba3836a0788f3d8b2296a53a/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /home/rafael/.gradle/caches/transforms-3/be1b7549f845d0634244d77963e36e33/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /home/rafael/.gradle/caches/transforms-3/d4c7398b925a7fa33014a3b3d90293a8/transformed/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.0] /home/rafael/.gradle/caches/transforms-3/e92ae1b118cf1d765af55ea31cc53fa1/transformed/profileinstaller-1.2.0/AndroidManifest.xml:17:1-50:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafael/.gradle/caches/transforms-3/b4e080daf9c24dca88ead6ef595a4d7e/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6d9cccdff1fb1b85f5a78fc9236e2a3f/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
@@ -184,6 +185,8 @@ uses-sdk
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
+MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity-compose:1.6.1] /home/rafael/.gradle/caches/transforms-3/58523d70836e945cbce5c22410b8b8f4/transformed/activity-compose-1.6.1/AndroidManifest.xml:20:5-44
@@ -232,10 +235,10 @@ MERGED from [androidx.compose.ui:ui-geometry:1.3.3] /home/rafael/.gradle/caches/
 MERGED from [androidx.compose.ui:ui-geometry:1.3.3] /home/rafael/.gradle/caches/transforms-3/34a85ab4c11e2066a827e9803319d84f/transformed/ui-geometry-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime:1.3.3] /home/rafael/.gradle/caches/transforms-3/bed0a8e8645430145a1b23e8bd9056b4/transformed/runtime-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime:1.3.3] /home/rafael/.gradle/caches/transforms-3/bed0a8e8645430145a1b23e8bd9056b4/transformed/runtime-1.3.3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/c93d4ca366170a55e3da27d272262fac/transformed/navigation-runtime-ktx-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/c93d4ca366170a55e3da27d272262fac/transformed/navigation-runtime-ktx-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-runtime:2.4.1] /home/rafael/.gradle/caches/transforms-3/a2d1085825d65887825daaffc097c3ee/transformed/navigation-runtime-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-runtime:2.4.1] /home/rafael/.gradle/caches/transforms-3/a2d1085825d65887825daaffc097c3ee/transformed/navigation-runtime-2.4.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/3b5d8a5ef781da1272b9663ed16ab22f/transformed/navigation-runtime-ktx-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/3b5d8a5ef781da1272b9663ed16ab22f/transformed/navigation-runtime-ktx-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.5.3] /home/rafael/.gradle/caches/transforms-3/ec4bd8c9817634b0c25a157c90449182/transformed/navigation-runtime-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.5.3] /home/rafael/.gradle/caches/transforms-3/ec4bd8c9817634b0c25a157c90449182/transformed/navigation-runtime-2.5.3/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.material:material:1.8.0] /home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.material:material:1.8.0] /home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/rafael/.gradle/caches/transforms-3/fe5722c2d28764b765710ac6c318c6e8/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
@@ -256,10 +259,10 @@ MERGED from [androidx.activity:activity:1.6.1] /home/rafael/.gradle/caches/trans
 MERGED from [androidx.activity:activity:1.6.1] /home/rafael/.gradle/caches/transforms-3/b8c98a0537bfebf3feab4e6d73c21896/transformed/activity-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity-ktx:1.6.1] /home/rafael/.gradle/caches/transforms-3/d9927077d2bfcb6f54ed7d747fd95171/transformed/activity-ktx-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity-ktx:1.6.1] /home/rafael/.gradle/caches/transforms-3/d9927077d2bfcb6f54ed7d747fd95171/transformed/activity-ktx-1.6.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.navigation:navigation-common-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/77fe6b939cefe7c8ee9d082be9fdbc7e/transformed/navigation-common-ktx-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-common-ktx:2.4.1] /home/rafael/.gradle/caches/transforms-3/77fe6b939cefe7c8ee9d082be9fdbc7e/transformed/navigation-common-ktx-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-common:2.4.1] /home/rafael/.gradle/caches/transforms-3/4f83763965561c319331e979718061dd/transformed/navigation-common-2.4.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.navigation:navigation-common:2.4.1] /home/rafael/.gradle/caches/transforms-3/4f83763965561c319331e979718061dd/transformed/navigation-common-2.4.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/9f92e8908c55b347327e74f83e73ea3e/transformed/navigation-common-ktx-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.5.3] /home/rafael/.gradle/caches/transforms-3/9f92e8908c55b347327e74f83e73ea3e/transformed/navigation-common-ktx-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.5.3] /home/rafael/.gradle/caches/transforms-3/a2d0ea161f54ce2794f6cb37fd9ac5fc/transformed/navigation-common-2.5.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.5.3] /home/rafael/.gradle/caches/transforms-3/a2d0ea161f54ce2794f6cb37fd9ac5fc/transformed/navigation-common-2.5.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/dc804ff42597da713ad05c49ffae2f0b/transformed/lifecycle-viewmodel-ktx-2.5.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/dc804ff42597da713ad05c49ffae2f0b/transformed/lifecycle-viewmodel-ktx-2.5.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/rafael/.gradle/caches/transforms-3/408114025130bb6daf47149094ff07ef/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
@@ -320,18 +323,18 @@ MERGED from [androidx.savedstate:savedstate-ktx:1.2.0] /home/rafael/.gradle/cach
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.0] /home/rafael/.gradle/caches/transforms-3/cc6480639cb5dc42735f8293e1e59a36/transformed/savedstate-ktx-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.2.0] /home/rafael/.gradle/caches/transforms-3/6c799608a67394e2261b50f8508ea239/transformed/savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.2.0] /home/rafael/.gradle/caches/transforms-3/6c799608a67394e2261b50f8508ea239/transformed/savedstate-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /home/rafael/.gradle/caches/transforms-3/d64e7ca6b93f4a6c092b1dd37cf249d6/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.1] /home/rafael/.gradle/caches/transforms-3/d64e7ca6b93f4a6c092b1dd37cf249d6/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/bd2013a7ba3836a0788f3d8b2296a53a/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/bd2013a7ba3836a0788f3d8b2296a53a/transformed/lifecycle-runtime-2.5.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /home/rafael/.gradle/caches/transforms-3/be1b7549f845d0634244d77963e36e33/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /home/rafael/.gradle/caches/transforms-3/be1b7549f845d0634244d77963e36e33/transformed/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /home/rafael/.gradle/caches/transforms-3/d4c7398b925a7fa33014a3b3d90293a8/transformed/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.5.1] /home/rafael/.gradle/caches/transforms-3/d4c7398b925a7fa33014a3b3d90293a8/transformed/lifecycle-livedata-core-2.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/rafael/.gradle/caches/transforms-3/26ded2edba86a9f74f387e6bc33c7208/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/transforms-3/0f83c5d5bf7c6e76956157cb777fbf37/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.0] /home/rafael/.gradle/caches/transforms-3/e92ae1b118cf1d765af55ea31cc53fa1/transformed/profileinstaller-1.2.0/AndroidManifest.xml:21:5-22:38
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.0] /home/rafael/.gradle/caches/transforms-3/e92ae1b118cf1d765af55ea31cc53fa1/transformed/profileinstaller-1.2.0/AndroidManifest.xml:21:5-22:38
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafael/.gradle/caches/transforms-3/b4e080daf9c24dca88ead6ef595a4d7e/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41

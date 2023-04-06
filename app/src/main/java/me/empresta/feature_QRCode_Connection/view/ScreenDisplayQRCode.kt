@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import me.empresta.Black
 import me.empresta.BrightOrange
 import me.empresta.Grey
@@ -22,7 +23,7 @@ import me.empresta.White
 
 
 @Composable
-fun ScreenDisplayQRCode() {
+fun ScreenDisplayQRCode(navController: NavController) {
 
 
     val bitmap: Bitmap = DisplayQRCodeView().invoke()

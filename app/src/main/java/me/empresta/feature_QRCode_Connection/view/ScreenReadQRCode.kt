@@ -24,13 +24,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import me.empresta.Black
 import me.empresta.White
 import me.empresta.feature_QRCode_Connection.use_case.QRCodeAnalyser
 
 
 @Composable
-fun ScreenReadQRCode() {
+fun ScreenReadQRCode(navController: NavController) {
 
     // Camera Stuff
     var code by remember {

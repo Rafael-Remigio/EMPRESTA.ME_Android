@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-70:/values/values.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-71:/values/values.xml",
             "map": [
                 {
                     "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values/colors.xml",
@@ -148,6 +148,25 @@
                     }
                 },
                 {
+                    "source": "/home/rafael/.gradle/caches/transforms-3/ec4bd8c9817634b0c25a157c90449182/transformed/navigation-runtime-2.5.3/res/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,10,13",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,108,412,527",
+                        "endLines": "2,9,12,15",
+                        "endColumns": "52,24,24,24",
+                        "endOffsets": "103,407,522,637"
+                    },
+                    "to": {
+                        "startLines": "1690,8921,11995,11998",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "108300,604979,719634,719749",
+                        "endLines": "1690,8927,11997,12000",
+                        "endColumns": "52,24,24,24",
+                        "endOffsets": "108348,605278,719744,719859"
+                    }
+                },
+                {
                     "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values/themes.xml",
                     "from": {
                         "startLines": "2",
@@ -224,22 +243,22 @@
                     }
                 },
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/a2d1085825d65887825daaffc097c3ee/transformed/navigation-runtime-2.4.1/res/values/values.xml",
+                    "source": "/home/rafael/.gradle/caches/transforms-3/a2d0ea161f54ce2794f6cb37fd9ac5fc/transformed/navigation-common-2.5.3/res/values/values.xml",
                     "from": {
-                        "startLines": "2,3,10,13",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,108,412,527",
-                        "endLines": "2,9,12,15",
-                        "endColumns": "52,24,24,24",
-                        "endOffsets": "103,407,522,637"
+                        "startLines": "2,15,21,27,30",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,694,938,1185,1318",
+                        "endLines": "14,20,26,29,34",
+                        "endColumns": "24,24,24,24,24",
+                        "endOffsets": "689,933,1180,1313,1495"
                     },
                     "to": {
-                        "startLines": "1690,8921,11995,11998",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "108300,604979,719634,719749",
-                        "endLines": "1690,8927,11997,12000",
-                        "endColumns": "52,24,24,24",
-                        "endOffsets": "108348,605278,719744,719859"
+                        "startLines": "11967,11980,11986,11992,12139",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "718371,719010,719254,719501,724130",
+                        "endLines": "11979,11985,11991,11994,12143",
+                        "endColumns": "24,24,24,24,24",
+                        "endOffsets": "719005,719249,719496,719629,724307"
                     }
                 },
                 {
@@ -295,25 +314,6 @@
                         "endLines": "523,524,525,526,1667,8920,8931,12474,12486,12494",
                         "endColumns": "11,59,51,44,59,24,24,24,24,24",
                         "endOffsets": "26239,26299,26351,26396,107181,604974,605409,736326,736766,737075"
-                    }
-                },
-                {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/4f83763965561c319331e979718061dd/transformed/navigation-common-2.4.1/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,15,21,27,30",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,694,938,1185,1318",
-                        "endLines": "14,20,26,29,34",
-                        "endColumns": "24,24,24,24,24",
-                        "endOffsets": "689,933,1180,1313,1495"
-                    },
-                    "to": {
-                        "startLines": "11967,11980,11986,11992,12139",
-                        "startColumns": "4,4,4,4,4",
-                        "startOffsets": "718371,719010,719254,719501,724130",
-                        "endLines": "11979,11985,11991,11994,12143",
-                        "endColumns": "24,24,24,24,24",
-                        "endOffsets": "719005,719249,719496,719629,724307"
                     }
                 },
                 {
