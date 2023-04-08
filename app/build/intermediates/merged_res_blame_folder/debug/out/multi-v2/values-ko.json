@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-71:/values-ko/values-ko.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-75:/values-ko/values-ko.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/67a11b39af4c8d004f7fbafda0bf650b/transformed/zxing-android-embedded-4.3.0/res/values-ko/values-ko.xml",

@@ -10,6 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -28,8 +31,20 @@ fun ScreenFeed(
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        scaffoldState = scaffoldState
-
+        scaffoldState = scaffoldState,
+        bottomBar = {BottomBar(
+            items = listOf(
+                BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode)
+        ),
+            navController = navController,
+            onItemClick = {
+                navController.navigate(it.route)
+            }
+        )
+        }
     )
 
     {

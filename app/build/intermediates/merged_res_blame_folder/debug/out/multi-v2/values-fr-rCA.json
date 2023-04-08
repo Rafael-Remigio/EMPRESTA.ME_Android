@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-71:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-75:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/ff6e108f33ce65a5df2cf4987f9c5433/transformed/material3-1.0.1/res/values-fr-rCA/values-fr-rCA.xml",

@@ -4,6 +4,8 @@ ADDED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidMani
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-27:12
+MERGED from [androidx.room:room-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/ee4c75ca739334b4f19ebb6e6a116a23/transformed/room-ktx-2.5.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.activity:activity-compose:1.6.1] /home/rafael/.gradle/caches/transforms-3/58523d70836e945cbce5c22410b8b8f4/transformed/activity-compose-1.6.1/AndroidManifest.xml:17:1-22:12
@@ -83,6 +85,8 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.2.0] /home/rafael/.gra
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafael/.gradle/caches/transforms-3/b4e080daf9c24dca88ead6ef595a4d7e/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6d9cccdff1fb1b85f5a78fc9236e2a3f/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/fff9c17fbdb1c5a38217bdf93a63d9f8/transformed/exifinterface-1.3.2/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/ca3466ecd41ced983ab23d4fe877e81f/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.3.1] /home/rafael/.gradle/caches/transforms-3/785b80d6d4a5f9e42a15ef990a681379/transformed/sqlite-2.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rafael/.gradle/caches/transforms-3/bdeac150b6ce0fcc7996d2b9a9f9c390/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/rafael/.gradle/caches/transforms-3/a451e6aa662452d7affc319487109940/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /home/rafael/.gradle/caches/transforms-3/7035a2135f2972f98fa12a92c56bc089/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -117,6 +121,8 @@ MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/rafael/.gradle/
 		ADDED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:5:22-62
 application
 ADDED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:7:5-25:19
+MERGED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.material:material:1.8.0] /home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/AndroidManifest.xml:24:5-20
@@ -185,6 +191,10 @@ uses-sdk
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
+MERGED from [androidx.room:room-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/ee4c75ca739334b4f19ebb6e6a116a23/transformed/room-ktx-2.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.5.1] /home/rafael/.gradle/caches/transforms-3/ee4c75ca739334b4f19ebb6e6a116a23/transformed/room-ktx-2.5.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:21:5-44
 MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.navigation:navigation-compose:2.5.3] /home/rafael/.gradle/caches/transforms-3/be68381743410719b4ca06a38d623813/transformed/navigation-compose-2.5.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:20:5-44
@@ -343,6 +353,10 @@ MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6d9cccdff1fb1b85f5a78fc9236e2a3f/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/fff9c17fbdb1c5a38217bdf93a63d9f8/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/fff9c17fbdb1c5a38217bdf93a63d9f8/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/ca3466ecd41ced983ab23d4fe877e81f/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/ca3466ecd41ced983ab23d4fe877e81f/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.1] /home/rafael/.gradle/caches/transforms-3/785b80d6d4a5f9e42a15ef990a681379/transformed/sqlite-2.3.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.1] /home/rafael/.gradle/caches/transforms-3/785b80d6d4a5f9e42a15ef990a681379/transformed/sqlite-2.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rafael/.gradle/caches/transforms-3/bdeac150b6ce0fcc7996d2b9a9f9c390/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rafael/.gradle/caches/transforms-3/bdeac150b6ce0fcc7996d2b9a9f9c390/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.interpolator:interpolator:1.0.0] /home/rafael/.gradle/caches/transforms-3/a451e6aa662452d7affc319487109940/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
@@ -367,6 +381,16 @@ INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidM
 		INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
 		ADDED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
 		INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.5.1] /home/rafael/.gradle/caches/transforms-3/1b7c7da59fb0ccb4eb7af9ffe8c82524/transformed/room-runtime-2.5.1/AndroidManifest.xml:25:13-74
 activity#androidx.compose.ui.tooling.PreviewActivity
 ADDED from [androidx.compose.ui:ui-tooling:1.3.3] /home/rafael/.gradle/caches/transforms-3/bd2a77bb2bf1e5f405c88f4867cdd5e9/transformed/ui-tooling-1.3.3/AndroidManifest.xml:23:9-25:39
 	android:exported

@@ -5,17 +5,18 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
 import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.empresta.*
+import me.empresta.feature_register.use_case.RegisterUseCase
 
 
 @Composable
@@ -25,6 +26,10 @@ fun ScreenRegister(
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
+    var nickName by remember { mutableStateOf(TextFieldValue("")) }
+    var contact by remember { mutableStateOf(TextFieldValue("")) }
+    var description by remember { mutableStateOf(TextFieldValue("")) }
 
     Scaffold(
         scaffoldState = scaffoldState
@@ -82,9 +87,11 @@ fun ScreenRegister(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = BrightOrange,
                     unfocusedBorderColor = Grey),
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "Name", color = BrightOrange)},
+                value = nickName,
+                onValueChange = {
+                                nickName = it
+                },
+                label = { Text(text = "NickName", color = BrightOrange)},
             )
 
             Box(modifier = Modifier.padding(5.dp))
@@ -93,15 +100,36 @@ fun ScreenRegister(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = BrightOrange,
                     unfocusedBorderColor = Grey),
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "Email address", color = BrightOrange)},
+                value = description,
+                onValueChange = {
+                                description = it
+                },
+                label = { Text(text = "Description (not necessary)", color = BrightOrange)},
             )
 
-            Box(modifier = Modifier.padding(5.dp))
+
+            OutlinedTextField(
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = BrightOrange,
+                    unfocusedBorderColor = Grey),
+                value = contact,
+                onValueChange = {
+                                contact = it
+                },
+                label = { Text(text = "Phone Number (not necessary)", color = BrightOrange)},
+            )
 
 
-            Button(onClick = { navController.navigate(EmprestameScreen.Feed.name)},
+        Box(modifier = Modifier.padding(5.dp))
+
+
+            Button(onClick = {
+                    val success = RegisterUseCase.Register(nickName.text,description.text, contact.text);
+
+                    if (success) {
+                        navController.navigate(EmprestameScreen.Feed.name)
+                    }
+                             },
                 content = {Text(text = "Register", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
                 colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
                 modifier=Modifier.width(200.dp).height(60.dp),
