@@ -11,6 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.ui.Alignment
@@ -36,7 +37,7 @@ fun ScreenFeed(
             items = listOf(
                 BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
                 BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
-                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
                 BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode)
         ),
             navController = navController,

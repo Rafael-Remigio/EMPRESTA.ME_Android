@@ -1,4 +1,4 @@
-#Sat Apr 08 01:36:01 WEST 2023
+#Sun Apr 09 01:29:22 WEST 2023
 path.4=4/classes.dex
 path.3=13/classes.dex
 path.2=12/classes.dex
@@ -9,6 +9,8 @@ path.8=classes2.dex
 path.7=9/classes.dex
 path.6=8/classes.dex
 path.5=5/classes.dex
+renamed.11=classes12.dex
+renamed.10=classes11.dex
 path.0=classes.dex
 base.4=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex
 base.3=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/13/classes.dex
@@ -18,9 +20,11 @@ base.0=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
+path.10=3/classes.dex
 renamed.0=classes.dex
 base.9=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
 path.9=classes3.dex
+path.11=6/classes.dex
 renamed.7=classes8.dex
 base.8=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 renamed.6=classes7.dex
@@ -29,3 +33,5 @@ renamed.5=classes6.dex
 base.6=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
 renamed.4=classes5.dex
 base.5=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
+base.11=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+base.10=/home/rafael/Documents/LEI/EmprestameAndroid/app/build/intermediates/dex/debug/mergeProjectDexDebug/3/classes.dex

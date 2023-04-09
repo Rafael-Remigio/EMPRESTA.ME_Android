@@ -21,6 +21,7 @@ import androidx.room.Room
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Database
 import me.empresta.feature_View_Feed.view.ScreenFeed
+import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_register.use_case.RegisterUseCase
 
 class MainActivity : ComponentActivity() {
@@ -59,6 +60,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     }
                     composable(route = EmprestameScreen.ReadQR.name) {
                         ScreenReadQRCode(navController = navController)
+                    }
+                    composable(route = EmprestameScreen.Network.name) {
+                        ScreenDisplayNetwork(navController = navController)
                     }
                 }
             }

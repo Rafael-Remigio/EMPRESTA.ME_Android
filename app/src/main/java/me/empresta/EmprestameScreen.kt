@@ -6,6 +6,7 @@ enum class EmprestameScreen() {
     ShowQR,
     ReadQR,
     Feed,
+    Network
 }
 
 

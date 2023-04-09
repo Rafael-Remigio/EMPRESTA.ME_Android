@@ -8,8 +8,6 @@ import java.security.PublicKey
 @Entity
 data class Account(
     @PrimaryKey
-    val id : String = "Account",
-    val privateKey: ByteArray,
     val publicKey: ByteArray,
     val NickName: String,
     val Description: String = "",

@@ -11,7 +11,7 @@ interface AccountDao {
     @Upsert
     fun insertAccount(account: Account)
 
-    @Query("select * from Account where id='Account'")
+    @Query("select * from Account")
     fun getAccountById(): Account
 
 }
