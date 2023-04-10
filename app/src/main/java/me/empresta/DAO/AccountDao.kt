@@ -12,6 +12,6 @@ interface AccountDao {
     fun insertAccount(account: Account)
 
     @Query("select * from Account")
-    fun getAccountById(): Account
+    suspend fun getAccountById(): Account
 
 }

@@ -18,24 +18,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.room.Room
+import dagger.hilt.android.AndroidEntryPoint
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Database
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_register.use_case.RegisterUseCase
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    /* TODO */
-    // I need to change to a better way of handling dependency injection
-    private val db by lazy {
-        Room.databaseBuilder(
-            context = applicationContext,
-            Database::class.java,
-            "EMPRESTAMEBB"
-        ).build()
-    }
-
 
 
 override fun onCreate(savedInstanceState: Bundle?) {

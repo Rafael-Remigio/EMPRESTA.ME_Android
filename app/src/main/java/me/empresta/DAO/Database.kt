@@ -11,6 +11,7 @@ abstract class Database: RoomDatabase() {
 
     abstract val AccountDao: AccountDao
 
+
     abstract val CommunityDao: CommunityDao
 
 }

@@ -15,13 +15,17 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import me.empresta.*
 import me.empresta.feature_register.use_case.RegisterUseCase
 
 
 @Composable
 fun ScreenRegister(
-    navController: NavController){
+    navController: NavController,
+    viewModel: RegisterViewModel = hiltViewModel()
+){
+
 
 
     val scaffoldState = rememberScaffoldState()
@@ -124,7 +128,7 @@ fun ScreenRegister(
 
 
             Button(onClick = {
-                    val success = RegisterUseCase.Register(nickName.text,description.text, contact.text);
+                    val success = viewModel.onRegister(nickName.text,description.text, contact.text)
 
                     if (success) {
                         navController.navigate(EmprestameScreen.Feed.name)

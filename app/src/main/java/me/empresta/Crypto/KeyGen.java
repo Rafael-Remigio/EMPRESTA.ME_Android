@@ -17,6 +17,7 @@ import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.spec.ECGenParameterSpec;
 
@@ -27,16 +28,17 @@ import javax.crypto.NoSuchPaddingException;
 
 public class KeyGen {
 
-    public KeyPair CreateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException {
+    public static KeyPair CreateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException {
 
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
                 KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             keyPairGenerator.initialize(
                     new KeyGenParameterSpec.Builder(
                             "key1",
                             KeyProperties.PURPOSE_SIGN)
-                            .setAlgorithmParameterSpec(new ECGenParameterSpec("secp256k1"))
+                            .setAlgorithmParameterSpec(new ECGenParameterSpec("secp256r1"))
                             .setDigests(KeyProperties.DIGEST_SHA256,
                                     KeyProperties.DIGEST_SHA384,
                                     KeyProperties.DIGEST_SHA512)
@@ -46,12 +48,25 @@ public class KeyGen {
                             .setUserAuthenticationValidityDurationSeconds(5 * 60)
                             .build());
         }
+        else {
+            keyPairGenerator.initialize(1024);
+        }
+
+
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         return keyPair;
     }
 
 
-    public PublicKey getPubKey() throws KeyStoreException, CertificateException, IOException, NoSuchAlgorithmException {
+    public static Certificate getPubCert() throws KeyStoreException, CertificateException, IOException, NoSuchAlgorithmException {
+        KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+        keyStore.load(null);
+
+        return keyStore.getCertificate("key1");
+    }
+
+
+    public static PublicKey getPubKey() throws KeyStoreException, CertificateException, IOException, NoSuchAlgorithmException {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
 
