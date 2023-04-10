@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import me.empresta.Black
 import me.empresta.BrightOrange
@@ -23,10 +24,12 @@ import me.empresta.White
 
 
 @Composable
-fun ScreenDisplayQRCode(navController: NavController) {
+fun ScreenDisplayQRCode(navController: NavController,
+                        viewModel: DisplayQRCodeView = hiltViewModel()
+    ) {
 
 
-    val bitmap: Bitmap = DisplayQRCodeView().invoke()
+    val bitmap: Bitmap = viewModel.invoke()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 

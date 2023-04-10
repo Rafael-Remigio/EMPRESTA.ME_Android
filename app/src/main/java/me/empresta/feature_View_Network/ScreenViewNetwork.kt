@@ -31,7 +31,6 @@ import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
 fun ScreenDisplayNetwork(navController: NavController) {
 
     var yourData: String = "192.168.241.192:5500/basic-site.html"
-    val bitmap: Bitmap = DisplayQRCodeView().invoke()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 

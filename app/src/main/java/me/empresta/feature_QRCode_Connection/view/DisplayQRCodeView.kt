@@ -2,17 +2,27 @@ package me.empresta.feature_QRCode_Connection.view
 
 import android.content.res.Resources
 import android.graphics.Bitmap
-import androidmads.library.qrgenearator.QRGContents
+import android.os.AsyncTask
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.lifecycle.ViewModel
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
-import com.google.zxing.common.BitMatrix
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import me.empresta.DAO.Account
+import me.empresta.DAO.AccountDao
+import me.empresta.feature_register.use_case.RegisterUseCase
+import javax.inject.Inject
 
+@HiltViewModel
+class DisplayQRCodeView @Inject constructor(
+    private val accountDao: AccountDao
+) : ViewModel()
+{
 
-class DisplayQRCodeView {
-
-    //private var static ConnectionInfo: "{Name: Name filler ; Public Key: 123456}"
 
     // on below line we are creating
     // a variable for bitmap
@@ -22,6 +32,7 @@ class DisplayQRCodeView {
     lateinit var qrEncoder: QRGEncoder
 
 
+    @OptIn(DelicateCoroutinesApi::class)
     operator fun invoke(): Bitmap {
 
 
@@ -43,13 +54,18 @@ class DisplayQRCodeView {
             // on below line we are
             // initializing our bitmap
             val writer = MultiFormatWriter()
+            GlobalScope.launch{
+                val personalAccount : Account
+                        = getAccount()
 
-            val bitMatrix = writer.encode("{Name: Name filler ; Public Key: 123456}", BarcodeFormat.QR_CODE, dimen,dimen)
+                val bitMatrix = writer.encode("{NickName:" + personalAccount.NickName +"; Description: "+personalAccount.Description+ "; Public Key:"+personalAccount.publicKey+"}", BarcodeFormat.QR_CODE, dimen,dimen)
+
 
             val barcodeEncoder = BarcodeEncoder()
 
 
             bitmap = barcodeEncoder.createBitmap(bitMatrix)
+            }
 
             return bitmap
 
@@ -70,4 +86,7 @@ class DisplayQRCodeView {
         return Resources.getSystem().getDisplayMetrics().heightPixels
     }
 
+    suspend fun getAccount():Account{
+        return accountDao.getAccountById()
+    }
 }
