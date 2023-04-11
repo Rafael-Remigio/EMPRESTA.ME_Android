@@ -32,8 +32,8 @@ fun ScreenCommunityPreview(
     viewModel: CommunityPreviewView = hiltViewModel()
 ){
 
-    val Info = mutableSetOf(viewModel.getInfo(code))
-
+    val info = mutableSetOf(viewModel.state)
+    viewModel.getInfo(code)
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -59,20 +59,43 @@ fun ScreenCommunityPreview(
 
             innerPadding -> Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         modifier = Modifier
             .background(Black)
             .fillMaxSize()
             .padding(innerPadding)) {
-        Text(
-            text = Info.toString(),
-            style = MaterialTheme.typography.h2,
-            fontWeight = FontWeight.Bold,
-            color = White
-        )
+        viewModel.get().title?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.h2,
+                fontWeight = FontWeight.Bold,
+                color = White,
+                modifier = Modifier.padding(start = 5.dp, top = 100.dp)
+            )
+        }
+        viewModel.get().bio?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.h5,
+                fontWeight = FontWeight.Normal,
+                color = White,
+                modifier = Modifier.padding(start = 5.dp, top = 20.dp)
 
+            )
+        }
 
-    }
+        Box(modifier = Modifier.padding(vertical = 60.dp))
+        
+        Button(onClick = { navController.navigate(EmprestameScreen.ReadQR.name) },
+            content = {Text(text = "Join Community", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
+            colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
+            modifier= Modifier
+                .width(200.dp)
+                .height(60.dp),
+            shape = RoundedCornerShape(15)
+            )
+
+            }
 
     }
 

@@ -21,20 +21,24 @@ class CommunityPreviewView @Inject constructor(
 
 
     private val _state = mutableStateOf(CommunityInfo())
-    val state = _state
+    val state : CommunityInfo = _state.value
+    var reached = false
 
-
-    @OptIn(DelicateCoroutinesApi::class)
     fun getInfo(url: String) {
+        println("here we are" + url)
         connectToCommunity.seturl("http://$url/")
-
         GlobalScope.launch{
 
-            println("here we are" + url)
 
             val result = connectToCommunity.getInfo()
-            _state.value =  result
+            if (result != null){
+                _state.value =  result
+                reached = true
+            }
         }
+
     }
 
+
+    fun get() = _state.value
 }

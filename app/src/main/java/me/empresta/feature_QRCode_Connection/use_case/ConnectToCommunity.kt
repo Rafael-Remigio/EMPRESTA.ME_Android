@@ -1,7 +1,7 @@
 package me.empresta.feature_QRCode_Connection.use_case
 
-import me.empresta.DAO.AccountDao
-import me.empresta.DAO.CommunityDao
+import com.google.gson.Gson
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import retrofit2.Retrofit
@@ -14,17 +14,23 @@ class ConnectToCommunity @Inject constructor(private val APIBuilder: Retrofit.Bu
 
     var communityAPI: CommunityAPI?= null
 
-        //.addConverterFactory(GsonConverterFactory.create()).build().create(CommunityAPI::class.java)
     fun seturl(url: String){
             this.url = url
-            communityAPI = Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build().create(CommunityAPI::class.java)
-            println("here + " + url)
+            println("here + " + this.url)
+
+            communityAPI = Retrofit.Builder().baseUrl(this.url).addConverterFactory(GsonConverterFactory.create()).build().create(CommunityAPI::class.java)
     }
 
-    suspend fun getInfo() : CommunityInfo {
+    suspend fun getInfo() : CommunityInfo? {
 
-        return communityAPI!!.getInfo(this.url+"meta/info"!!)
-
+        val response =   communityAPI!!.getInfo(this.url+"meta/info"!!)
+        print(response)
+        val gson = Gson()
+        return if (response != null) {
+            return gson.fromJson(response.string(), CommunityInfo::class.java)
+        } else {
+            null
+        }
     }
 
 
