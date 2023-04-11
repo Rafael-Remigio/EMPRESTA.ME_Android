@@ -1,4 +1,4 @@
-package me.empresta
+package me.empresta.Navigation
 
 enum class EmprestameScreen() {
     Start,
@@ -6,7 +6,8 @@ enum class EmprestameScreen() {
     ShowQR,
     ReadQR,
     Feed,
-    Network
+    Network,
+    CommunityPreview
 }
 
 

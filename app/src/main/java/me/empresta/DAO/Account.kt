@@ -13,4 +13,19 @@ data class Account(
     val Description: String = "",
     val contactInfo: String = "",
     val customization: String = "",
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Account
+
+        if (!publicKey.contentEquals(other.publicKey)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return publicKey.contentHashCode()
+    }
+}

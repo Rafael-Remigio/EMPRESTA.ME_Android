@@ -1,13 +1,10 @@
 package me.empresta.feature_View_Network
 
-import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -16,15 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import me.empresta.*
-import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
+import me.empresta.Navigation.BottomBar
+import me.empresta.Navigation.BottomNavItem
 
 
 @Composable
@@ -49,7 +42,8 @@ fun ScreenDisplayNetwork(navController: NavController) {
                 onItemClick = {
                     navController.navigate(it.route)
                 }
-            )}
+            )
+        }
         )
             {
 

@@ -3,27 +3,21 @@ package me.empresta
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import me.empresta.feature_QRCode_Connection.view.ScreenDisplayQRCode
 import me.empresta.feature_QRCode_Connection.view.ScreenReadQRCode
 import me.empresta.feature_register.view.ScreenRegister
 import androidx.compose.material.Surface
+import androidx.navigation.NavType
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.room.Room
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import me.empresta.DAO.AccountDao
-import me.empresta.DAO.Database
+import me.empresta.Navigation.EmprestameScreen
+import me.empresta.feature_QRCode_Connection.view.ScreenCommunityPreview
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
-import me.empresta.feature_register.use_case.RegisterUseCase
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -54,6 +48,13 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     }
                     composable(route = EmprestameScreen.Network.name) {
                         ScreenDisplayNetwork(navController = navController)
+                    }
+                    composable(route = EmprestameScreen.CommunityPreview.name+"/{code}")
+                    {backStackEntry ->
+                        val code = backStackEntry.arguments?.getString("code")
+                        if (code != null) {
+                            ScreenCommunityPreview(navController = navController,  code )
+                        }
                     }
                 }
             }

@@ -2,7 +2,6 @@ package me.empresta.feature_View_Feed.view
 
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.rememberScaffoldState
@@ -17,10 +16,12 @@ import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.empresta.*
+import me.empresta.Navigation.BottomBar
+import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 
 
 @Composable
@@ -33,7 +34,8 @@ fun ScreenFeed(
 
     Scaffold(
         scaffoldState = scaffoldState,
-        bottomBar = {BottomBar(
+        bottomBar = {
+            BottomBar(
             items = listOf(
                 BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
                 BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
@@ -83,6 +85,5 @@ fun ScreenFeed(
     }
 
     }
-
 
 }

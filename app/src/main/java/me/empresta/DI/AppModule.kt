@@ -1,4 +1,4 @@
-package me.empresta
+package me.empresta.DI
 
 import android.content.Context
 import androidx.room.Room
@@ -10,7 +10,12 @@ import dagger.hilt.components.SingletonComponent
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
+import me.empresta.RemoteAPI.CommunityAPI
+import me.empresta.feature_QRCode_Connection.use_case.ConnectToCommunity
 import me.empresta.feature_register.use_case.RegisterUseCase
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 
@@ -40,6 +45,17 @@ object AppModule {
     @Singleton
     fun provideRegisterUseCases(dao: AccountDao): RegisterUseCase {
         return RegisterUseCase(dao)
+    }
+
+    @Provides
+    fun provideBuilder(): Retrofit.Builder {
+        return Retrofit.Builder()
+    }
+
+    @Provides
+    @Singleton
+    fun provideConnectToCommunityUseCase(builder:Retrofit.Builder): ConnectToCommunity {
+        return ConnectToCommunity(builder)
     }
 
 }

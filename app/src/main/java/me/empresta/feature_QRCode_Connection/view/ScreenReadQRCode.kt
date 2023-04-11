@@ -3,6 +3,7 @@ package me.empresta.feature_QRCode_Connection.view
 import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Size
+import androidx.compose.material.*
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -14,6 +15,10 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoGraph
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,12 +31,17 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import me.empresta.Black
+import me.empresta.Navigation.BottomBar
+import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 import me.empresta.White
 import me.empresta.feature_QRCode_Connection.use_case.QRCodeAnalyser
 
 
 @Composable
-fun ScreenReadQRCode(navController: NavController) {
+fun ScreenReadQRCode(
+    navController: NavController,
+) {
 
     // Camera Stuff
     var code by remember {
@@ -66,8 +76,22 @@ fun ScreenReadQRCode(navController: NavController) {
     
     val scaffoldState = rememberScaffoldState()
 
-    androidx.compose.material.Scaffold(
-        scaffoldState = scaffoldState
+    Scaffold(
+        scaffoldState = scaffoldState,
+        bottomBar = {
+            BottomBar(
+                items = listOf(
+                    BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
+                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                    BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
+                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode)
+                ),
+                navController = navController,
+                onItemClick = {
+                    navController.navigate(it.route)
+                }
+            )
+        }
 
     )
     {
@@ -96,6 +120,7 @@ fun ScreenReadQRCode(navController: NavController) {
                         ContextCompat.getMainExecutor(context),
                         QRCodeAnalyser {result ->
                             code = result
+                            navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+code+"")
                         }
                     )
                     try {
