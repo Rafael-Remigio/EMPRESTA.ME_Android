@@ -18,6 +18,7 @@ import me.empresta.Navigation.EmprestameScreen
 import me.empresta.feature_QRCode_Connection.view.ScreenCommunityPreview
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
+import me.empresta.feature_View_Profile.view.ScreenProfile
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,6 +56,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
                         if (code != null) {
                             ScreenCommunityPreview(navController = navController,  code )
                         }
+                    }
+                    composable(route = EmprestameScreen.Profile.name) {
+                        ScreenProfile(navController = navController)
                     }
                 }
             }

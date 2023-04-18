@@ -12,6 +12,7 @@ import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.feature_QRCode_Connection.use_case.ConnectToCommunity
+import me.empresta.feature_View_Profile.use_case.ProfileUseCase
 import me.empresta.feature_register.use_case.RegisterUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -43,19 +44,25 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRegisterUseCases(dao: AccountDao): RegisterUseCase {
-        return RegisterUseCase(dao)
+    fun provideRegisterUseCases(repository: Repository): RegisterUseCase {
+        return RegisterUseCase(repository)
     }
 
     @Provides
-    fun provideBuilder(): Retrofit.Builder {
-        return Retrofit.Builder()
+    fun provideBuilder(): CommunityAPI {
+        return  Retrofit.Builder().baseUrl("http://empresta.me").addConverterFactory(GsonConverterFactory.create()).build().create(CommunityAPI::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideConnectToCommunityUseCase(builder:Retrofit.Builder): ConnectToCommunity {
-        return ConnectToCommunity(builder)
+    fun provideConnectToCommunityUseCase(repository: Repository,communityAPI:CommunityAPI,communityDao: CommunityDao): ConnectToCommunity {
+        return ConnectToCommunity(repository,communityDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileUseCase(repository: Repository): ProfileUseCase {
+        return ProfileUseCase(repository)
     }
 
 }

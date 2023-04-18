@@ -13,6 +13,8 @@ MERGED from [androidx.activity:activity-compose:1.6.1] /home/rafael/.gradle/cach
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1] /home/rafael/.gradle/caches/transforms-3/927f74b7e8c29a8f413698ba427ccd17/transformed/lifecycle-viewmodel-compose-2.5.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.material:material:1.3.1] /home/rafael/.gradle/caches/transforms-3/837b6a36eb3c783aed23b07e279f3fe7/transformed/material-1.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material3:material3:1.0.1] /home/rafael/.gradle/caches/transforms-3/049068880f83cba69f2d754536812ed3/transformed/material3-1.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [io.coil-kt:coil-compose:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/1c567d7b81a345781a7e682fdb43d150/transformed/coil-compose-2.0.0-rc01/AndroidManifest.xml:2:1-9:12
+MERGED from [io.coil-kt:coil-compose-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7144c875379d8ae701df632c13a043ac/transformed/coil-compose-base-2.0.0-rc01/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.compose.material:material-ripple:1.3.1] /home/rafael/.gradle/caches/transforms-3/5b0772785e9473ec1fa1a6efb7cfd3ef/transformed/material-ripple-1.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.foundation:foundation:1.3.1] /home/rafael/.gradle/caches/transforms-3/464e4d5d712d9da535b672fdbb643881/transformed/foundation-1.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.material:material-icons-extended:1.3.1] /home/rafael/.gradle/caches/transforms-3/3f0e3872d2ee3f3daa1249b675cd81b8/transformed/material-icons-extended-1.3.1/AndroidManifest.xml:17:1-22:12
@@ -23,6 +25,7 @@ MERGED from [androidx.compose.animation:animation:1.3.3] /home/rafael/.gradle/ca
 MERGED from [androidx.compose.foundation:foundation-layout:1.3.1] /home/rafael/.gradle/caches/transforms-3/f1f0178f0cefc4efad219dd7e86b71b5/transformed/foundation-layout-1.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.animation:animation-core:1.3.3] /home/rafael/.gradle/caches/transforms-3/f1e94997e3e60bbed521bb9fcda86a40/transformed/animation-core-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.ui:ui-tooling-data:1.3.3] /home/rafael/.gradle/caches/transforms-3/624fbf63b3028c721de493bcfe99df46/transformed/ui-tooling-data-1.3.3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.23.1] /home/rafael/.gradle/caches/transforms-3/20e66efb717ca255ce4f53b2317e9201/transformed/accompanist-drawablepainter-0.23.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.ui:ui:1.3.3] /home/rafael/.gradle/caches/transforms-3/8d2ef59da2a052909764f3f5a3146b39/transformed/ui-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.runtime:runtime-rxjava2:1.3.3] /home/rafael/.gradle/caches/transforms-3/94b900aeebb8ca091f07ebb9c464f917/transformed/runtime-rxjava2-1.3.3/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.compose.ui:ui-tooling-preview:1.3.3] /home/rafael/.gradle/caches/transforms-3/3e4d8743c0c605d5a793ff31e411a226/transformed/ui-tooling-preview-1.3.3/AndroidManifest.xml:17:1-22:12
@@ -38,6 +41,8 @@ MERGED from [androidx.navigation:navigation-runtime:2.5.3] /home/rafael/.gradle/
 MERGED from [com.google.android.material:material:1.8.0] /home/rafael/.gradle/caches/transforms-3/5cf51cf355bf0ec9e9cdd4601c100365/transformed/material-1.8.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/rafael/.gradle/caches/transforms-3/96768e9c986dfeb5a6a0ec075c024cd2/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.camera:camera-view:1.2.2] /home/rafael/.gradle/caches/transforms-3/d2f4cfe000b99b0921012928f79c4ece/transformed/camera-view-1.2.2/AndroidManifest.xml:17:1-22:12
+MERGED from [io.coil-kt:coil:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/49102d96148628bc5f52c32ecc5a53d4/transformed/coil-2.0.0-rc01/AndroidManifest.xml:2:1-9:12
+MERGED from [io.coil-kt:coil-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7fc703a27324dc2225d5772a37ff03d8/transformed/coil-base-2.0.0-rc01/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/rafael/.gradle/caches/transforms-3/f9c64eba53f815f0acfc8a6971f5b8d5/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] /home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.dagger:hilt-android:2.44] /home/rafael/.gradle/caches/transforms-3/db0fa732e56c24d2833223e5f8a084ca/transformed/hilt-android-2.44/AndroidManifest.xml:16:1-19:12
@@ -87,7 +92,6 @@ MERGED from [androidx.cardview:cardview:1.0.0] /home/rafael/.gradle/caches/trans
 MERGED from [androidx.profileinstaller:profileinstaller:1.2.0] /home/rafael/.gradle/caches/transforms-3/8853c74b970652cf60427292acf370b8/transformed/profileinstaller-1.2.0/AndroidManifest.xml:17:1-50:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafael/.gradle/caches/transforms-3/4b66524dcf1399f897fd9e8055acaf83/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6220022b726cfa9b9de2072032814ed1/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/92c291273304408468e39224023d7368/transformed/exifinterface-1.3.2/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/60c697eac796cd23c3f03a0000e52160/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite:2.3.1] /home/rafael/.gradle/caches/transforms-3/cb01fbf881bb3268a42c4a092eb2365c/transformed/sqlite-2.3.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/rafael/.gradle/caches/transforms-3/000611d0fbd8e27c00868daff9919def/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
@@ -96,6 +100,7 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /home/rafael/.gradle/cach
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/rafael/.gradle/caches/transforms-3/fda4fd2213166457e711cee8e7bfe9a0/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/rafael/.gradle/caches/transforms-3/084e7b05b66ac31d2c7ff0ca706edb5b/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.tracing:tracing:1.0.0] /home/rafael/.gradle/caches/transforms-3/df80e5a9663cd4286d8bdaf79ec96d5e/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /home/rafael/.gradle/caches/transforms-3/0dffe943e3d4603ba445138c945f676a/transformed/exifinterface-1.3.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/rafael/.gradle/caches/transforms-3/e6edcf6b26aa74cb5fa50392d671006b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.dagger:dagger-lint-aar:2.44] /home/rafael/.gradle/caches/transforms-3/946cac7cab7c4a069974bdd528f1e316/transformed/dagger-lint-aar-2.44/AndroidManifest.xml:16:1-19:12
 INJECTED from /home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/AndroidManifest.xml:2:1-30:12
@@ -221,6 +226,10 @@ MERGED from [androidx.compose.material:material:1.3.1] /home/rafael/.gradle/cach
 MERGED from [androidx.compose.material:material:1.3.1] /home/rafael/.gradle/caches/transforms-3/837b6a36eb3c783aed23b07e279f3fe7/transformed/material-1.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3:1.0.1] /home/rafael/.gradle/caches/transforms-3/049068880f83cba69f2d754536812ed3/transformed/material3-1.0.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3:1.0.1] /home/rafael/.gradle/caches/transforms-3/049068880f83cba69f2d754536812ed3/transformed/material3-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [io.coil-kt:coil-compose:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/1c567d7b81a345781a7e682fdb43d150/transformed/coil-compose-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/1c567d7b81a345781a7e682fdb43d150/transformed/coil-compose-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7144c875379d8ae701df632c13a043ac/transformed/coil-compose-base-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7144c875379d8ae701df632c13a043ac/transformed/coil-compose-base-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.compose.material:material-ripple:1.3.1] /home/rafael/.gradle/caches/transforms-3/5b0772785e9473ec1fa1a6efb7cfd3ef/transformed/material-ripple-1.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material:material-ripple:1.3.1] /home/rafael/.gradle/caches/transforms-3/5b0772785e9473ec1fa1a6efb7cfd3ef/transformed/material-ripple-1.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.foundation:foundation:1.3.1] /home/rafael/.gradle/caches/transforms-3/464e4d5d712d9da535b672fdbb643881/transformed/foundation-1.3.1/AndroidManifest.xml:20:5-44
@@ -241,6 +250,8 @@ MERGED from [androidx.compose.animation:animation-core:1.3.3] /home/rafael/.grad
 MERGED from [androidx.compose.animation:animation-core:1.3.3] /home/rafael/.gradle/caches/transforms-3/f1e94997e3e60bbed521bb9fcda86a40/transformed/animation-core-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui-tooling-data:1.3.3] /home/rafael/.gradle/caches/transforms-3/624fbf63b3028c721de493bcfe99df46/transformed/ui-tooling-data-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui-tooling-data:1.3.3] /home/rafael/.gradle/caches/transforms-3/624fbf63b3028c721de493bcfe99df46/transformed/ui-tooling-data-1.3.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.23.1] /home/rafael/.gradle/caches/transforms-3/20e66efb717ca255ce4f53b2317e9201/transformed/accompanist-drawablepainter-0.23.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.23.1] /home/rafael/.gradle/caches/transforms-3/20e66efb717ca255ce4f53b2317e9201/transformed/accompanist-drawablepainter-0.23.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.ui:ui:1.3.3] /home/rafael/.gradle/caches/transforms-3/8d2ef59da2a052909764f3f5a3146b39/transformed/ui-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.ui:ui:1.3.3] /home/rafael/.gradle/caches/transforms-3/8d2ef59da2a052909764f3f5a3146b39/transformed/ui-1.3.3/AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.runtime:runtime-rxjava2:1.3.3] /home/rafael/.gradle/caches/transforms-3/94b900aeebb8ca091f07ebb9c464f917/transformed/runtime-rxjava2-1.3.3/AndroidManifest.xml:20:5-44
@@ -271,6 +282,10 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/rafael/.gra
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/rafael/.gradle/caches/transforms-3/96768e9c986dfeb5a6a0ec075c024cd2/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.camera:camera-view:1.2.2] /home/rafael/.gradle/caches/transforms-3/d2f4cfe000b99b0921012928f79c4ece/transformed/camera-view-1.2.2/AndroidManifest.xml:20:5-44
 MERGED from [androidx.camera:camera-view:1.2.2] /home/rafael/.gradle/caches/transforms-3/d2f4cfe000b99b0921012928f79c4ece/transformed/camera-view-1.2.2/AndroidManifest.xml:20:5-44
+MERGED from [io.coil-kt:coil:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/49102d96148628bc5f52c32ecc5a53d4/transformed/coil-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/49102d96148628bc5f52c32ecc5a53d4/transformed/coil-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7fc703a27324dc2225d5772a37ff03d8/transformed/coil-base-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-base:2.0.0-rc01] /home/rafael/.gradle/caches/transforms-3/7fc703a27324dc2225d5772a37ff03d8/transformed/coil-base-2.0.0-rc01/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/rafael/.gradle/caches/transforms-3/f9c64eba53f815f0acfc8a6971f5b8d5/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/rafael/.gradle/caches/transforms-3/f9c64eba53f815f0acfc8a6971f5b8d5/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] /home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
@@ -369,8 +384,6 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafae
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/rafael/.gradle/caches/transforms-3/4b66524dcf1399f897fd9e8055acaf83/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6220022b726cfa9b9de2072032814ed1/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /home/rafael/.gradle/caches/transforms-3/6220022b726cfa9b9de2072032814ed1/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/92c291273304408468e39224023d7368/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.2] /home/rafael/.gradle/caches/transforms-3/92c291273304408468e39224023d7368/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/60c697eac796cd23c3f03a0000e52160/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite-framework:2.3.1] /home/rafael/.gradle/caches/transforms-3/60c697eac796cd23c3f03a0000e52160/transformed/sqlite-framework-2.3.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite:2.3.1] /home/rafael/.gradle/caches/transforms-3/cb01fbf881bb3268a42c4a092eb2365c/transformed/sqlite-2.3.1/AndroidManifest.xml:20:5-44
@@ -387,6 +400,8 @@ MERGED from [androidx.print:print:1.0.0] /home/rafael/.gradle/caches/transforms-
 MERGED from [androidx.print:print:1.0.0] /home/rafael/.gradle/caches/transforms-3/084e7b05b66ac31d2c7ff0ca706edb5b/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.tracing:tracing:1.0.0] /home/rafael/.gradle/caches/transforms-3/df80e5a9663cd4286d8bdaf79ec96d5e/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] /home/rafael/.gradle/caches/transforms-3/df80e5a9663cd4286d8bdaf79ec96d5e/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /home/rafael/.gradle/caches/transforms-3/0dffe943e3d4603ba445138c945f676a/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /home/rafael/.gradle/caches/transforms-3/0dffe943e3d4603ba445138c945f676a/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/rafael/.gradle/caches/transforms-3/e6edcf6b26aa74cb5fa50392d671006b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/rafael/.gradle/caches/transforms-3/e6edcf6b26aa74cb5fa50392d671006b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.dagger:dagger-lint-aar:2.44] /home/rafael/.gradle/caches/transforms-3/946cac7cab7c4a069974bdd528f1e316/transformed/dagger-lint-aar-2.44/AndroidManifest.xml:18:3-42

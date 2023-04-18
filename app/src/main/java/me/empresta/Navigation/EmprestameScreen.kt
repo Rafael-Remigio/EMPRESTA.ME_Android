@@ -7,7 +7,8 @@ enum class EmprestameScreen() {
     ReadQR,
     Feed,
     Network,
-    CommunityPreview
+    CommunityPreview,
+    Profile
 }
 
 

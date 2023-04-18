@@ -4,6 +4,9 @@ import com.google.gson.Gson
 import me.empresta.Crypto.Base58
 import me.empresta.Crypto.KeyGen
 import me.empresta.Crypto.Utils
+import me.empresta.DAO.Community
+import me.empresta.DAO.CommunityDao
+import me.empresta.DI.Repository
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.RemoteAPI.DTO.CommunityResponse
@@ -14,26 +17,22 @@ import java.security.SecureRandom
 import java.security.interfaces.ECPublicKey
 import javax.inject.Inject
 
-class ConnectToCommunity @Inject constructor(private val APIBuilder: Retrofit.Builder) {
+class ConnectToCommunity @Inject constructor(private val repository: Repository, private val communityDao: CommunityDao) {
 
-    var url: String? = null
+    var url: String = ""
     var token: String? = null
-    var communityAPI: CommunityAPI?= null
 
     fun seturl(url: String){
             this.url = url
-            println("here + " + this.url)
-
-            communityAPI = Retrofit.Builder().baseUrl(this.url).addConverterFactory(GsonConverterFactory.create()).build().create(CommunityAPI::class.java)
     }
 
     suspend fun getInfo() : CommunityInfo? {
 
-        val response =   communityAPI!!.getInfo(this.url+"meta/info"!!)
+        val response =   repository.getInfo(this.url)
         val gson = Gson()
-        return if (response != null) {
-            return gson.fromJson(response.string(), CommunityInfo::class.java)
-        } else {
+        return try {
+            gson.fromJson(response.string(), CommunityInfo::class.java)
+        } catch (e: Exception) {
             null
         }
     }
@@ -41,27 +40,30 @@ class ConnectToCommunity @Inject constructor(private val APIBuilder: Retrofit.Bu
     suspend fun challengeCommunity(): Boolean{
 
 
-        val challenge = generateChallenge()
-        val response =   communityAPI!!.postChallenge(this.url + "meta/verify_key",challenge)
+        /*val challenge = generateChallenge()
+        val response =   repository.postChallenge(this.url ,challenge)
         val gson = Gson()
         val communityResponse = gson.fromJson(response.string(),CommunityResponse::class.java)
-        return validateResponse(communityResponse,challenge)
+        return validateResponse(communityResponse,challenge)*/
+        return true
 
     }
 
-    suspend fun associate(password: String): Boolean{
+    suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
-        var response =   communityAPI!!.postAssociate(this.url + "auth/associate",password)
+        var response =   repository.postAssociate(this.url,password)
         val gson = Gson()
         token =  response.string()
 
-        var pubKey = KeyGen.getPubCert().publicKey
         //val bytes = Utils.toUncompressedPoint(pubKey as ECPublicKey?)
         /*TODO*/
         //Utils.setParams((pubKey as ECPublicKey).params)
         //response =   communityAPI!!.getChallenge(this.url + "auth/challenge", token!!,Base58.encode(bytes))
 
         //println("response: "+ response)
+
+        val community = Community(communityName,this.url, Base58.decode(pubKey))
+        repository.insertCommunity(community)
 
 
         return true

@@ -16,16 +16,18 @@ import java.security.cert.CertificateException;
 
 import javax.inject.Inject;
 
+import me.empresta.Crypto.Base58;
 import me.empresta.Crypto.KeyGen;
 import me.empresta.DAO.Account;
 import me.empresta.DAO.AccountDao;
+import me.empresta.DI.Repository;
 
 public class RegisterUseCase {
      @Inject
-     AccountDao accountDao;
+     Repository repository;
     @Inject
-    public RegisterUseCase(AccountDao dao){
-        this.accountDao = dao;
+    public RegisterUseCase(Repository repo){
+        this.repository = repo;
     }
     public boolean Register(
         String nickName,
@@ -40,13 +42,15 @@ public class RegisterUseCase {
         KeyPair pair = KeyGen.CreateKeyPair();
 
         Certificate publicKey = KeyGen.getPubCert();
+        byte[] pubkey = publicKey.getPublicKey().getEncoded();
 
-        Account account = new Account(publicKey.getEncoded(),nickName,description,contact,"");
+        Account account = new Account(Base58.encode(pubkey),nickName,description,contact,"");
 
 
         AsyncTask.execute(() -> {
+            repository.deleteAccounts();
             //Insert Data
-            accountDao.insertAccount(account);
+            repository.insertAccount(account);
         });
 
         return true;

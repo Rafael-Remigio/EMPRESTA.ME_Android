@@ -15,7 +15,6 @@ class CommunityPreviewView @Inject constructor(
 ) : ViewModel() {
 
 
-
     private val _state = mutableStateOf(CommunityInfo())
     val state : CommunityInfo = _state.value
     var reached = true
@@ -45,7 +44,13 @@ class CommunityPreviewView @Inject constructor(
                 /*TODO*/
                 // Launch an exception Screen
             }
-            if (! connectToCommunity_useCase.associate(password)){
+            if (!_state.value.title?.let {
+                    _state.value.public_key?.let { it1 ->
+                        connectToCommunity_useCase.associate(password,
+                            it, it1
+                        )
+                    }
+                }!!){
                 /*TODO*/
                 // Launch an exception Screen
             }

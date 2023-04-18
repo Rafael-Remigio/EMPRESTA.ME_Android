@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -49,7 +50,7 @@ fun ScreenDisplayQRCode(navController: NavController,
                     BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
                     BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
                     BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
-                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode)
+                    BottomNavItem(name = "Profile", route = "Profile", icon = Icons.Default.Person)
                 ),
                 navController = navController,
                 onItemClick = {

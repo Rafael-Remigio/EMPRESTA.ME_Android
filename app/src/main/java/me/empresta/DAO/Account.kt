@@ -8,7 +8,7 @@ import java.security.PublicKey
 @Entity
 data class Account(
     @PrimaryKey
-    val publicKey: ByteArray,
+    val publicKey: String,
     val NickName: String,
     val Description: String = "",
     val contactInfo: String = "",
@@ -26,6 +26,7 @@ data class Account(
     }
 
     override fun hashCode(): Int {
-        return publicKey.contentHashCode()
+        return publicKey.hashCode()
     }
+
 }

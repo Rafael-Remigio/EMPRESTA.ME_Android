@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-77:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-78:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-en-rXC/values-en-rXC.xml",
