@@ -2,7 +2,6 @@ package me.empresta.feature_View_Feed.view
 
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.rememberScaffoldState
@@ -10,13 +9,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavController
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoGraph
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.empresta.*
+import me.empresta.Navigation.BottomBar
+import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 
 
 @Composable
@@ -28,8 +34,21 @@ fun ScreenFeed(
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        scaffoldState = scaffoldState
-
+        scaffoldState = scaffoldState,
+        bottomBar = {
+            BottomBar(
+            items = listOf(
+                BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.Person)
+        ),
+            navController = navController,
+            onItemClick = {
+                navController.navigate(it.route)
+            }
+        )
+        }
     )
 
     {
@@ -67,6 +86,5 @@ fun ScreenFeed(
     }
 
     }
-
 
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-71:/values-small-v4/values-small-v4.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-78:/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/9ae6143ba7d88d1cbf68916d08d2afcb/transformed/material-1.8.0/res/values-small-v4/values-small-v4.xml",
+                    "source": "/home/rafael/.gradle/caches/transforms-3/5cf51cf355bf0ec9e9cdd4601c100365/transformed/material-1.8.0/res/values-small-v4/values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

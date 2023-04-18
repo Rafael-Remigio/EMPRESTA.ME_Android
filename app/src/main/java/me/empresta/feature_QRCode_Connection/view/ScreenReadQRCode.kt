@@ -2,7 +2,9 @@ package me.empresta.feature_QRCode_Connection.view
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.drawable.shapes.Shape
 import android.util.Size
+import androidx.compose.material.*
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
@@ -11,27 +13,41 @@ import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoGraph
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import me.empresta.Black
+import me.empresta.BrightOrange
+import me.empresta.Navigation.BottomBar
+import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 import me.empresta.White
 import me.empresta.feature_QRCode_Connection.use_case.QRCodeAnalyser
 
 
 @Composable
-fun ScreenReadQRCode(navController: NavController) {
+fun ScreenReadQRCode(
+    navController: NavController,
+) {
 
     // Camera Stuff
     var code by remember {
@@ -66,8 +82,22 @@ fun ScreenReadQRCode(navController: NavController) {
     
     val scaffoldState = rememberScaffoldState()
 
-    androidx.compose.material.Scaffold(
-        scaffoldState = scaffoldState
+    Scaffold(
+        scaffoldState = scaffoldState,
+        bottomBar = {
+            BottomBar(
+                items = listOf(
+                    BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
+                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                    BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
+                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode)
+                ),
+                navController = navController,
+                onItemClick = {
+                    navController.navigate(it.route)
+                }
+            )
+        }
 
     )
     {
@@ -81,7 +111,8 @@ fun ScreenReadQRCode(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-
+            Row() {
+                Box(modifier = Modifier.width(20.dp))
             if (hasCamPermission){
                 AndroidView(factory = { context ->
                     val previewView = PreviewView(context)
@@ -96,6 +127,7 @@ fun ScreenReadQRCode(navController: NavController) {
                         ContextCompat.getMainExecutor(context),
                         QRCodeAnalyser {result ->
                             code = result
+                            navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+code)
                         }
                     )
                     try {
@@ -109,14 +141,21 @@ fun ScreenReadQRCode(navController: NavController) {
                         e.printStackTrace()
                     }
                     previewView
-                },
-                    modifier = Modifier.weight(1f))
+                                      },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding()//.border(BorderStroke(5.dp,color = BrightOrange), RoundedCornerShape(15))
+                )
             }
-
+                Box(modifier = Modifier.width(20.dp))
+            }
             Text(
-                text = code,
-                fontSize = 15.sp,
-                modifier = Modifier.fillMaxWidth().padding(32.dp),
+                text = "Scan to join a Community or Connect to a User",
+                fontSize = 30.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start =32.dp,end= 32.dp, top = 50.dp),
                 color = White
 
             )
