@@ -9,14 +9,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val registerUseCases: RegisterUseCase,private val pubSub: PubSub
+    private val registerUseCases: RegisterUseCase
 ) : ViewModel() {
 
 
-    init {
-
-        pubSub.start_listening("my_pub_key");
-    }
     fun onRegister (nickName:String,description:String, contact:String): Boolean {
         return registerUseCases.Register(nickName,description, contact)
     }

@@ -29,11 +29,22 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+
+    @Inject lateinit var pubSub: PubSub
+
     override fun onStart() {
         super.onStart()
+        pubSub.start_listening("my_pub_key")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        pubSub.start_listening("my_pub_key")
     }
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+
 
 
     setContent {
@@ -79,6 +90,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 
 }
+
+    override fun onPause() {
+        super.onPause()
+
+
+    }
 }
 
 

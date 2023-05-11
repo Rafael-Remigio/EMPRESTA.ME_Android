@@ -18,12 +18,10 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
-import me.empresta.DI.Repository;
-
 
 public class PubSub{
 
-    static String host = "192.168.62.52";
+    static String host = "192.168.206.52";
 
 
     @Inject
@@ -34,7 +32,7 @@ public class PubSub{
         this.message_handler = message_handler;
     }
 
-    public void start_listening(String EXCHANGE_NAME)throws Exception{
+    public  void start_listening(String EXCHANGE_NAME)throws Exception{
 
         Thread subscribeThread = new Thread(new Runnable() {
             @Override

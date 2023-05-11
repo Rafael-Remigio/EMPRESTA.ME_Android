@@ -26,7 +26,7 @@ public class Message_Handler {
         this.repository = repo;
     }
 
-    public  void Handle(String message, String exchange){
+    public void Handle(String message, String exchange){
         System.out.println(message);
 
 
@@ -69,9 +69,7 @@ public class Message_Handler {
         //Reconstruction
             // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
 
-         repository.getAllVouches();
 
-        repository.deleteVouches();
 
         System.out.println();
 
