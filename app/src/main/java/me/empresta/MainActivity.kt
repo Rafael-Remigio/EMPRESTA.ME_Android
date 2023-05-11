@@ -4,28 +4,38 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
-import me.empresta.feature_QRCode_Connection.view.ScreenDisplayQRCode
-import me.empresta.feature_QRCode_Connection.view.ScreenReadQRCode
-import me.empresta.feature_register.view.ScreenRegister
 import androidx.compose.material.Surface
-import androidx.navigation.NavType
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.compose.rememberNavController
+import com.rabbitmq.client.Channel
+import com.rabbitmq.client.Connection
+import com.rabbitmq.client.ConnectionFactory
 import dagger.hilt.android.AndroidEntryPoint
 import me.empresta.Navigation.EmprestameScreen
+import me.empresta.PubSub.PubSub
 import me.empresta.feature_QRCode_Connection.view.ScreenCommunityPreview
+import me.empresta.feature_QRCode_Connection.view.ScreenDisplayQRCode
+import me.empresta.feature_QRCode_Connection.view.ScreenReadQRCode
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_View_Profile.view.ScreenProfile
+import me.empresta.feature_register.view.ScreenRegister
+import java.util.concurrent.TimeoutException;
+import java.io.IOException
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
+    override fun onStart() {
+        super.onStart()
+    }
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+
     setContent {
         CleanArchitecture {
             Surface(
@@ -64,6 +74,10 @@ override fun onCreate(savedInstanceState: Bundle?) {
             }
         }
     }
+
+
+
+
 }
 }
 

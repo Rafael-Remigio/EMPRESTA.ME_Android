@@ -10,6 +10,9 @@ import dagger.hilt.components.SingletonComponent
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
+import me.empresta.DAO.VouchDAO
+import me.empresta.PubSub.Message_Handler
+import me.empresta.PubSub.PubSub
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.feature_QRCode_Connection.use_case.ConnectToCommunity
 import me.empresta.feature_View_Profile.use_case.ProfileUseCase
@@ -42,6 +45,11 @@ object AppModule {
     @Provides
     fun provideAccountDao(db: Database): AccountDao{ return db.AccountDao }
 
+    @Singleton
+    @Provides
+    fun provideVouchDao(db: Database): VouchDAO { return db.VouchDAO }
+
+
     @Provides
     @Singleton
     fun provideRegisterUseCases(repository: Repository): RegisterUseCase {
@@ -64,5 +72,18 @@ object AppModule {
     fun provideProfileUseCase(repository: Repository): ProfileUseCase {
         return ProfileUseCase(repository)
     }
+
+    @Provides
+    @Singleton
+    fun provideMessageHandler(repository: Repository): Message_Handler {
+        return Message_Handler(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePubSub(messageHandler: Message_Handler): PubSub {
+        return PubSub(messageHandler)
+    }
+
 
 }

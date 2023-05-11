@@ -4,7 +4,7 @@
             "outputFile": "me.empresta.app-mergeDebugResources-78:/values-watch-v21/values-watch-v21.xml",
             "map": [
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-watch-v21/values-watch-v21.xml",
+                    "source": "C:\\Users\\jtele\\.gradle\\caches\\transforms-3\\6e8eba475af1ea4cbd655b1e6494c4a2\\transformed\\appcompat-1.6.1\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",
