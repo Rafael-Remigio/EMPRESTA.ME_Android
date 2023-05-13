@@ -17,6 +17,8 @@ EMPRESTA.ME Android Application
 * Room database and data access object classes are located under the DAO folder
 * Components related to accessing API's are under the RemoteAPI Folder
 
+<img src="images/Architecture.png">
+
 # 
 ### Features
 * **Busines Logic**
