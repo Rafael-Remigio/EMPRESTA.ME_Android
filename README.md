@@ -13,7 +13,7 @@ EMPRESTA.ME Android Application
 
 * Reusable UI components are located under UI folder
 * Navigation Components are located under the Navigation folder
-* Dependency Injection and Repository pattern code are under the DI folder
+* Dependency Injection and Repository pattern code are under the DI folder. Dependency Injection is achieved with Dagger Hilt. Please se the [Android Documentation about the subject](https://developer.android.com/training/dependency-injection/hilt-android) (it is very good)
 * Room database and data access object classes are located under the DAO folder
 * Components related to accessing API's are under the RemoteAPI Folder
 
