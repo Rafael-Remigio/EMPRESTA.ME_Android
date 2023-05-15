@@ -33,7 +33,7 @@ EMPRESTA.ME Android Application
 Have Android Studio Installed.  
 
 
-When running the aplication make sure to Register when entering the applicatio. (just feel in the )
+When running the aplication make sure to Register when entering the applicatio. (just feel in the username)
 
 
 # PUB SUB
