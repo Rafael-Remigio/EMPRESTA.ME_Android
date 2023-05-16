@@ -39,48 +39,6 @@ public class Vouch_Message{
         return json;
     }
 
-    public static List<List<Integer>> Get_Matrix(List<Integer> idOrder, List<String> nodes) {
-
-        // Creates an N*N matrix
-        int size = nodes.size();
-        List<List<Integer>> matrix = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            List<Integer> row = new ArrayList<>();
-            for (int j = 0; j < size; j++) {
-                row.add(0);
-            }
-            matrix.add(row);
-        }
-        /*
-        // Goes through each node...
-        for (int nodeIdx = 0; nodeIdx < idOrder.size(); nodeIdx++) {
-            int nodeId = idOrder.get(nodeIdx);
-
-            // ... and each vouch
-            for (int otherId : nodes.get(nodeId).getVouches().keySet()) {
-                int otherIdx = idOrder.indexOf(otherId); // Gets the idx from the ordered list
-
-                // Don't check for connections if already exists
-                if (matrix.get(nodeIdx).get(otherIdx) != 0) {
-                    continue;
-                }
-
-                // If they vouch for each other...
-                if (hasPositiveConnection(nodeId, otherId)) {
-                    matrix.get(nodeIdx).set(otherIdx, 1);
-                    matrix.get(otherIdx).set(nodeIdx, 1);
-                }
-                // If they vouch against each other...
-                else if (hasNegativeConnection(nodeId, otherId)) {
-                    matrix.get(nodeIdx).set(otherIdx, -1);
-                    matrix.get(otherIdx).set(nodeIdx, -1);
-                }
-            }
-        }
-        */
-        return matrix;
-    }
-
 
     public boolean check_signature(){
         //TODO: Implement hash test

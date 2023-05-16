@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -16,7 +17,7 @@ import me.empresta.DI.Repository;
 
 public class Message_Handler {
 
-    static int[][] matrix;
+    static HashMap<String,Integer> connectionMap = new HashMap<String,Integer>();
 
     @Inject
     Repository repository;
@@ -48,7 +49,7 @@ public class Message_Handler {
                 System.out.println("Header is C");
                 break;
             default:
-                System.out.println("Header is not VOUCH, A, B, or C");
+                System.out.println("message not recognized");
                 break;
         }
 
@@ -57,21 +58,23 @@ public class Message_Handler {
     public  void Handle_Vouch(Vouch_Message message, String exchange){
 
         // Validations
-        if(message.check_nonce())
+        if(!message.check_nonce())
             return;
 
-        if(message.check_sender(exchange))
+        if(!message.check_sender(exchange))
             return;
 
-        if(message.check_signature())
+        if(!message.check_signature())
             return;
+
 
         //Reconstruction
-            // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
+
+        // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
+        repository.insertVouch(new Vouch(message.sender + message.receiver, message.sender, message.receiver, message.state, message.message));
 
 
 
-        System.out.println();
 
     }
 
