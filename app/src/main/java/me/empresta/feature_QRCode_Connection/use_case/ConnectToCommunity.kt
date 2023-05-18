@@ -40,12 +40,11 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     suspend fun challengeCommunity(): Boolean{
 
 
-        /*val challenge = generateChallenge()
+        val challenge = generateChallenge()
         val response =   repository.postChallenge(this.url ,challenge)
         val gson = Gson()
         val communityResponse = gson.fromJson(response.string(),CommunityResponse::class.java)
-        return validateResponse(communityResponse,challenge)*/
-        return true
+        return validateResponse(communityResponse,challenge)
 
     }
 
@@ -55,12 +54,12 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         val gson = Gson()
         token =  response.string()
 
-        //val bytes = Utils.toUncompressedPoint(pubKey as ECPublicKey?)
-        /*TODO*/
-        //Utils.setParams((pubKey as ECPublicKey).params)
-        //response =   communityAPI!!.getChallenge(this.url + "auth/challenge", token!!,Base58.encode(bytes))
+        val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
 
-        //println("response: "+ response)
+        response =   repository.getChallenge(this.url , token!!,Base58.encode(keybytes))
+
+
+        println("response: $response")
 
         val community = Community(communityName,this.url, Base58.decode(pubKey))
         repository.insertCommunity(community)
@@ -77,15 +76,11 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     }
 
     private fun validateResponse(response: CommunityResponse,challenge: String): Boolean{
-        /*TODO*/
         val responseBytes = Base58.decode(response.response)
         val pubkeyBytes = Base58.decode(response.public_key)
-        println(pubkeyBytes.toString())
-        //val pubkeyBytesUncompressed = Utils.fromUncompressedPoint(pubkeyBytes)
+        val pubKey = Utils.fromUncompressedPoint(Utils.compressedToUncompressed(pubkeyBytes))
         val challengeBytes = Base58.decode(challenge)
-        //println("" + response.response + "   "+response.public_key + " " +challenge)
-        //return Utils.verifySignature(pubkeyBytesUncompressed.encoded,challengeBytes,responseBytes)
-        return true
+        return Utils.verifySignature(pubKey,challengeBytes,responseBytes)
     }
 
 

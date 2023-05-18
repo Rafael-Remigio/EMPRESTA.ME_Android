@@ -20,6 +20,11 @@ class Repository @Inject constructor
         }
 
 
+        suspend fun getChallenge(url: String,token: String,keyBytes: String): ResponseBody {
+            return communityAPI.getChallenge(url + "auth/challenge",token,keyBytes)
+        }
+
+
         suspend fun postAssociate(url: String,password: String): ResponseBody {
             return communityAPI.postAssociate(url +  "auth/associate",password)
         }

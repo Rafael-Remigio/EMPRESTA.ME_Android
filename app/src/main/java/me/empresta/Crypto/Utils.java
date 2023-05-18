@@ -1,6 +1,7 @@
 package me.empresta.Crypto;
 
 import java.math.BigInteger;
+import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -8,6 +9,7 @@ import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignatureException;
 import java.security.interfaces.ECPublicKey;
+import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.ECPoint;
 import java.security.spec.ECPublicKeySpec;
@@ -22,26 +24,25 @@ public class Utils {
     public static final String algorithm = "SHA256withECDSA";
     static org.bouncycastle.jce.spec.ECNamedCurveParameterSpec SPEC = org.bouncycastle.jce.ECNamedCurveTable.getParameterSpec("secp256r1");
 
-    public static boolean verifySignature(byte[] publicKeyBytes,byte[] challenge,byte[] response) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, SignatureException {
+    public static boolean verifySignature(PublicKey publicKey,byte[] challenge,byte[] response) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
 
-        EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("EC");
-        PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
         Signature sign = Signature.getInstance(algorithm);
         sign.initVerify(publicKey);
         sign.update(challenge);
 
         return sign.verify(response);
     }
-    private static ECParameterSpec params;
     private static final byte UNCOMPRESSED_POINT_INDICATOR = 0x04;
 
 
     public static ECPublicKey fromUncompressedPoint(
-            final byte[] uncompressedPoint, final ECParameterSpec params)
+            final byte[] uncompressedPoint)
             throws Exception {
+
+        AlgorithmParameters parameters = AlgorithmParameters.getInstance("EC");
+        parameters.init(new ECGenParameterSpec("secp256r1"));
+        ECParameterSpec params = parameters.getParameterSpec(ECParameterSpec.class);
         
-                System.out.println(uncompressedPoint.length);
         int offset = 0;
         if (uncompressedPoint[offset++] != UNCOMPRESSED_POINT_INDICATOR) {
             throw new IllegalArgumentException(
@@ -129,7 +130,7 @@ public class Utils {
 
 
 
-    static byte[] uncompressedToCompressed(byte[] uncompKey){
+    public static byte[] uncompressedToCompressed(byte[] uncompKey){
         org.bouncycastle.math.ec.ECPoint point = SPEC.getCurve().decodePoint(uncompKey);
     
     
@@ -138,7 +139,7 @@ public class Utils {
     
     }
     
-     static byte[] compressedToUncompressed(byte[] compKey) {
+     public static byte[] compressedToUncompressed(byte[] compKey) {
          org.bouncycastle.math.ec.ECPoint point = SPEC.getCurve().decodePoint(compKey);
          byte[] x = point.getXCoord().getEncoded();
          byte[] y = point.getYCoord().getEncoded();
