@@ -51,7 +51,6 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
         var response =   repository.postAssociate(this.url,password)
-        val gson = Gson()
         token =  response.string()
 
         val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
@@ -59,9 +58,13 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         response =   repository.getChallenge(this.url , token!!,Base58.encode(keybytes))
 
 
-        println("response: $response")
+        val challenge = response.string()
 
+        /*TODO*/
+        /*Send register to the Server*/
+        
         val community = Community(communityName,this.url, Base58.decode(pubKey))
+
         repository.insertCommunity(community)
 
 
