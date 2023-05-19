@@ -50,11 +50,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     composable(route = EmprestameScreen.Network.name) {
                         ScreenDisplayNetwork(navController = navController)
                     }
-                    composable(route = EmprestameScreen.CommunityPreview.name+"/{code}")
+                    composable(route = EmprestameScreen.CommunityPreview.name+"/{code}?usesIDP={usesIDP}"  ,  arguments = listOf(navArgument("usesIDP") { defaultValue = "false" }))
                     {backStackEntry ->
                         val code = backStackEntry.arguments?.getString("code")
                         if (code != null) {
-                            ScreenCommunityPreview(navController = navController,  code )
+                            ScreenCommunityPreview(navController = navController,  code, usesIDP = true )
                         }
                     }
                     composable(route = EmprestameScreen.Profile.name) {
