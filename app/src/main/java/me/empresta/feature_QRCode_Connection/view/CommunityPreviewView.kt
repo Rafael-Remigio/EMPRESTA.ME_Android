@@ -20,7 +20,6 @@ class CommunityPreviewView @Inject constructor(
     var reached = true
 
     fun getInfo(url: String) {
-        println("here we are" + url)
         connectToCommunity_useCase.seturl("http://$url/")
         GlobalScope.launch{
             try {

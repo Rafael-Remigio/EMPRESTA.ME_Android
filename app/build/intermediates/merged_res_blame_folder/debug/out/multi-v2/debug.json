@@ -1844,23 +1844,6 @@
             "outputFile": "me.empresta.app-merged_res-80:/values_values.arsc.flat",
             "map": [
                 {
-                    "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values/colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "286,55,102,149,196,241,328",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "323,97,144,191,236,281,365"
-                    },
-                    "to": {
-                        "startLines": "639,891,892,893,904,905,908",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "32373,50626,50673,50720,51464,51509,51675",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "32410,50668,50715,50762,51504,51549,51712"
-                    }
-                },
-                {
                     "source": "/home/rafael/.gradle/caches/transforms-3/7fc703a27324dc2225d5772a37ff03d8/transformed/coil-base-2.0.0-rc01/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -1875,6 +1858,23 @@
                         "startOffsets": "107186",
                         "endColumns": "49",
                         "endOffsets": "107231"
+                    }
+                },
+                {
+                    "source": "/home/rafael/Desktop/LEI/AndroidApp/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "48",
+                        "endOffsets": "60"
+                    },
+                    "to": {
+                        "startLines": "1848",
+                        "startColumns": "4",
+                        "startOffsets": "117992",
+                        "endColumns": "48",
+                        "endOffsets": "118036"
                     }
                 },
                 {
@@ -1933,23 +1933,6 @@
                     }
                 },
                 {
-                    "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "48",
-                        "endOffsets": "60"
-                    },
-                    "to": {
-                        "startLines": "1848",
-                        "startColumns": "4",
-                        "startOffsets": "117992",
-                        "endColumns": "48",
-                        "endOffsets": "118036"
-                    }
-                },
-                {
                     "source": "/home/rafael/.gradle/caches/transforms-3/0604f883d4f3262868a60635e7d87b16/transformed/viewpager2-1.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -2000,25 +1983,6 @@
                         "startOffsets": "107406,107446,108791,109040,109095,110591,110645,110697,110746,110807",
                         "endColumns": "39,46,42,54,46,53,51,48,60,49",
                         "endOffsets": "107441,107488,108829,109090,109137,110640,110692,110741,110802,110852"
-                    }
-                },
-                {
-                    "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values/themes.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "100",
-                        "endLines": "14",
-                        "endColumns": "12",
-                        "endOffsets": "799"
-                    },
-                    "to": {
-                        "startLines": "6167",
-                        "startColumns": "4",
-                        "startOffsets": "424391",
-                        "endLines": "6179",
-                        "endColumns": "12",
-                        "endOffsets": "424969"
                     }
                 },
                 {
@@ -2174,6 +2138,23 @@
                     }
                 },
                 {
+                    "source": "/home/rafael/Desktop/LEI/AndroidApp/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "286,55,102,149,196,241,328",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "323,97,144,191,236,281,365"
+                    },
+                    "to": {
+                        "startLines": "639,891,892,893,904,905,908",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "32373,50626,50673,50720,51464,51509,51675",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "32410,50668,50715,50762,51504,51549,51712"
+                    }
+                },
+                {
                     "source": "/home/rafael/.gradle/caches/transforms-3/4ac1400e890ce6ac39d7ce2707c527ec/transformed/lifecycle-runtime-2.5.1/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -2222,6 +2203,25 @@
                         "startOffsets": "119842,120127,120454",
                         "endColumns": "47,43,45",
                         "endOffsets": "119885,120166,120495"
+                    }
+                },
+                {
+                    "source": "/home/rafael/Desktop/LEI/AndroidApp/app/src/main/res/values/themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "100",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "799"
+                    },
+                    "to": {
+                        "startLines": "6167",
+                        "startColumns": "4",
+                        "startOffsets": "424391",
+                        "endLines": "6179",
+                        "endColumns": "12",
+                        "endOffsets": "424969"
                     }
                 },
                 {
@@ -8391,24 +8391,7 @@
                     }
                 },
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593,687",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "120,204,288,384,486,588,682,771"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,47",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593,4031",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "120,204,288,384,486,588,682,4115"
-                    }
-                },
-                {
-                    "source": "/home/rafael/Documents/LEI/EmprestameAndroid/app/src/main/res/values-night/themes.xml",
+                    "source": "/home/rafael/Desktop/LEI/AndroidApp/app/src/main/res/values-night/themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -8424,6 +8407,23 @@
                         "endLines": "21",
                         "endColumns": "12",
                         "endOffsets": "1265"
+                    }
+                },
+                {
+                    "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-night-v8/values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,47",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,4031",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,4115"
                     }
                 }
             ]
