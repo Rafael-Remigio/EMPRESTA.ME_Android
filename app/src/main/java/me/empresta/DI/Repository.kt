@@ -5,6 +5,8 @@ import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Community
 import me.empresta.DAO.CommunityDao
 import me.empresta.RemoteAPI.CommunityAPI
+import me.empresta.RemoteAPI.DTO.RegisterBody
+import okhttp3.Response
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
@@ -29,7 +31,13 @@ class Repository @Inject constructor
             return communityAPI.postAssociate(url +  "auth/associate",password)
         }
 
-        suspend fun insertCommunity(community:Community){
+
+        suspend fun postRegister(url: String,body: RegisterBody): ResponseBody {
+            return communityAPI.postRegister(url +  "acc/register",body)
+        }
+
+
+    suspend fun insertCommunity(community:Community){
             communityDao.insertCommunity(community)
         }
 

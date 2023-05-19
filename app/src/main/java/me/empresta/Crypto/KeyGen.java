@@ -16,6 +16,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -73,33 +75,19 @@ public class KeyGen {
         return keyStore.getCertificate("key1").getPublicKey();
     }
 
-    public PrivateKey getPrivKey() throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, IOException {
+    public static PrivateKey getPrivKey() throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException, CertificateException, IOException {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
 
         return (PrivateKey) keyStore.getKey("key1", null);
     }
 
-    public String encrypt(String data) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        PublicKey publicKey = getPubKey();
-        Cipher cipher = Cipher.getInstance("EC");
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-        byte[] byteArray = data.getBytes();
-        byte[] bytes = cipher.doFinal(byteArray);
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    public static byte[] sign( byte[] data) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, InvalidKeyException, UnrecoverableKeyException, SignatureException {
+        Signature sign = Signature.getInstance("SHA256withECDSA");
+        sign.initSign(getPrivKey());
+        sign.update(data);
+        return sign.sign();
     }
-
-    public String decrypt(String data) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnrecoverableKeyException {
-        PrivateKey prvKey = getPrivKey();
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-        cipher.init(Cipher.DECRYPT_MODE, prvKey);
-        byte[] encryptedData = Base64.decode(data, Base64.DEFAULT);
-        byte[] decodedData = cipher.doFinal(encryptedData);
-        return new String(decodedData);
-    }
-
-
-
 
 
 }
