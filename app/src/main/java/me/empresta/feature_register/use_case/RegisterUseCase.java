@@ -13,11 +13,13 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.interfaces.ECPublicKey;
 
 import javax.inject.Inject;
 
 import me.empresta.Crypto.Base58;
 import me.empresta.Crypto.KeyGen;
+import me.empresta.Crypto.Utils;
 import me.empresta.DAO.Account;
 import me.empresta.DAO.AccountDao;
 import me.empresta.DI.Repository;
@@ -41,10 +43,11 @@ public class RegisterUseCase {
 
         KeyPair pair = KeyGen.CreateKeyPair();
 
-        Certificate publicKey = KeyGen.getPubCert();
-        byte[] pubkey = publicKey.getPublicKey().getEncoded();
 
-        Account account = new Account(Base58.encode(pubkey),nickName,description,contact,"");
+        byte[] keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint((ECPublicKey) KeyGen.getPubKey()));
+        String keyBase58 = Base58.encode(keybytes);
+
+        Account account = new Account(keyBase58,nickName,description,contact,"");
 
 
         AsyncTask.execute(() -> {

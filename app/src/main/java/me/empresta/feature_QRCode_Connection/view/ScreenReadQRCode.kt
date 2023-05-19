@@ -3,6 +3,7 @@ package me.empresta.feature_QRCode_Connection.view
 import android.Manifest
 import android.content.pm.PackageManager
 import android.util.Size
+import android.widget.Toast
 import androidx.compose.material.*
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -148,6 +149,11 @@ fun ScreenReadQRCode(
                                     navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+ map["CommunityAddress"]+ "?usesIDP=false")
                                 }
                             }
+                            if (map.containsKey("NickName")){
+                                Toast.makeText(context,"User Connection", Toast.LENGTH_SHORT).show()
+
+                            }
+                            Toast.makeText(context,"Invalid Read", Toast.LENGTH_SHORT).show()
                         }
                     )
                     try {
@@ -175,7 +181,7 @@ fun ScreenReadQRCode(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start =32.dp,end= 32.dp, top = 50.dp),
+                    .padding(start = 32.dp, end = 32.dp, top = 50.dp),
                 color = White
 
             )
