@@ -57,7 +57,6 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
         val challenge = response.string()
         val signedData = Base58.encode(KeyGen.sign(Base58.decode(challenge)))
-        println(challenge + "     " + signedData)
         val account = repository.getAccount()
 
         val body = RegisterBody(keyBase58,account.NickName,account.Description,account.contactInfo,account.customization,signedData)

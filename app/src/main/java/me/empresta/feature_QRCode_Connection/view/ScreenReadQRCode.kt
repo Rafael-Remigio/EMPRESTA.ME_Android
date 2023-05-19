@@ -2,7 +2,6 @@ package me.empresta.feature_QRCode_Connection.view
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.drawable.shapes.Shape
 import android.util.Size
 import androidx.compose.material.*
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -13,11 +12,8 @@ import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoGraph
@@ -36,13 +32,28 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import me.empresta.Black
-import me.empresta.BrightOrange
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
 import me.empresta.Navigation.EmprestameScreen
 import me.empresta.White
 import me.empresta.feature_QRCode_Connection.use_case.QRCodeAnalyser
+import org.json.JSONArray
+import org.json.JSONObject
 
+
+fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
+    when (val value = this[it])
+    {
+        is JSONArray ->
+        {
+            val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
+            JSONObject(map).toMap().values.toList()
+        }
+        is JSONObject -> value.toMap()
+        JSONObject.NULL -> null
+        else            -> value
+    }
+}
 
 @Composable
 fun ScreenReadQRCode(
@@ -127,7 +138,16 @@ fun ScreenReadQRCode(
                         ContextCompat.getMainExecutor(context),
                         QRCodeAnalyser {result ->
                             code = result
-                            navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+code)
+                            val jsonObj = JSONObject(code)
+                            val map = jsonObj.toMap()
+                            if (map.containsKey("CommunityAddress")){
+                                if (map.containsKey("usesIDP")){
+                                    navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+ map["CommunityAddress"] + "?usesIDP=true")
+                                }
+                                else {
+                                    navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+ map["CommunityAddress"]+ "?usesIDP=false")
+                                }
+                            }
                         }
                     )
                     try {
