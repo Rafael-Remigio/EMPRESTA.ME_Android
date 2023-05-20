@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-78:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-82:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/5cf51cf355bf0ec9e9cdd4601c100365/transformed/material-1.8.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",

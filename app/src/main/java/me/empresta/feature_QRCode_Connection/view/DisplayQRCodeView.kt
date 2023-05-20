@@ -58,9 +58,8 @@ class DisplayQRCodeView @Inject constructor(
                 val personalAccount : Account
                         = getAccount()
 
-                val bitMatrix = writer.encode("{NickName: \"" + personalAccount.NickName +"\"; Description: \""+personalAccount.Description+ "\"; Public Key: \""+personalAccount.publicKey+"\"; Customization: \""+personalAccount.customization +"\"}", BarcodeFormat.QR_CODE, dimen,dimen)
+                val bitMatrix = writer.encode("{NickName: \"" + personalAccount.NickName +"\"; Description: \""+personalAccount.Description+ "\"; PublicKey: \""+personalAccount.publicKey+"\"; Customization: \""+personalAccount.customization +"\"}", BarcodeFormat.QR_CODE, dimen,dimen)
 
-                println( "{NickName: \"" + personalAccount.NickName +" \"; Description: \""+personalAccount.Description+ " \"; Public Key: \""+personalAccount.publicKey+" \"; Customization: \" "+personalAccount.customization +"\"}")
 
             val barcodeEncoder = BarcodeEncoder()
 
