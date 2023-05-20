@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-78:/values-v23/values-v23.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-82:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
