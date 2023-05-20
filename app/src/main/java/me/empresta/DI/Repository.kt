@@ -1,5 +1,6 @@
 package me.empresta.DI
 
+import kotlinx.coroutines.flow.Flow
 import me.empresta.DAO.Account
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Community
@@ -37,12 +38,17 @@ class Repository @Inject constructor
         }
 
 
-    suspend fun insertCommunity(community:Community){
+        suspend fun insertCommunity(community:Community){
             communityDao.insertCommunity(community)
         }
 
 
-        fun insertAccount(account:Account){
+        suspend fun getCommunities():List<Community>{
+            return communityDao.getCommunityList()
+        }
+
+
+    fun insertAccount(account:Account){
             accountDao.insertAccount(account)
         }
 
