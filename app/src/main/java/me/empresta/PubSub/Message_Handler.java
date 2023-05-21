@@ -90,8 +90,7 @@ public class Message_Handler {
         if(!message.check_signature())
             return;
 
-        //Reconstruction
-        // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
+        // Add this Item Announcement to the list of saved Items
 
     }
 
@@ -109,8 +108,8 @@ public class Message_Handler {
         if(!message.check_signature())
             return;
 
-        //Reconstruction
-        // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
+        // Add this Item Request to the list of saved Items
+
 
     }
 
