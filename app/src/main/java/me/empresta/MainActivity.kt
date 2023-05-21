@@ -19,9 +19,35 @@ import me.empresta.feature_QRCode_Connection.view.ScreenCommunityPreview
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_View_Profile.view.ScreenProfile
+import androidx.navigation.compose.rememberNavController
+import com.rabbitmq.client.Channel
+import com.rabbitmq.client.Connection
+import com.rabbitmq.client.ConnectionFactory
+import me.empresta.PubSub.PubSub
+import java.util.concurrent.TimeoutException;
+import java.io.IOException
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject lateinit var pubSub: PubSub
+
+    override fun onStart() {
+        super.onStart()
+        pubSub.start_listening("my_pub_key")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        pubSub.start_listening("my_pub_key")
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+
+    }
 
 
 override fun onCreate(savedInstanceState: Bundle?) {
