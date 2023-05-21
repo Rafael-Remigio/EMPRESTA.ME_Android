@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 public class PubSub{
 
-    static String host = "192.168.206.52";
+    static String host = "192.168.227.52";
 
 
     @Inject
@@ -83,7 +83,7 @@ public class PubSub{
         - Vouch Type
         - Description
     */
-    public static void Publish_Vouch(String my_public_key, String other_public_key, String Description){
+    public static void Publish_Vouch(String my_public_key, String other_public_key, String Description, Integer state){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -99,63 +99,20 @@ public class PubSub{
                     int nonce = 0;
 
                     JSONObject j_message = new JSONObject();
-                    j_message.put("my_public_key", my_public_key);
+                    j_message.put("header", "VOUCH");
+                    j_message.put("clock", "clock"); //TODO: clock
+                    j_message.put("hash", "hash"); //TODO: hash of the message
                     j_message.put("nonce", nonce);
-                    j_message.put("other_public_key", other_public_key);
-                    j_message.put("Description", Description);
+                    j_message.put("signature", "signature"); //TODO: Signature
+                    j_message.put("sender", my_public_key);
+                    j_message.put("receiver", other_public_key);
+                    j_message.put("state", state);
+                    j_message.put("message", Description);
+
 
                     channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
 
-                    System.out.println(" [x] Sent '" +  j_message.toString() + "'");
-
-                    channel.close();
-                    connection.close();
-
-                } catch (IOException | TimeoutException e) {
-                    throw new RuntimeException("Rabbitmq problem", e);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-        thread.start();
-    }
-    /*
-    Item Announcement Update
-         X -Public key
-         X -Nonce (Proof-of-Work)
-         X -Signature
-         X -Name
-         X -Description
-         X -Photo
-    */
-    public static void Publish_Item_Announcement_Update(String my_public_key, String Signature, String Name, String Description, String Photo){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ConnectionFactory factory = new ConnectionFactory();
-
-                    factory.setHost(host);
-                    Connection connection = factory.newConnection();
-                    Channel channel = connection.createChannel();
-
-                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-
-                    int nonce = 0; //Nonce that needs to be randomized
-
-                    JSONObject j_message = new JSONObject();
-                    j_message.put("my_public_key", my_public_key);
-                    j_message.put("Signature", Signature);
-                    j_message.put("nonce", nonce);
-                    j_message.put("Name", Name);
-                    j_message.put("Description", Description);
-                    j_message.put("Photo", Photo);
-
-                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
-
-                    System.out.println(" [x] Sent '" +  j_message.toString() + "'");
+                    //System.out.println(" [x] Sent '" +  j_message.toString() + "'");
 
                     channel.close();
                     connection.close();
@@ -171,15 +128,7 @@ public class PubSub{
         thread.start();
     }
 
-    /*
-    Item Request
-      X -Public key
-      X -Nonce (Proof-of-Work)
-      X -Signature
-      X -Name
-      X -Issuer (optional)
-    */
-    public static void Publish_Item_Request(String my_public_key, String Signature, String Name, String Issuer_public_key){
+    public static void Publish_Item_Announcement_Update(String my_public_key, String Name, String Description, String Photo){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -195,15 +144,63 @@ public class PubSub{
                     int nonce = 0; //Nonce that needs to be randomized
 
                     JSONObject j_message = new JSONObject();
-                    j_message.put("my_public_key", my_public_key);
+                    j_message.put("header", "ITEM_ANNOUNCEMENT");
+                    j_message.put("clock", "clock"); //TODO: clock
+                    j_message.put("hash", "hash"); //TODO: hash of the message
                     j_message.put("nonce", nonce);
-                    j_message.put("Issuer_public_key", Issuer_public_key);
-                    j_message.put("Signature", Signature);
-                    j_message.put("Name", Name);
+                    j_message.put("signature", "signature"); //TODO: Signature
+                    j_message.put("sender", my_public_key);
+                    j_message.put("name", Name);
+                    j_message.put("description", Description);
+                    j_message.put("image", Photo);
 
                     channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
 
-                    System.out.println(" [x] Sent '" +  j_message + "'");
+                    //System.out.println(" [x] Sent '" +  j_message.toString() + "'");
+
+                    channel.close();
+                    connection.close();
+
+                } catch (IOException | TimeoutException e) {
+                    throw new RuntimeException("Rabbitmq problem", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+
+    public static void Publish_Item_Request(String my_public_key, String Name, String Description){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ConnectionFactory factory = new ConnectionFactory();
+
+                    factory.setHost(host);
+                    Connection connection = factory.newConnection();
+                    Channel channel = connection.createChannel();
+
+                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+                    int nonce = 0; //Nonce that needs to be randomized
+
+                    JSONObject j_message = new JSONObject();
+                    j_message.put("header", "ITEM_REQUEST");
+                    j_message.put("clock", "clock"); //TODO: clock
+                    j_message.put("hash", "hash"); //TODO: hash of the message
+                    j_message.put("nonce", nonce);
+                    j_message.put("signature", "signature"); //TODO: Signature
+                    j_message.put("sender", my_public_key);
+                    j_message.put("name", Name);
+                    j_message.put("description", Description);
+
+                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
+
+                    //System.out.println(" [x] Sent '" +  j_message + "'");
 
                     channel.close();
                     connection.close();

@@ -9,12 +9,26 @@ public class Vouch_Message{
     private String header;
     private String state;
     private String clock;
+    private String signature;
     private String sender;
     private String receiver;
     private String message;
     private String nonce;
     private String hash;
 
+    @Override
+    public String toString() {
+        return "Vouch_Message{" +
+                "header='" + header + '\'' +
+                ", state='" + state + '\'' +
+                ", clock='" + clock + '\'' +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", message='" + message + '\'' +
+                ", nonce='" + nonce + '\'' +
+                ", hash='" + hash + '\'' +
+                '}';
+    }
 
     public Vouch_Message(String header, String state, String clock, String sender, String receiver, String message, String nonce, String hash) {
         this.header = header;
@@ -108,4 +122,5 @@ public class Vouch_Message{
     public void setHash(String hash) {
         this.hash = hash;
     }
+
 }

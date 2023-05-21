@@ -28,7 +28,7 @@ public class Message_Handler {
     }
 
     public void Handle(String message, String exchange){
-        System.out.println(message);
+
 
 
         Gson gson = new Gson();
@@ -39,23 +39,25 @@ public class Message_Handler {
             case "VOUCH":
                 Handle_Vouch(Vouch_Message.fromJson(message), exchange);
                 break;
-            case "A":
-                System.out.println("Header is A");
+            case "ITEM_ANNOUNCEMENT":
+                Handle_Item_Announcement(Item_Announcement_Message.fromJson(message), exchange);
                 break;
-            case "B":
-                System.out.println("Header is B");
+            case "ITEM_REQUEST":
+                Handle_Item_Request(Item_Request_Message.fromJson(message), exchange);
                 break;
-            case "C":
-                System.out.println("Header is C");
+            case "ASK_INFO":
+                System.out.println("Header is ASK_INFO");
                 break;
             default:
-                System.out.println("message not recognized");
+                System.out.println("Header is not VOUCH, ITEM_ANNOUNCEMENT, ITEM_REQUEST, or ASK_INFO");
                 break;
         }
 
 
     }
     public  void Handle_Vouch(Vouch_Message message, String exchange){
+
+        System.out.println(message);
 
         // Validations
         if(!message.check_nonce())
@@ -73,8 +75,42 @@ public class Message_Handler {
         // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
         repository.insertVouch(new Vouch(message.sender + message.receiver, message.sender, message.receiver, message.state, message.message));
 
+    }
+    public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){
 
+        System.out.println(message);
 
+        // Validations
+        if(!message.check_nonce())
+            return;
+
+        if(!message.check_sender(exchange))
+            return;
+
+        if(!message.check_signature())
+            return;
+
+        //Reconstruction
+        // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
+
+    }
+
+    public  void Handle_Item_Request(Item_Request_Message message, String exchange){
+
+        System.out.println(message);
+
+        // Validations
+        if(!message.check_nonce())
+            return;
+
+        if(!message.check_sender(exchange))
+            return;
+
+        if(!message.check_signature())
+            return;
+
+        //Reconstruction
+        // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
 
     }
 
