@@ -73,7 +73,7 @@ public class Message_Handler {
         //Reconstruction
 
         // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
-        repository.insertVouch(new Vouch(message.sender + message.receiver, message.sender, message.receiver, message.state, message.message));
+        repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), Integer.parseInt(message.getState()), message.getMessage()));
 
     }
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){

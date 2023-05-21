@@ -11,7 +11,7 @@ data class Vouch(
     val id: String,
     val publicKey_1: String,
     val publicKey_2: String,
-    val state: Boolean,
+    val state: Integer,
     val Description: String = ""
 ) {
     override fun equals(other: Any?): Boolean {
