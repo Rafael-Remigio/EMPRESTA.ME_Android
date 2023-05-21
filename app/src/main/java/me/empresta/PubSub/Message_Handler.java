@@ -12,6 +12,8 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
+import me.empresta.DAO.ItemAnnouncement;
+import me.empresta.DAO.ItemRequest;
 import me.empresta.DAO.Vouch;
 import me.empresta.DI.Repository;
 
@@ -57,8 +59,6 @@ public class Message_Handler {
     }
     public  void Handle_Vouch(Vouch_Message message, String exchange){
 
-        System.out.println(message);
-
         // Validations
         if(!message.check_nonce())
             return;
@@ -78,8 +78,6 @@ public class Message_Handler {
     }
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){
 
-        System.out.println(message);
-
         // Validations
         if(!message.check_nonce())
             return;
@@ -91,14 +89,13 @@ public class Message_Handler {
             return;
 
         // Add this Item Announcement to the list of saved Items
-
+        repository.insertItemAnnouncement(new ItemAnnouncement(message.getSender(), message.getName(), message.getDescription(), message.getImage()));
+        System.out.println("[From DB]" + repository.getAllItemAnnouncements());
     }
 
     public  void Handle_Item_Request(Item_Request_Message message, String exchange){
-
         System.out.println(message);
-
-        // Validations
+        /*Validations
         if(!message.check_nonce())
             return;
 
@@ -106,11 +103,11 @@ public class Message_Handler {
             return;
 
         if(!message.check_signature())
-            return;
+            return;*/
 
         // Add this Item Request to the list of saved Items
-
-
+        repository.insertItemRequest(new ItemRequest(message.getSender(), message.getName(), message.getDescription()));
+        System.out.println("[From DB]" + repository.getAllItemRequests());
     }
 
 }

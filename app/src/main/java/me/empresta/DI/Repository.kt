@@ -6,10 +6,10 @@ import me.empresta.DAO.Account
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Community
 import me.empresta.DAO.CommunityDao
+import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemAnnouncementDAO
+import me.empresta.DAO.ItemRequest
 import me.empresta.DAO.ItemRequestDAO
-import me.empresta.DAO.Item_Announcement
-import me.empresta.DAO.Item_Request
 import me.empresta.DAO.VouchDAO
 import me.empresta.DAO.Vouch
 import me.empresta.RemoteAPI.CommunityAPI
@@ -65,11 +65,11 @@ class Repository @Inject constructor
 
 
         // Item Request
-        fun insertItemRequest(item:Item_Request){
+        fun insertItemRequest(item:ItemRequest){
             itemRequestDAO.insertItem(item)
         }
 
-        fun getAllItemRequests(): Flow<List<Item_Request>> {
+        fun getAllItemRequests(): Flow<List<ItemRequest>> {
             return itemRequestDAO.getAllItems()
         }
 
@@ -80,11 +80,11 @@ class Repository @Inject constructor
 
         // Item Announcement
         // Item Request
-        fun insertItemAnnouncement(item:Item_Announcement){
+        fun insertItemAnnouncement(item: ItemAnnouncement){
             itemAnnouncementDAO.insertItem(item)
         }
 
-        fun getAllItemAnnouncements(): Flow<List<Item_Announcement>> {
+        fun getAllItemAnnouncements(): Flow<List<ItemAnnouncement>> {
             return itemAnnouncementDAO.getAllItems()
         }
 

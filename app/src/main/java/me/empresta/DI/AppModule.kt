@@ -10,6 +10,8 @@ import dagger.hilt.components.SingletonComponent
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
+import me.empresta.DAO.ItemAnnouncementDAO
+import me.empresta.DAO.ItemRequestDAO
 import me.empresta.DAO.VouchDAO
 import me.empresta.PubSub.Message_Handler
 import me.empresta.PubSub.PubSub
@@ -48,6 +50,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideVouchDao(db: Database): VouchDAO { return db.VouchDAO }
+    @Singleton
+    @Provides
+    fun provideItemRequestDAO(db: Database): ItemRequestDAO { return db.ItemRequestDAO }
+    @Singleton
+    @Provides
+    fun provideItemAnnouncementDAO(db: Database): ItemAnnouncementDAO { return db.ItemAnnouncementDAO }
 
 
     @Provides

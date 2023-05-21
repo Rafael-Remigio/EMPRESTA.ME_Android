@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.Flow
 interface ItemAnnouncementDAO{
 
     @Upsert
-    fun insertItem(item: Item_Announcement)
+    fun insertItem(item: ItemAnnouncement)
 
-    @Query("select * from Item_Announcement")
-    fun getAllItems(): Flow<List<Item_Announcement>>
+    @Query("select * from ItemAnnouncement")
+    fun getAllItems(): Flow<List<ItemAnnouncement>>
 
-    @Query("delete from Item_Announcement")
+    @Query("delete from ItemAnnouncement")
     fun deleteAllItems()
 
 

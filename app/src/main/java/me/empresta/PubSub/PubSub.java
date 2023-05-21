@@ -200,7 +200,7 @@ public class PubSub{
 
                     channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
 
-                    //System.out.println(" [x] Sent '" +  j_message + "'");
+                    System.out.println(" [x] Sent '" +  j_message + "'");
 
                     channel.close();
                     connection.close();
