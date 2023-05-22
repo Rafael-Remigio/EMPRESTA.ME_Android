@@ -45,14 +45,14 @@ fun ScreenFeed(
 
 
 
-    /*
+    /* */
     PubSub.Publish_Vouch("my_pub_key","other_pub_key","Vouch description", 0);
     PubSub.Publish_Item_Request("my_pub_key","Dnd Set","Vouch description");
     PubSub.Publish_Item_Announcement_Update("my_pub_key","Bikleta","Vouch description","image_url");
     PubSub.Publish_Item_Request("my_pub_key","Dnd Set","Vouch description");
     PubSub.Publish_Item_Announcement_Update("my_pub_key","Bikleta","Vouch description","image_url");
     PubSub.Publish_Vouch("my_pub_key","other_pub_key","Vouch description", 0);
-    */
+    PubSub.Publish_Ask_Info("my_pub_key", "my_pub_key", "Alor mano me da teu numero pls")
 
     //PubSub.Publish_Item_Announcement_Update("my_pub_key","Signature","Item Name", "Item Description", "Photo");
     //PubSub.Publish_Item_Request("my_pub_key","Signature","Item Name", "issuer_pub_key");
