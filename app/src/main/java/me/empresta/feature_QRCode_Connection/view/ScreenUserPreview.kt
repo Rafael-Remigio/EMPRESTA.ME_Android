@@ -11,20 +11,19 @@ import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.rounded.School
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import me.empresta.Black
 import me.empresta.BrightOrange
+import me.empresta.Grey
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
 import me.empresta.White
@@ -54,6 +53,10 @@ fun ScreenUserPreview(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+
+    //text field
+
+    var vouchDescription by remember { mutableStateOf(TextFieldValue("")) }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -109,6 +112,9 @@ fun ScreenUserPreview(
             modifier = Modifier.padding(start = 5.dp, top = 20.dp)
         )
 
+        if (communities.isNotEmpty()){
+
+
         Text(
             text = "Communities",
             style = MaterialTheme.typography.h5,
@@ -130,12 +136,25 @@ fun ScreenUserPreview(
             Spacer(modifier = Modifier.size(20.dp,5.dp))
 
         }
+        }
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = BrightOrange,
+                unfocusedBorderColor = Grey
+            ),
+            value = vouchDescription,
+            onValueChange = {
+                vouchDescription = it
+            },
+            label = { Text(text = "Description of Positive Vouch", color = BrightOrange)},
+        )
 
-        Box(modifier = Modifier.padding(vertical = 60.dp))
+        Row(modifier = Modifier.padding(vertical = 60.dp)){
+
 
                 Button(
                     onClick = {
-                        if (viewModel.connect()){
+                        if (viewModel.connect(pubKey,vouchDescription.text,1)){
                             Toast.makeText(context,"Vouched successfully",Toast.LENGTH_SHORT).show()
                         }
                               },
@@ -149,12 +168,33 @@ fun ScreenUserPreview(
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange),
                     modifier = Modifier
-                        .width(200.dp)
+                        .width(150.dp)
                         .height(60.dp),
                     shape = RoundedCornerShape(15)
                 )
 
 
+                Button(
+                    onClick = {
+                    if (viewModel.connect(pubKey,vouchDescription.text,-1)){
+                        Toast.makeText(context,"Vouched negatively",Toast.LENGTH_SHORT).show()
+                    }
+                },
+                    content = {
+                    Text(
+                        text = "Disapprove",
+                        color = White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp
+                    )
+                    },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange),
+                    modifier = Modifier
+                    .width(150.dp)
+                    .height(60.dp),
+                    shape = RoundedCornerShape(15)
+                )
+        }
 
     }
 
