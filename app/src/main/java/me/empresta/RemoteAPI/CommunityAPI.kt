@@ -1,8 +1,10 @@
 package me.empresta.RemoteAPI
 
-import me.empresta.RemoteAPI.DTO.CommunityInfo
+import me.empresta.RemoteAPI.DTO.RegisterBody
+import okhttp3.Response
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -22,5 +24,8 @@ interface CommunityAPI {
 
     @GET()
     suspend fun getChallenge(@Url url: String, @Header("token") token: String,@Header("public_key") public_key: String): ResponseBody
+
+    @POST()
+    suspend fun postRegister(@Url url: String, @Body body: RegisterBody): ResponseBody
 
 }

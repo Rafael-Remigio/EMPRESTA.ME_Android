@@ -129,3 +129,8 @@ public class Item_Announcement_Message {
         this.image = image;
     }
 }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+}

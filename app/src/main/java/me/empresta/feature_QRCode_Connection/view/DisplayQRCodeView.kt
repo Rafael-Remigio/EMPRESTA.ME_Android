@@ -11,15 +11,22 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import me.empresta.DAO.Account
 import me.empresta.DAO.AccountDao
+import me.empresta.DAO.Community
+import me.empresta.DI.Repository
 import me.empresta.feature_register.use_case.RegisterUseCase
+import okio.ByteString.Companion.encode
+import java.util.Vector
 import javax.inject.Inject
 
 @HiltViewModel
 class DisplayQRCodeView @Inject constructor(
-    private val accountDao: AccountDao
+    private val repository: Repository
 ) : ViewModel()
 {
 
@@ -58,7 +65,17 @@ class DisplayQRCodeView @Inject constructor(
                 val personalAccount : Account
                         = getAccount()
 
-                val bitMatrix = writer.encode("{NickName:" + personalAccount.NickName +"; Description: "+personalAccount.Description+ "; Public Key:"+personalAccount.publicKey+"}", BarcodeFormat.QR_CODE, dimen,dimen)
+
+                val array = ByteArray(10);
+                val communities = getCommunities()
+                var communityString: String = "";
+
+                for (i in communities){
+                    communityString.plus("{name:"+ i.name +";url: "+i.url+";},")
+                }
+
+
+                val bitMatrix = writer.encode("{NickName: \"" + personalAccount.NickName +"\"; Description: \""+personalAccount.Description+ "\"; PublicKey: \""+personalAccount.publicKey+"\"; Customization: \""+personalAccount.customization +"\"; Communities: [" +""  +  "]}", BarcodeFormat.QR_CODE, dimen,dimen)
 
 
             val barcodeEncoder = BarcodeEncoder()
@@ -78,15 +95,22 @@ class DisplayQRCodeView @Inject constructor(
     }
 
 
-    fun getScreenWidth(): Int {
+    private fun getScreenWidth(): Int {
         return Resources.getSystem().getDisplayMetrics().widthPixels
     }
 
-    fun getScreenHeight(): Int {
+    private fun getScreenHeight(): Int {
         return Resources.getSystem().getDisplayMetrics().heightPixels
     }
 
-    suspend fun getAccount():Account{
-        return accountDao.getAccountById()
+    private suspend fun getAccount():Account{
+        return repository.getAccount()
     }
+
+
+    suspend fun getCommunities():List<Community>{
+        val data = repository.getCommunities()
+        return data
+    }
+
 }

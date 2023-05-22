@@ -2,8 +2,11 @@ package me.empresta.feature_QRCode_Connection.view
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.drawable.shapes.Shape
+import android.net.Uri
+import android.util.Log
 import android.util.Size
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.material.*
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,11 +16,8 @@ import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoGraph
@@ -35,30 +35,43 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import me.empresta.Black
-import me.empresta.BrightOrange
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
 import me.empresta.Navigation.EmprestameScreen
 import me.empresta.White
-import me.empresta.feature_QRCode_Connection.use_case.QRCodeAnalyser
+import me.empresta.feature_QRCode_Connection.use_case.BarCodeAnalyser
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
+
+fun JSONObject.toMap(): Map<String, *> = keys().asSequence().associateWith {
+    when (val value = this[it])
+    {
+        is JSONArray ->
+        {
+            val map = (0 until value.length()).associate { Pair(it.toString(), value[it]) }
+            JSONObject(map).toMap().values.toList()
+        }
+        is JSONObject -> value.toMap()
+        JSONObject.NULL -> null
+        else            -> value
+    }
+}
 
 @Composable
 fun ScreenReadQRCode(
     navController: NavController,
 ) {
 
-    // Camera Stuff
-    var code by remember {
-        mutableStateOf("")
-    }
-    val context = LocalContext.current
-    val cameraProviderFuture = remember {
-        ProcessCameraProvider.getInstance(context)
-    }
-
     // Camera Permission
+    val context = LocalContext.current
+
     var hasCamPermission by remember {
         mutableStateOf(
             ContextCompat.checkSelfPermission(
@@ -77,7 +90,9 @@ fun ScreenReadQRCode(
     }
     val lifeCycleOwner = LocalLifecycleOwner.current
 
-
+    val lifecycleOwner = LocalLifecycleOwner.current
+    var preview by remember { mutableStateOf<Preview?>(null) }
+    val barCodeVal = remember { mutableStateOf("") }
 
     
     val scaffoldState = rememberScaffoldState()
@@ -114,37 +129,82 @@ fun ScreenReadQRCode(
             Row() {
                 Box(modifier = Modifier.width(20.dp))
             if (hasCamPermission){
-                AndroidView(factory = { context ->
-                    val previewView = PreviewView(context)
-                    val preview = Preview.Builder().build()
-                    val selector = CameraSelector.Builder()
-                        .requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
-                    preview.setSurfaceProvider(previewView.surfaceProvider)
-                    val imageAnalysis = ImageAnalysis.Builder()
-                        .setTargetResolution(Size(previewView.width,previewView.height))
-                        .setBackpressureStrategy(STRATEGY_KEEP_ONLY_LATEST).build()
-                    imageAnalysis.setAnalyzer(
-                        ContextCompat.getMainExecutor(context),
-                        QRCodeAnalyser {result ->
-                            code = result
-                            navController.navigate(EmprestameScreen.CommunityPreview.name+"/"+code)
+                AndroidView(
+                    factory = { AndroidViewContext ->
+                        PreviewView(AndroidViewContext).apply {
+                            this.scaleType = PreviewView.ScaleType.FILL_CENTER
+                            layoutParams = ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                            )
+                            implementationMode = PreviewView.ImplementationMode.COMPATIBLE
                         }
-                    )
-                    try {
-                        cameraProviderFuture.get().bindToLifecycle(
-                            lifeCycleOwner,
-                            selector,
-                            preview,
-                            imageAnalysis
-                        )
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                    },
+                    modifier = Modifier.fillMaxSize().padding(50.dp),
+                    update = { previewView ->
+                        val cameraSelector: CameraSelector = CameraSelector.Builder()
+                            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                            .build()
+                        val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
+                        val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> =
+                            ProcessCameraProvider.getInstance(context)
+
+                        cameraProviderFuture.addListener({
+                            preview = Preview.Builder().build().also {
+                                it.setSurfaceProvider(previewView.surfaceProvider)
+                            }
+                            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+                            val barcodeAnalyser = BarCodeAnalyser { barcodes ->
+                                barcodes.forEach { barcode ->
+                                    barcode.rawValue?.let { barcodeValue ->
+                                        barCodeVal.value = barcodeValue
+                                        try {
+                                            val jsonObj = JSONObject(barcode.displayValue)
+                                            val map = jsonObj.toMap()
+                                            if (map.containsKey("CommunityAddress")) {
+                                                if (map.containsKey("usesIDP")) {
+                                                    navController.navigate(EmprestameScreen.CommunityPreview.name + "/" + map["CommunityAddress"] + "?usesIDP=true")
+                                                } else {
+                                                    navController.navigate(EmprestameScreen.CommunityPreview.name + "/" + map["CommunityAddress"] + "?usesIDP=false")
+                                                }
+                                            }
+                                            if (map.containsKey("NickName")) {
+
+                                                //Encode Json String to an encoded Uri version
+                                                val arguments = Uri.encode(barcodeValue)
+
+                                                navController.navigate(EmprestameScreen.UserPreview.name + "/" + arguments)
+
+                                                Toast.makeText(context,"User Connection",Toast.LENGTH_SHORT).show();
+                                            }
+                                            }
+                                        catch (e: Exception){
+                                            print(e.message)
+                                            Toast.makeText(context,"Unable to parse QRCode",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                            val imageAnalysis: ImageAnalysis = ImageAnalysis.Builder()
+                                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                                .build()
+                                .also {
+                                    it.setAnalyzer(cameraExecutor, barcodeAnalyser)
+                                }
+
+                            try {
+                                cameraProvider.unbindAll()
+                                cameraProvider.bindToLifecycle(
+                                    lifecycleOwner,
+                                    cameraSelector,
+                                    preview,
+                                    imageAnalysis
+                                )
+                            } catch (e: Exception) {
+                                Log.d("TAG", "CameraPreview: ${e.localizedMessage}")
+                            }
+                        }, ContextCompat.getMainExecutor(context))
                     }
-                    previewView
-                                      },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding()//.border(BorderStroke(5.dp,color = BrightOrange), RoundedCornerShape(15))
                 )
             }
                 Box(modifier = Modifier.width(20.dp))
@@ -155,7 +215,7 @@ fun ScreenReadQRCode(
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start =32.dp,end= 32.dp, top = 50.dp),
+                    .padding(start = 32.dp, end = 32.dp, top = 50.dp),
                 color = White
 
             )

@@ -7,16 +7,13 @@ import me.empresta.Crypto.Utils
 import me.empresta.DAO.Community
 import me.empresta.DAO.CommunityDao
 import me.empresta.DI.Repository
-import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.RemoteAPI.DTO.CommunityResponse
-import org.bouncycastle.asn1.cmp.Challenge
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import me.empresta.RemoteAPI.DTO.RegisterBody
 import java.security.SecureRandom
 import java.security.interfaces.ECPublicKey
 import javax.inject.Inject
-
+import retrofit2.HttpException
 class ConnectToCommunity @Inject constructor(private val repository: Repository, private val communityDao: CommunityDao) {
 
     var url: String = ""
@@ -40,12 +37,11 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     suspend fun challengeCommunity(): Boolean{
 
 
-        /*val challenge = generateChallenge()
+        val challenge = generateChallenge()
         val response =   repository.postChallenge(this.url ,challenge)
         val gson = Gson()
         val communityResponse = gson.fromJson(response.string(),CommunityResponse::class.java)
-        return validateResponse(communityResponse,challenge)*/
-        return true
+        return validateResponse(communityResponse,challenge)
 
     }
 
@@ -53,25 +49,35 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
         var response =   repository.postAssociate(this.url,password)
-        val gson = Gson()
         token =  response.string()
 
 
 
-        //val bytes = Utils.toUncompressedPoint(pubKey as ECPublicKey?)
-        /*TODO*/
-        //Utils.setParams((pubKey as ECPublicKey).params)
-        //response =   communityAPI!!.getChallenge(this.url + "auth/challenge", token!!,Base58.encode(bytes))
-
-        //println("response: "+ response)
+        val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
+        val keyBase58 = Base58.encode(keybytes)
+        response =   repository.getChallenge(this.url , token!!,keyBase58)
 
 
+        val challenge = response.string()
+        val signedData = Base58.encode(KeyGen.sign(Base58.decode(challenge)))
+        val account = repository.getAccount()
 
-        val community = Community(communityName,this.url, Base58.decode(pubKey))
-        repository.insertCommunity(community)
+        val body = RegisterBody(keyBase58,account.NickName,account.Description,account.contactInfo,account.customization,signedData)
 
 
-        return true
+        try {
+            response = repository.postRegister(url,body)
+
+            val community = Community(communityName,this.url, Base58.decode(pubKey))
+
+            repository.insertCommunity(community)
+
+            return true
+        }
+        catch (e: HttpException){
+
+            return false
+        }
     }
 
     private fun generateChallenge(): String{
@@ -82,15 +88,11 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
     }
 
     private fun validateResponse(response: CommunityResponse,challenge: String): Boolean{
-        /*TODO*/
         val responseBytes = Base58.decode(response.response)
         val pubkeyBytes = Base58.decode(response.public_key)
-        println(pubkeyBytes.toString())
-        //val pubkeyBytesUncompressed = Utils.fromUncompressedPoint(pubkeyBytes)
+        val pubKey = Utils.fromUncompressedPoint(Utils.compressedToUncompressed(pubkeyBytes))
         val challengeBytes = Base58.decode(challenge)
-        //println("" + response.response + "   "+response.public_key + " " +challenge)
-        //return Utils.verifySignature(pubkeyBytesUncompressed.encoded,challengeBytes,responseBytes)
-        return true
+        return Utils.verifySignature(pubKey,challengeBytes,responseBytes)
     }
 
 

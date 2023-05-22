@@ -43,7 +43,7 @@ import me.empresta.White
 @Composable
 fun ScreenCommunityPreview(
     navController: NavController,
-    code: String,
+    code: String, usesIDP: Boolean = false,
     viewModel: CommunityPreviewView = hiltViewModel()
 ){
 
