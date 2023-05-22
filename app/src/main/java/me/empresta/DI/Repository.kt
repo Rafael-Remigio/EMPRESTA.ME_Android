@@ -1,10 +1,17 @@
 package me.empresta.DI
 
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import me.empresta.DAO.Account
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.Community
 import me.empresta.DAO.CommunityDao
+import me.empresta.DAO.ItemAnnouncement
+import me.empresta.DAO.ItemAnnouncementDAO
+import me.empresta.DAO.ItemRequest
+import me.empresta.DAO.ItemRequestDAO
+import me.empresta.DAO.VouchDAO
+import me.empresta.DAO.Vouch
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.RegisterBody
 import okhttp3.Response
@@ -16,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class Repository @Inject constructor
-    (private val communityDao:CommunityDao,private val accountDao:AccountDao,private val vouchDAO:VouchDAO,private val communityAPI: CommunityAPI) {
+    (private val communityDao:CommunityDao, private val accountDao:AccountDao, private val vouchDAO:VouchDAO, private val itemRequestDAO: ItemRequestDAO, private val itemAnnouncementDAO: ItemAnnouncementDAO, private val communityAPI: CommunityAPI) {
 
         suspend fun getInfo(url: String): ResponseBody {
             return communityAPI.getInfo(url+"meta/info"!!)
@@ -63,6 +70,7 @@ class Repository @Inject constructor
         fun deleteAccounts() {
             accountDao.deletePreviousAccounts()
         }
+
         fun insertVouch(vouch:Vouch){
             vouchDAO.insertVouch(vouch)
         }
@@ -71,7 +79,7 @@ class Repository @Inject constructor
             return vouchDAO.getAllVouches()
         }
 
-        fun deleteVouches() {
+        fun deleteAllVouches() {
             vouchDAO.deleteAllVouches()
         }
 

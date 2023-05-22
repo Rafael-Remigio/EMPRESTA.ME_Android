@@ -45,10 +45,13 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
     }
 
+
     suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
         var response =   repository.postAssociate(this.url,password)
         token =  response.string()
+
+
 
         val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
         val keyBase58 = Base58.encode(keybytes)
