@@ -9,16 +9,16 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface VouchDAO{
+interface ItemRequestDAO{
 
     @Upsert
-    fun insertVouch(vouch: Vouch)
+    fun insertItem(item: ItemRequest)
 
-    @Query("select * from Vouch")
-    fun getAllVouches(): Flow<List<Vouch>>
+    @Query("select * from ItemRequest")
+    fun getAllItems(): Flow<List<ItemRequest>>
 
-    @Query("delete from Vouch")
-    fun deleteAllVouches()
+    @Query("delete from ItemRequest")
+    fun deleteAllItems()
 
 
 }
