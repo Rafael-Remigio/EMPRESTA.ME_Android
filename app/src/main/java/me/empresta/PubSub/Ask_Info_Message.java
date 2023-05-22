@@ -2,10 +2,7 @@ package me.empresta.PubSub;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Item_Announcement_Message {
+public class Ask_Info_Message {
 
     private String header;
     private String clock;
@@ -13,32 +10,31 @@ public class Item_Announcement_Message {
     private String hash;
     private String signature;
     private String sender;
-    private String description;
-    private String name;
-    private String image;
+    private String receiver;
+    private String message;
+
 
     @Override
     public String toString() {
-        return "Item_Announcement_Message{" +
+        return "Ask_Info_Message{" +
                 "header='" + header + '\'' +
                 ", clock='" + clock + '\'' +
                 ", nonce='" + nonce + '\'' +
                 ", hash='" + hash + '\'' +
                 ", signature='" + signature + '\'' +
                 ", sender='" + sender + '\'' +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 
-    public static Item_Announcement_Message fromJson(String json) {
+    public static Ask_Info_Message fromJson(String json) {
         Gson gson = new Gson();
-        Item_Announcement_Message vouchMessage = gson.fromJson(json, Item_Announcement_Message.class);
+        Ask_Info_Message vouchMessage = gson.fromJson(json, Ask_Info_Message.class);
         return vouchMessage;
     }
 
-    public static String toJson(Item_Announcement_Message vouchMessage) {
+    public static String toJson(Ask_Info_Message vouchMessage) {
         Gson gson = new Gson();
         String json = gson.toJson(vouchMessage);
         return json;
@@ -50,8 +46,12 @@ public class Item_Announcement_Message {
         return true;
     }
     public boolean check_sender(String exchange){
-        return exchange==this.sender;
+        return exchange.equals( this.sender);
     }
+    public boolean check_receiver(String my_pbk){
+        return my_pbk.equals( this.receiver);
+    }
+
     public boolean check_nonce(){
         //TODO: Implement Nonce Check where we test for the first x digits of the hash
         return true;
@@ -105,28 +105,16 @@ public class Item_Announcement_Message {
         this.sender = sender;
     }
 
-    public String getDescription() {
-        return description;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getMessage() {return message; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setMessage(String message) { this.message = message;}
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 }
-
