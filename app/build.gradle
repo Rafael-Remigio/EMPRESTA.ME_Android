@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id("com.google.dagger.hilt.android")
+    id 'kotlin-parcelize'
+    id 'kotlinx-serialization'
 
 }
 
@@ -39,7 +41,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
 
 }
@@ -55,7 +57,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.4.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -138,6 +139,11 @@ dependencies {
     implementation ('org.web3j:core:4.8.7-android')
 
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+
+    api "androidx.navigation:navigation-fragment-ktx:2.5.3"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+
 }
 
 

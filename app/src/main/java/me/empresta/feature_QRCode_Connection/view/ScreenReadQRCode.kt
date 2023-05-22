@@ -2,6 +2,7 @@ package me.empresta.feature_QRCode_Connection.view
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.util.Log
 import android.util.Size
 import android.view.ViewGroup
@@ -35,6 +36,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import me.empresta.Black
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
@@ -166,10 +169,17 @@ fun ScreenReadQRCode(
                                                 }
                                             }
                                             if (map.containsKey("NickName")) {
+
+                                                //Encode Json String to an encoded Uri version
+                                                val arguments = Uri.encode(barcodeValue)
+
+                                                navController.navigate(EmprestameScreen.UserPreview.name + "/" + arguments)
+
                                                 Toast.makeText(context,"User Connection",Toast.LENGTH_SHORT).show();
                                             }
                                             }
                                         catch (e: Exception){
+                                            print(e.message)
                                             Toast.makeText(context,"Unable to parse QRCode",Toast.LENGTH_SHORT).show();
                                         }
                                     }

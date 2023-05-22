@@ -71,7 +71,7 @@ class DisplayQRCodeView @Inject constructor(
                 var communityString: String = "";
 
                 for (i in communities){
-                    communityString.plus("Community: {name:"+ i.name +";url: "+i.url+";},")
+                    communityString.plus("{name:"+ i.name +";url: "+i.url+";},")
                 }
 
 

@@ -12,6 +12,7 @@ import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.feature_QRCode_Connection.use_case.ConnectToCommunity
+import me.empresta.feature_QRCode_Connection.use_case.VouchUseCase
 import me.empresta.feature_View_Profile.use_case.ProfileUseCase
 import me.empresta.feature_register.use_case.RegisterUseCase
 import retrofit2.Retrofit
@@ -65,4 +66,11 @@ object AppModule {
         return ProfileUseCase(repository)
     }
 
+
+
+    @Provides
+    @Singleton
+    fun provideVouchUseCase(repository: Repository): VouchUseCase {
+        return VouchUseCase(repository)
+    }
 }

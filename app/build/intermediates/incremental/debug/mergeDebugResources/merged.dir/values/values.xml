@@ -1623,6 +1623,7 @@
     <dimen name="notification_subtext_size">13sp</dimen>
     <dimen name="notification_top_pad">10dp</dimen>
     <dimen name="notification_top_pad_large_text">5dp</dimen>
+    <dimen name="sliding_pane_detail_pane_width">300dp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
     <dimen name="tooltip_margin">8dp</dimen>
@@ -1698,6 +1699,7 @@
     <item name="mtrl_motion_snapshot_view" type="id"/>
     <item name="mtrl_view_tag_bottom_padding" type="id"/>
     <item name="nav_controller_view_tag" type="id"/>
+    <item name="nav_host_fragment_container" type="id"/>
     <item name="navigation_bar_item_active_indicator_view" type="id"/>
     <item name="navigation_bar_item_icon_container" type="id"/>
     <item name="navigation_bar_item_icon_view" type="id"/>
@@ -1713,6 +1715,8 @@
     <item name="save_non_transition_alpha" type="id"/>
     <item name="save_overlay_view" type="id"/>
     <item name="selection_type" type="id"/>
+    <item name="sliding_pane_detail_container" type="id"/>
+    <item name="sliding_pane_layout" type="id"/>
     <item name="snackbar_action" type="id"/>
     <item name="snackbar_text" type="id"/>
     <item name="special_effects_controller_view_tag" type="id"/>
@@ -10877,6 +10881,9 @@
         <attr format="boolean" name="customBoolean"/>
         <attr format="reference" name="customReference"/>
     </declare-styleable>
+    <declare-styleable name="DialogFragmentNavigator">
+        <attr name="android:name"/>
+    </declare-styleable>
     <declare-styleable name="DrawerArrowToggle">
         
         <attr format="color" name="color"/>
@@ -11050,6 +11057,9 @@
     <declare-styleable name="FragmentContainerView">
         <attr name="android:name"/>
         <attr name="android:tag"/>
+    </declare-styleable>
+    <declare-styleable name="FragmentNavigator">
+        <attr name="android:name"/>
     </declare-styleable>
     <declare-styleable name="GradientColor">
         
@@ -12038,6 +12048,9 @@
     </declare-styleable>
     <declare-styleable name="NavHost">
         <attr format="reference" name="navGraph"/>
+    </declare-styleable>
+    <declare-styleable name="NavHostFragment">
+        <attr format="boolean" name="defaultNavHost"/>
     </declare-styleable>
     <declare-styleable name="NavInclude">
         <attr format="reference" name="graph"/>

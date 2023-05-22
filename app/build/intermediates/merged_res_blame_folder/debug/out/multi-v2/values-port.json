@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "me.empresta.app-mergeDebugResources-82:/values-port/values-port.xml",
+            "outputFile": "me.empresta.app-mergeDebugResources-87:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/home/rafael/.gradle/caches/transforms-3/6e8eba475af1ea4cbd655b1e6494c4a2/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
+                    "source": "/home/rafael/.gradle/caches/transforms-3/2e82985d73fe373d3adbcb060496a976/transformed/appcompat-1.6.1/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
