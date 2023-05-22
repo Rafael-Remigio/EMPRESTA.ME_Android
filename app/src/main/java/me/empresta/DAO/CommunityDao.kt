@@ -12,5 +12,5 @@ interface CommunityDao {
     suspend fun insertCommunity(community: Community)
 
     @Query("select * from community")
-    fun getCommunityList(): Flow<List<Community>>
+    fun getCommunityList(): List<Community>
 }

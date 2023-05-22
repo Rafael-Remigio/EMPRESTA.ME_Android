@@ -8,7 +8,8 @@ enum class EmprestameScreen() {
     Feed,
     Network,
     CommunityPreview,
-    Profile
+    Profile,
+    UserPreview
 }
 
 
