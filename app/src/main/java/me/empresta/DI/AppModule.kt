@@ -19,6 +19,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
+import me.empresta.DAO.VouchDAO
+import me.empresta.PubSub.Message_Handler
+import me.empresta.PubSub.PubSub
 
 
 @Module
@@ -66,11 +69,24 @@ object AppModule {
         return ProfileUseCase(repository)
     }
 
-
-
     @Provides
     @Singleton
     fun provideVouchUseCase(repository: Repository): VouchUseCase {
         return VouchUseCase(repository)
+    }
+    @Singleton
+    @Provides
+    fun provideVouchDao(db: Database): VouchDAO { return db.VouchDAO }
+
+    @Provides
+    @Singleton
+    fun provideMessageHandler(repository: Repository): Message_Handler {
+        return Message_Handler(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providePubSub(messageHandler: Message_Handler): PubSub {
+        return PubSub(messageHandler)
     }
 }
