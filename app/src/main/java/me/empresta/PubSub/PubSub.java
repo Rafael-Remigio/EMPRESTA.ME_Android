@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 public class PubSub{
 
-    static String host = "192.168.227.52";
+    static String host = "192.168.82.52";
 
 
     @Inject
@@ -197,6 +197,49 @@ public class PubSub{
                     j_message.put("sender", my_public_key);
                     j_message.put("name", Name);
                     j_message.put("description", Description);
+
+                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
+
+                    System.out.println(" [x] Sent '" +  j_message + "'");
+
+                    channel.close();
+                    connection.close();
+
+                } catch (IOException | TimeoutException e) {
+                    throw new RuntimeException("Rabbitmq problem", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    public static void Publish_Ask_Info(String my_public_key, String target_public_key, String message){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ConnectionFactory factory = new ConnectionFactory();
+
+                    factory.setHost(host);
+                    Connection connection = factory.newConnection();
+                    Channel channel = connection.createChannel();
+
+                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+                    int nonce = 0; //Nonce that needs to be randomized
+
+                    JSONObject j_message = new JSONObject();
+                    j_message.put("header", "ASK_INFO");
+                    j_message.put("clock", "clock"); //TODO: clock
+                    j_message.put("hash", "hash"); //TODO: hash of the message
+                    j_message.put("nonce", nonce);
+                    j_message.put("signature", "signature"); //TODO: Signature
+                    j_message.put("sender", my_public_key);
+                    j_message.put("receiver", target_public_key);
+                    j_message.put("message", message);
 
                     channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
 

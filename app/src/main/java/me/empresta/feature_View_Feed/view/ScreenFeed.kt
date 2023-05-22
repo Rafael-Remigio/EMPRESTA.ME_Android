@@ -186,8 +186,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                 }
             }
 
-            Spacer(modifier = Modifier.height(26.dp))
-
             Text(
                 text = "Do you have this item?",
                 style = MaterialTheme.typography.h5.copy(
