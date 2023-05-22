@@ -10,6 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
+import me.empresta.DAO.InfoRequestDAO
 import me.empresta.DAO.ItemAnnouncementDAO
 import me.empresta.DAO.ItemRequestDAO
 import me.empresta.DAO.VouchDAO
@@ -22,7 +23,9 @@ import me.empresta.feature_View_Profile.use_case.ProfileUseCase
 import me.empresta.feature_register.use_case.RegisterUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -46,7 +49,9 @@ object AppModule {
     @Provides
     fun provideAccountDao(db: Database): AccountDao{ return db.AccountDao }
 
-
+    @Singleton
+    @Provides
+    fun provideVouchDao(db: Database): VouchDAO { return db.VouchDAO }
     @Singleton
     @Provides
     fun provideItemRequestDAO(db: Database): ItemRequestDAO { return db.ItemRequestDAO }
@@ -54,6 +59,9 @@ object AppModule {
     @Provides
     fun provideItemAnnouncementDAO(db: Database): ItemAnnouncementDAO { return db.ItemAnnouncementDAO }
 
+    @Singleton
+    @Provides
+    fun provideInfoRequestDAO(db: Database): InfoRequestDAO { return db.InfoRequestDAO }
 
     @Provides
     @Singleton
@@ -80,12 +88,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideVouchUseCase(repository: Repository,pubSub: PubSub): VouchUseCase {
-        return VouchUseCase(repository, pubSub )
+    fun provideVouchUseCase(repository: Repository, pubSub: PubSub): VouchUseCase {
+        return VouchUseCase(repository, pubSub)
     }
-    @Singleton
-    @Provides
-    fun provideVouchDao(db: Database): VouchDAO { return db.VouchDAO }
 
     @Provides
     @Singleton

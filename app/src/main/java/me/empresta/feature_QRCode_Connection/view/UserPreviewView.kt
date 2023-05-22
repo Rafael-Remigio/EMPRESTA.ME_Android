@@ -15,8 +15,8 @@ class UserPreviewView @Inject constructor(
     private val vouchUseCase: VouchUseCase
 ) : ViewModel() {
 
-    fun connect(): Boolean {
-        return vouchUseCase.connect()
+    fun connect(pubkey:String,description: String, value:Int): Boolean {
+        return vouchUseCase.connect(pubkey,description,value)
     }
 
 }
