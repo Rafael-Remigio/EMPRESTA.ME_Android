@@ -2,8 +2,6 @@ package me.empresta.DAO
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.security.PrivateKey
-import java.security.PublicKey
 
 @Entity
 data class ItemAnnouncement(
