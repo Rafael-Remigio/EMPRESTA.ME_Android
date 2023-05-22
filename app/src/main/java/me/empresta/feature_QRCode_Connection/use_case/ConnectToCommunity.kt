@@ -80,6 +80,11 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         }
     }
 
+    fun associateWithIDP(password: String,communityName:String,pubKey: String): Boolean{
+
+        return true
+    }
+
     private fun generateChallenge(): String{
         val random = SecureRandom()
         val bytes = ByteArray(16)

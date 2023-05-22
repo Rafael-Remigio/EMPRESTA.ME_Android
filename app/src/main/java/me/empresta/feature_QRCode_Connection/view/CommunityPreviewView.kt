@@ -18,8 +18,10 @@ class CommunityPreviewView @Inject constructor(
     private val _state = mutableStateOf(CommunityInfo())
     val state : CommunityInfo = _state.value
     var reached = true
+    var usesIDP = false
 
     fun getInfo(url: String) {
+        usesIDP = usesIDP
         connectToCommunity_useCase.seturl("http://$url/")
         GlobalScope.launch{
             try {
@@ -39,10 +41,12 @@ class CommunityPreviewView @Inject constructor(
 
     fun connectWithCommunity(password: String){
         GlobalScope.launch {
+            print(_state)
             if (! connectToCommunity_useCase.challengeCommunity()){
                 /*TODO*/
                 // Launch an exception Screen
             }
+
             if (!_state.value.title?.let {
                     _state.value.public_key?.let { it1 ->
                         connectToCommunity_useCase.associate(password,
@@ -53,10 +57,8 @@ class CommunityPreviewView @Inject constructor(
                 /*TODO*/
                 // Launch an exception Screen
             }
-
         }
     }
-
 
     fun get() = _state.value
 }

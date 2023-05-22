@@ -23,63 +23,63 @@ import javax.inject.Inject
 class Repository @Inject constructor
     (private val communityDao:CommunityDao, private val accountDao:AccountDao, private val vouchDAO:VouchDAO, private val itemRequestDAO: ItemRequestDAO, private val itemAnnouncementDAO: ItemAnnouncementDAO, private val InfoRequestDAO: InfoRequestDAO, private val communityAPI: CommunityAPI) {
 
-        suspend fun getInfo(url: String): ResponseBody {
-            return communityAPI.getInfo(url+"meta/info"!!)
-        }
+    suspend fun getInfo(url: String): ResponseBody {
+        return communityAPI.getInfo(url+"meta/info"!!)
+    }
 
-        suspend fun postChallenge(url: String,challenge: String): ResponseBody {
-            return communityAPI.postChallenge(url +  "meta/verify_key",challenge)
-        }
-
-
-        suspend fun getChallenge(url: String,token: String,keyBytes: String): ResponseBody {
-            return communityAPI.getChallenge(url + "auth/challenge",token,keyBytes)
-        }
+    suspend fun postChallenge(url: String,challenge: String): ResponseBody {
+        return communityAPI.postChallenge(url +  "meta/verify_key",challenge)
+    }
 
 
-        suspend fun postAssociate(url: String,password: String): ResponseBody {
-            return communityAPI.postAssociate(url +  "auth/associate",password)
-        }
+    suspend fun getChallenge(url: String,token: String,keyBytes: String): ResponseBody {
+        return communityAPI.getChallenge(url + "auth/challenge",token,keyBytes)
+    }
 
 
-        suspend fun postRegister(url: String,body: RegisterBody): ResponseBody {
-            return communityAPI.postRegister(url +  "acc/register",body)
-        }
+    suspend fun postAssociate(url: String,password: String): ResponseBody {
+        return communityAPI.postAssociate(url +  "auth/associate",password)
+    }
 
 
-        suspend fun insertCommunity(community:Community){
-            communityDao.insertCommunity(community)
-        }
+    suspend fun postRegister(url: String,body: RegisterBody): ResponseBody {
+        return communityAPI.postRegister(url +  "acc/register",body)
+    }
 
 
-        suspend fun getCommunities():List<Community>{
-            return communityDao.getCommunityList()
-        }
+    suspend fun insertCommunity(community:Community){
+        communityDao.insertCommunity(community)
+    }
+
+
+    suspend fun getCommunities():List<Community>{
+        return communityDao.getCommunityList()
+    }
 
 
     fun insertAccount(account:Account){
-            accountDao.insertAccount(account)
-        }
+        accountDao.insertAccount(account)
+    }
 
-        suspend fun getAccount():Account{
-            return accountDao.getAccountById()
-        }
+    suspend fun getAccount():Account{
+        return accountDao.getAccountById()
+    }
 
-        fun deleteAccounts() {
-            accountDao.deletePreviousAccounts()
-        }
+    fun deleteAccounts() {
+        accountDao.deletePreviousAccounts()
+    }
 
-        fun insertVouch(vouch:Vouch){
-            vouchDAO.insertVouch(vouch)
-        }
+    fun insertVouch(vouch:Vouch){
+        vouchDAO.insertVouch(vouch)
+    }
 
-        fun getAllVouches(): Flow<List<Vouch>> {
-            return vouchDAO.getAllVouches()
-        }
+    fun getAllVouches(): Flow<List<Vouch>> {
+        return vouchDAO.getAllVouches()
+    }
 
-        fun deleteAllVouches() {
-            vouchDAO.deleteAllVouches()
-        }
+    fun deleteAllVouches() {
+        vouchDAO.deleteAllVouches()
+    }
 
 
         // Item Request
