@@ -20,17 +20,21 @@ class OAuthHttpServer() : NanoHTTPD(3000) {
 
         // Respond with the code parameter if it is present
         if (parameters.containsKey("code")) {
-            receivedCode = parameters["code"]?.get(0)
-            //return newFixedLengthResponse("Received code: $receivedCode")
-            // Redirect to the application using a custom scheme URI
-            val redirectUri = "redirect://oauth?code=${receivedCode}"
-            println("REDIRECT URI: $redirectUri")
-            exchangeForAccessToken()
-            return newFixedLengthResponse(
+            val receivedCode = parameters["code"]?.get(0)
+            val redirectUri = "myapp://www.mycoolapp.com/Android?code=$receivedCode"
+
+            // Create the redirect response
+            val response = newFixedLengthResponse(
                 Response.Status.REDIRECT,
-                NanoHTTPD.MIME_PLAINTEXT,
-                redirectUri
+                MIME_HTML,
+                "<html><body><a href=\"$redirectUri\">Redirect</a></body></html>"
             )
+
+            // Set the Location header to the redirect URI
+            response.addHeader("Location", redirectUri)
+
+            // Return the redirect response
+            return response
         }
 
         // Return a response indicating that the server is waiting for the code parameter
