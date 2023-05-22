@@ -6,29 +6,24 @@ import java.security.PrivateKey
 import java.security.PublicKey
 
 @Entity
-data class Vouch(
+data class Friend(
     @PrimaryKey
-    val id: String,
-    val publicKey_1: String,
-    val publicKey_2: String,
-    val sender_community: String,
-    val receiver_community: String,
-    val state: Integer,
-    val Description: String = ""
+    val publicKey: String,
+    val community: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Vouch
+        other as Friend
 
-        if (id != other.id) return false
+        if (publicKey != other.publicKey) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id.hashCode()
+        return publicKey.hashCode()
     }
 
 }

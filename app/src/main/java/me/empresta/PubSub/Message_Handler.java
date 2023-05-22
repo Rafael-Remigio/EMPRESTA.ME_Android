@@ -58,7 +58,7 @@ public class Message_Handler {
 
 
     }
-    public  void Handle_Vouch(Vouch_Message message, String exchange){
+    public void Handle_Vouch(Vouch_Message message, String exchange){
 
         // Validations
         if(!message.check_nonce())
@@ -74,7 +74,7 @@ public class Message_Handler {
         //Reconstruction
 
         // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
-        repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), Integer.parseInt(message.getState()), message.getMessage()));
+        repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), message.getSender_community(), message.getReceiver_community(), Integer.parseInt(message.getState()), message.getMessage()));
 
     }
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){
