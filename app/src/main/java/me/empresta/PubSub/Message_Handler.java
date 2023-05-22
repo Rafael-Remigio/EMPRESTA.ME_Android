@@ -1,14 +1,9 @@
 package me.empresta.PubSub;
 
-import android.os.AsyncTask;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 

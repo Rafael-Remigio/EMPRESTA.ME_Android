@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.Connection
 import com.rabbitmq.client.ConnectionFactory
@@ -22,18 +23,8 @@ import me.empresta.feature_QRCode_Connection.view.ScreenReadQRCode
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_View_Profile.view.ScreenProfile
-import androidx.navigation.compose.rememberNavController
-import com.rabbitmq.client.Channel
-import com.rabbitmq.client.Connection
-import com.rabbitmq.client.ConnectionFactory
-import me.empresta.PubSub.PubSub
-import java.util.concurrent.TimeoutException;
-import java.io.IOException
 import javax.inject.Inject
 import me.empresta.feature_register.view.ScreenRegister
-import java.util.concurrent.TimeoutException;
-import java.io.IOException
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -115,11 +106,6 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 }
 
-    override fun onPause() {
-        super.onPause()
-
-
-    }
 }
 
 

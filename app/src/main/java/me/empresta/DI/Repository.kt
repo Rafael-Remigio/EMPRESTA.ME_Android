@@ -1,25 +1,10 @@
 package me.empresta.DI
 
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
-import me.empresta.DAO.Account
-import me.empresta.DAO.AccountDao
-import me.empresta.DAO.Community
-import me.empresta.DAO.CommunityDao
-import me.empresta.DAO.ItemAnnouncement
-import me.empresta.DAO.ItemAnnouncementDAO
-import me.empresta.DAO.ItemRequest
-import me.empresta.DAO.ItemRequestDAO
-import me.empresta.DAO.VouchDAO
-import me.empresta.DAO.Vouch
+import me.empresta.DAO.*
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.RegisterBody
-import okhttp3.Response
 import okhttp3.ResponseBody
-import me.empresta.DAO.VouchDAO
-import me.empresta.DAO.Vouch
-import androidx.lifecycle.LiveData
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class Repository @Inject constructor
@@ -82,5 +67,23 @@ class Repository @Inject constructor
         fun deleteAllVouches() {
             vouchDAO.deleteAllVouches()
         }
+
+    // Item Request
+    fun insertItemRequest(item: ItemRequest){
+        itemRequestDAO.insertItem(item)
+    }
+
+    fun getAllItemRequests(): Flow<List<ItemRequest>> {
+        return itemRequestDAO.getAllItems()
+    }
+
+    // Item Announcement
+    fun insertItemAnnouncement(item:ItemAnnouncement){
+        itemAnnouncementDAO.insertItem(item)
+    }
+
+    fun getAllItemAnnouncements(): Flow<List<ItemAnnouncement>> {
+        return itemAnnouncementDAO.getAllItems()
+    }
 
     }
