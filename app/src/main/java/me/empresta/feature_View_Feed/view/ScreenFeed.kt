@@ -34,6 +34,7 @@ import me.empresta.*
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
 import me.empresta.feature_View_Feed.view.model.AvailableItem
+import me.empresta.PubSub.PubSub
 
 @Composable
 fun ScreenFeed(navController: NavController) {
