@@ -70,7 +70,7 @@ fun ScreenFeed(
                 BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
                 BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
                 BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
-                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.Person)
+                BottomNavItem(name = "Profile", route = "Profile", icon = Icons.Default.Person)
         ),
             navController = navController,
             onItemClick = {
