@@ -30,29 +30,29 @@ class NotificationViewModel @Inject constructor(
 
             repository.insertInfoRequest(
                 InfoRequest(
-                    "putas",
-                    "vinho verde"
+                    "Shor Manel",
+                    "ola"
                 )
             )
 
             repository.insertInfoRequest(
                 InfoRequest(
-                    "putas",
-                    "mais vinho verde"
+                    "Casemiro",
+                    "preciso da torradeira, a minha estragou-se"
                 )
             )
 
             repository.insertInfoRequest(
                 InfoRequest(
-                    "mais putas",
-                    "vinho branco"
+                    "Shor Manel",
+                    "saudaçoes camarada!"
                 )
             )
 
             repository.insertInfoRequest(
                 InfoRequest(
-                    "mais putas",
-                    "tintoooo"
+                    "Juan",
+                    "holla"
                 )
             )
 

@@ -136,7 +136,7 @@ fun ScreenNotifications(
 
 
         infoRequestsFlow?.forEach {
-            singleNotification(name = it.sender)
+            singleNotification(name = it.sender, message= it.message)
             Spacer(modifier = Modifier.size(20.dp))
         }
 
@@ -149,6 +149,7 @@ fun ScreenNotifications(
 @Composable
 fun singleNotification(
     name: String,
+    message: String
     //account: AccountDao
 ){
 
@@ -183,6 +184,13 @@ fun singleNotification(
                 Text(
                     name + " requested your number",
                     fontSize = 14.sp,
+                    modifier = Modifier
+                        .padding(bottom = 5.dp)
+                )
+
+                Text(
+                    "'$message' - $name",
+                    fontSize = 12.sp,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
                 )

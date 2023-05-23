@@ -40,6 +40,7 @@ import me.empresta.PubSub.PubSub
 import javax.inject.Inject
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
+import me.empresta.Navigation.EmprestameScreen
 import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
 
 
@@ -90,7 +91,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* Handle notifications icon click */ }) {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Notifications.name) }) {
                         Icon(Icons.Default.Notifications, contentDescription = "Notifications")
                     }
                 },
