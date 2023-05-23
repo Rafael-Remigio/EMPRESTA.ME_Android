@@ -9,7 +9,8 @@ enum class EmprestameScreen() {
     Network,
     CommunityPreview,
     Profile,
-    UserPreview
+    UserPreview,
+    Notifications
 }
 
 

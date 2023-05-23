@@ -115,7 +115,7 @@ class Repository @Inject constructor
             InfoRequestDAO.insertItem(request)
         }
 
-        fun getAllInfoRequests(): Flow<List<InfoRequest>> {
+        fun getAllInfoRequests(): List<InfoRequest>{
             return InfoRequestDAO.getAllItems()
         }
 

@@ -15,7 +15,7 @@ interface InfoRequestDAO{
     fun insertItem(request: InfoRequest)
 
     @Query("select * from InfoRequest")
-    fun getAllItems(): Flow<List<InfoRequest>>
+    fun getAllItems(): List<InfoRequest>
 
     @Query("delete from InfoRequest")
     fun deleteAllItems()
