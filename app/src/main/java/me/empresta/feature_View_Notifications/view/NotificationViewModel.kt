@@ -56,11 +56,16 @@ class NotificationViewModel @Inject constructor(
                 )
             )
 
+            repository.insertInfoRequest(
+                InfoRequest(
+                    "Shor Manel",
+                    "e viva o Puorto!"
+                )
+            )
+
             val a = getInfoRequests()
         }
     }
-
-
 
 
 
