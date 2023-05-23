@@ -30,7 +30,12 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,11 +45,13 @@ import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.Black
 import me.empresta.BrightOrange
 import me.empresta.DAO.AccountDao
+import me.empresta.DI.Repository
 import me.empresta.DarkGreen
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
@@ -52,11 +59,15 @@ import me.empresta.Navigation.EmprestameScreen
 import me.empresta.PubSub.PubSub
 import me.empresta.White
 import javax.inject.Inject
+import androidx.hilt.navigation.compose.hiltViewModel
+import me.empresta.DAO.InfoRequest
 
 
 @Composable
 fun ScreenNotifications(
-    navController: NavController){
+    navController: NavController,
+    viewModel: NotificationViewModel = hiltViewModel()
+){
 
 
 
@@ -113,14 +124,21 @@ fun ScreenNotifications(
 
         Spacer(modifier = Modifier.size(48.dp))
 
-        singleNotification(name = "madje")
-        Spacer(modifier = Modifier.size(20.dp))
 
-        singleNotification(name = "dude")
-        Spacer(modifier = Modifier.size(20.dp))
+        var infoRequestsFlow by remember { mutableStateOf<List<InfoRequest>?>(null) }
 
-        singleNotification(name = "arnoldo")
-        Spacer(modifier = Modifier.size(20.dp))
+
+        LaunchedEffect(Unit) {
+
+            val info = viewModel.getInfoRequests()
+            infoRequestsFlow = viewModel.info
+        }
+
+
+        infoRequestsFlow?.forEach {
+            singleNotification(name = it.sender)
+            Spacer(modifier = Modifier.size(20.dp))
+        }
 
         }
 
