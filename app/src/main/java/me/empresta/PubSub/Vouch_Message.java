@@ -26,6 +26,8 @@ public class Vouch_Message{
                 ", clock='" + clock + '\'' +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +
+                ", sender_community='" + sender_community + '\'' +
+                ", receiver_community='" + receiver_community + '\'' +
                 ", message='" + message + '\'' +
                 ", nonce='" + nonce + '\'' +
                 ", hash='" + hash + '\'' +

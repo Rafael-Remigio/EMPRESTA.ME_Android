@@ -23,7 +23,7 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class Repository @Inject constructor
-    (private val communityDao:CommunityDao, private val accountDao:AccountDao, private val vouchDAO:VouchDAO, private val itemRequestDAO: ItemRequestDAO, private val itemAnnouncementDAO: ItemAnnouncementDAO, private val InfoRequestDAO: InfoRequestDAO, private val communityAPI: CommunityAPI, private val FriendDAO: FriendDAO) {
+    (private val communityDao:CommunityDao, private val accountDao:AccountDao, private val FriendDAO: FriendDAO, private val vouchDAO:VouchDAO, private val itemRequestDAO: ItemRequestDAO, private val itemAnnouncementDAO: ItemAnnouncementDAO, private val InfoRequestDAO: InfoRequestDAO, private val communityAPI: CommunityAPI) {
 
     suspend fun getInfo(url: String): ResponseBody {
         return communityAPI.getInfo(url+"meta/info"!!)

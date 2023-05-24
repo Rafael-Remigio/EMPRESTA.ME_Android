@@ -18,7 +18,7 @@ class VouchUseCase @Inject constructor(private val repository: Repository,privat
             val mykeyBase58 = Base58.encode(keybytes)
 
 
-            PubSub.Publish_Vouch(mykeyBase58,pubkey,description,value)
+            PubSub.Publish_Vouch(mykeyBase58,pubkey,"com1 url","com2 url",description,value)
 
             return true
         }

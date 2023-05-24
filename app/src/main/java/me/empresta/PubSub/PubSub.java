@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 public class PubSub{
 
-    static String host = "192.168.82.52";
+    static String host = "192.168.1.110";
 
 
     @Inject
@@ -83,7 +83,7 @@ public class PubSub{
         - Vouch Type
         - Description
     */
-    public static void Publish_Vouch(String my_public_key, String other_public_key, String Description, Integer state){
+    public static void Publish_Vouch(String my_public_key, String other_public_key, String com_1, String com_2, String Description, Integer state){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -106,6 +106,8 @@ public class PubSub{
                     j_message.put("signature", "signature"); //TODO: Signature
                     j_message.put("sender", my_public_key);
                     j_message.put("receiver", other_public_key);
+                    j_message.put("sender_community", com_1);
+                    j_message.put("receiver_community", com_2);
                     j_message.put("state", state);
                     j_message.put("message", Description);
 

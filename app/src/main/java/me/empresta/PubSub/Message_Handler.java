@@ -60,6 +60,7 @@ public class Message_Handler {
     }
     public void Handle_Vouch(Vouch_Message message, String exchange){
 
+        System.out.println(message);
         // Validations
         if(!message.check_nonce())
             return;
