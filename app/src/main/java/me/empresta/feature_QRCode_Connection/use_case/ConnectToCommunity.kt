@@ -51,8 +51,6 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         var response =   repository.postAssociate(this.url,password)
         token =  response.string()
 
-
-
         val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
         val keyBase58 = Base58.encode(keybytes)
         response =   repository.getChallenge(this.url , token!!,keyBase58)
@@ -80,7 +78,7 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         }
     }
 
-    fun associateWithIDP(password: String,communityName:String,pubKey: String): Boolean{
+    fun associateWithIDP(communityName:String,pubKey: String): Boolean{
 
         return true
     }
@@ -99,6 +97,4 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         val challengeBytes = Base58.decode(challenge)
         return Utils.verifySignature(pubKey,challengeBytes,responseBytes)
     }
-
-
 }

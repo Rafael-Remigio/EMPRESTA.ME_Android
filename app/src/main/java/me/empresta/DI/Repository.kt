@@ -33,6 +33,10 @@ class Repository @Inject constructor
         return communityAPI.postRegister(url +  "acc/register",body)
     }
 
+    suspend fun getContact(url: String,body: RegisterBody): ResponseBody {
+        return communityAPI.postRegister(url +  "acc/register",body)
+    }
+
 
     suspend fun insertCommunity(community:Community){
         communityDao.insertCommunity(community)
@@ -71,9 +75,51 @@ class Repository @Inject constructor
     // Item Request
     fun insertItemRequest(item: ItemRequest){
         itemRequestDAO.insertItem(item)
+
+
+        // Item Request
+        fun insertItemRequest(item:ItemRequest){
+            itemRequestDAO.insertItem(item)
+        }
+
+        fun getAllItemRequests(): List<ItemRequest> {
+            return itemRequestDAO.getAllItems()
+        }
+
+        fun deleteAllItemRequests() {
+            itemRequestDAO.deleteAllItems()
+        }
+
+
+        // Item Announcement
+        fun insertItemAnnouncement(item: ItemAnnouncement){
+            itemAnnouncementDAO.insertItem(item)
+        }
+
+        fun getAllItemAnnouncements(): List<ItemAnnouncement> {
+            return itemAnnouncementDAO.getAllItems()
+        }
+
+        fun deleteAllItemAnnouncements() {
+            itemAnnouncementDAO.deleteAllItems()
+        }
+
+
+        // Info Request
+        fun insertInfoRequest(request: InfoRequest){
+            InfoRequestDAO.insertItem(request)
+        }
+
+        fun getAllInfoRequests(): Flow<List<InfoRequest>> {
+            return InfoRequestDAO.getAllItems()
+        }
+
+        fun deleteAllInfoRequests() {
+            InfoRequestDAO.deleteAllItems()
+        }
     }
 
-    fun getAllItemRequests(): Flow<List<ItemRequest>> {
+    fun getAllItemRequests(): List<ItemRequest> {
         return itemRequestDAO.getAllItems()
     }
 
@@ -82,7 +128,7 @@ class Repository @Inject constructor
         itemAnnouncementDAO.insertItem(item)
     }
 
-    fun getAllItemAnnouncements(): Flow<List<ItemAnnouncement>> {
+    fun getAllItemAnnouncements(): List<ItemAnnouncement> {
         return itemAnnouncementDAO.getAllItems()
     }
 

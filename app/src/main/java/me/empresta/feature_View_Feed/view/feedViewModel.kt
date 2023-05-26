@@ -1,7 +1,18 @@
 package me.empresta.feature_View_Feed.view
 
+import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
+import me.empresta.DAO.Account
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
@@ -12,22 +23,64 @@ class feedViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel()
 {
-    init {
-        // Mock data
-        repository?.insertItemAnnouncement(ItemAnnouncement("John","Bike 1","This is a bike", "https://th.bing.com/th/id/R.5bcdf75c71d0e9fd9cc8142fcb3307e3?rik=vknt2Qh16ObY0g&riu=http%3a%2f%2f1.bp.blogspot.com%2f-ADXEt7Ian14%2fTkke0CXr5qI%2fAAAAAAAAAC4%2fbhkwY7YYRL4%2fs1600%2fDSC00108.jpg&ehk=Grp1rsJauyAnZGkGd72mW2gI6O0qqXyjajhjfXX6HrY%3d&risl=&pid=Img"))
-        repository?.insertItemAnnouncement(ItemAnnouncement("John","Bike 2","This is a bike", "https://th.bing.com/th/id/R.5bcdf75c71d0e9fd9cc8142fcb3307e3?rik=vknt2Qh16ObY0g&riu=http%3a%2f%2f1.bp.blogspot.com%2f-ADXEt7Ian14%2fTkke0CXr5qI%2fAAAAAAAAAC4%2fbhkwY7YYRL4%2fs1600%2fDSC00108.jpg&ehk=Grp1rsJauyAnZGkGd72mW2gI6O0qqXyjajhjfXX6HrY%3d&risl=&pid=Img"))
-        repository?.insertItemAnnouncement(ItemAnnouncement("John","Bike 3","This is a bike", "https://th.bing.com/th/id/R.5bcdf75c71d0e9fd9cc8142fcb3307e3?rik=vknt2Qh16ObY0g&riu=http%3a%2f%2f1.bp.blogspot.com%2f-ADXEt7Ian14%2fTkke0CXr5qI%2fAAAAAAAAAC4%2fbhkwY7YYRL4%2fs1600%2fDSC00108.jpg&ehk=Grp1rsJauyAnZGkGd72mW2gI6O0qqXyjajhjfXX6HrY%3d&risl=&pid=Img"))
+    var itemRequests: List<ItemRequest>? = null
+    var itemAnnouncenents: List<ItemAnnouncement>? = null
 
-        repository?.insertItemRequest(ItemRequest("John","Bike 4","This is a bike"))
-        repository?.insertItemRequest(ItemRequest("John","Bike 5","This is a bike"))
-        repository?.insertItemRequest(ItemRequest("John","Bike 6","This is a bike"))
+     fun getData() {
 
-        // Get the list of available items to lend (from the database) -> Correspondents to ItemRequests
-        val itemRequests = repository?.getAllItemRequests()
-        System.out.println("itemRequests: $itemRequests")
-        val itemAnnouncenents = repository?.getAllItemAnnouncements()
-        System.out.println("itemAnnouncements: $itemAnnouncenents")
+         // Mock data
+        GlobalScope.launch {
+            Log.d("alor","asdsda")
 
+
+            repository.insertItemAnnouncement(
+                ItemAnnouncement(
+                    "Joana",
+                    "Blender",
+                    "This is a blender",
+                    "https://s.aolcdn.com/hss/storage/midas/1b8e6c255e1632157aaaf5bd05d9c8/205127975/06-blender-2000.jpg"
+                )
+            )
+
+            repository.insertItemAnnouncement(
+                ItemAnnouncement(
+                    "John",
+                    "Bike",
+                    "This is a bike",
+                    "https://th.bing.com/th/id/R.5bcdf75c71d0e9fd9cc8142fcb3307e3?rik=vknt2Qh16ObY0g&riu=http%3a%2f%2f1.bp.blogspot.com%2f-ADXEt7Ian14%2fTkke0CXr5qI%2fAAAAAAAAAC4%2fbhkwY7YYRL4%2fs1600%2fDSC00108.jpg&ehk=Grp1rsJauyAnZGkGd72mW2gI6O0qqXyjajhjfXX6HrY%3d&risl=&pid=Img"
+                )
+            )
+            Log.d("ITEM", "Requests $itemRequests")
+
+
+            repository.insertItemAnnouncement(
+                ItemAnnouncement(
+                    "Teles",
+                    "DND Set",
+                    "This is a Dungeons and Dragons Set",
+                    "https://th.bing.com/th/id/R.1b87091133e762c641b49977ecaec156?rik=CK4S2lHxfUYw%2bw&pid=ImgRaw&r=0"
+                )
+            )
+
+
+            Log.d("ITEM", "Requests $itemRequests")
+
+            Log.d("ITEM", "Requests $itemRequests")
+
+
+
+            repository.insertItemRequest(ItemRequest("John", "Bike", "This is a bike"))
+            repository.insertItemRequest(ItemRequest("Maria", "Bike", "This is a bike"))
+            repository.insertItemRequest(ItemRequest("Taylor", "Bike", "This is a bike"))
+
+            // Get the list of available items to lend (from the database) -> Correspondents to ItemRequests
+            itemRequests = repository.getAllItemRequests()
+            print("itemRequests: $itemRequests")
+            Log.d("ITEM", "Requests $itemRequests")
+            itemAnnouncenents = repository.getAllItemAnnouncements()
+            print("itemAnnouncements: $itemAnnouncenents")
+            Log.d("ITEM", "Announcements $itemAnnouncenents")
+            }
 
         /*
           PubSub.Publish_Vouch("my_pub_key","other_pub_key","Vouch description", 0);
@@ -43,4 +96,35 @@ class feedViewModel @Inject constructor(
 
     }
 
+    fun get_ItemRequests(): List<ItemRequest>? {
+        return itemRequests
+    }
+
+    fun get_ItemAnnouncements(): List<ItemAnnouncement>? {
+        return itemAnnouncenents
+    }
+
+    /*
+    @OptIn(DelicateCoroutinesApi::class)
+    operator fun invoke(): List {
+
+        try {
+            // on below line we are
+            // initializing our bitmap
+            val writer = MultiFormatWriter()
+            GlobalScope.launch{
+                val it : Account
+                        = itemAnnouncementsFlow.toList().flatten()
+            }
+
+            return
+
+        } catch (e: Exception) {
+            // on below line we
+            // are handling exception
+            e.printStackTrace()
+        }
+        return Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888)
+    }
+    */
 }

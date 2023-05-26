@@ -46,12 +46,18 @@ class CommunityPreviewView @Inject constructor(
                 /*TODO*/
                 // Launch an exception Screen
             }
-
             if (!_state.value.title?.let {
                     _state.value.public_key?.let { it1 ->
-                        connectToCommunity_useCase.associate(password,
-                            it, it1
-                        )
+                        if (usesIDP) {
+                            connectToCommunity_useCase.associateWithIDP(
+                                it, it1
+                            )
+                        }
+                        else{
+                            connectToCommunity_useCase.associate(password,
+                                it, it1
+                            )
+                        }
                     }
                 }!!){
                 /*TODO*/

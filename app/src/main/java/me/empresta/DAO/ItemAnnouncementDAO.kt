@@ -13,7 +13,7 @@ interface ItemAnnouncementDAO{
     fun insertItem(item: ItemAnnouncement)
 
     @Query("select * from ItemAnnouncement")
-    fun getAllItems(): Flow<List<ItemAnnouncement>>
+    fun getAllItems(): List<ItemAnnouncement>
 
     @Query("delete from ItemAnnouncement")
     fun deleteAllItems()

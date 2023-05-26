@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface ItemRequestDAO{
+interface InfoRequestDAO{
 
     @Upsert
-    fun insertItem(item: ItemRequest)
+    fun insertItem(request: InfoRequest)
 
-    @Query("select * from ItemRequest")
-    fun getAllItems(): List<ItemRequest>
+    @Query("select * from InfoRequest")
+    fun getAllItems(): List<InfoRequest>
 
-    @Query("delete from ItemRequest")
+    @Query("delete from InfoRequest")
     fun deleteAllItems()
 
 
