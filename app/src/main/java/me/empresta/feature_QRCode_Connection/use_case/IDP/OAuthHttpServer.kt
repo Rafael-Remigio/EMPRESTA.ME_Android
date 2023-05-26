@@ -1,6 +1,6 @@
-import android.content.Context
+package me.empresta.feature_QRCode_Connection.use_case.IDP
+
 import fi.iki.elonen.NanoHTTPD
-import me.empresta.feature_View_Feed.view.IDPAuthenticator
 
 class OAuthHttpServer() : NanoHTTPD(3000) {
     private var isServerOpen = false

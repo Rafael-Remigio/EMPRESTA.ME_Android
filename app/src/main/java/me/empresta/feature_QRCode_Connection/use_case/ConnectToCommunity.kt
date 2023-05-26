@@ -1,5 +1,6 @@
 package me.empresta.feature_QRCode_Connection.use_case
 
+import android.content.Context
 import com.google.gson.Gson
 import me.empresta.Crypto.Base58
 import me.empresta.Crypto.KeyGen
@@ -10,6 +11,7 @@ import me.empresta.DI.Repository
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.RemoteAPI.DTO.CommunityResponse
 import me.empresta.RemoteAPI.DTO.RegisterBody
+import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
 import java.security.SecureRandom
 import java.security.interfaces.ECPublicKey
 import javax.inject.Inject
@@ -45,7 +47,6 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
     }
 
-
     suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
         var response =   repository.postAssociate(this.url,password)
@@ -78,10 +79,14 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         }
     }
 
-    fun associateWithIDP(communityName:String,pubKey: String): Boolean{
+    fun associateWithIDP(communityName:String,pubKey: String,context: Context): Boolean{
+
 
         return true
     }
+
+    // Starting the IDP oauth2 flow
+
 
     private fun generateChallenge(): String{
         val random = SecureRandom()

@@ -1,6 +1,5 @@
-package me.empresta.feature_View_Feed.view
+package me.empresta.feature_QRCode_Connection.use_case.IDP
 
-import OAuthHttpServer
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -78,12 +77,13 @@ class IDPAuthenticator(private val context: Context) {
 
         server.start()
 
+        Log.d("LOADURL", "Load url to webview ${uaAuthUriComplete.toString()}")
+
         // Load the authorization URL in the WebView
         webView.loadUrl(uaAuthUriComplete.toString())
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uaAuthUriComplete.toString()))
         context.startActivity(intent)
 
-        Log.d("LOADURL", "Load url to webview")
 
         // Start the HTTP server to receive the authorization code
         server.openServer()

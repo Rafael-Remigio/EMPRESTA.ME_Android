@@ -42,19 +42,6 @@
                 <data android:pathPattern="/Android" /> <!-- Redirect URI path -->
             </intent-filter>
         </activity>
-        <!--
-        <activity android:name=".LoadingScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="redirect" android:host="oauth" />
-            </intent-filter>
-        </activity>
-        -->
     </application>
 
 </manifest>

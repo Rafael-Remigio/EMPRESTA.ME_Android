@@ -1,8 +1,6 @@
 package me.empresta.feature_View_Feed.view
 
-import me.empresta.RemoteAPI.DTO.Lending
 import android.content.Context
-import androidx.compose.ui.layout.*
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,29 +33,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import kotlinx.coroutines.flow.toList
 import me.empresta.*
-import me.empresta.DI.Repository
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
-import me.empresta.feature_View_Feed.view.model.AvailableItem
-import me.empresta.PubSub.PubSub
-import javax.inject.Inject
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
-import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
+import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
 
 
 @Composable
@@ -174,9 +165,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
             )
         }
     ) { innerPadding ->
-        Button(onClick = { startIDPoauth2(context) }) {
-            Text(text = "IDP",Modifier.padding(start = 10.dp))
-        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -403,13 +391,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
     }
 }
 
-// Starting the IDP oauth2 flow
-fun startIDPoauth2(context: Context) {
-    val auth = IDPAuthenticator(context)
-    val apiService = auth.createApiService()
-    auth.associateWithIDP(apiService, context)
-}
-
 @Composable
 fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean) -> Unit, setValue: (String) -> Unit) {
     val txtFieldError = remember { mutableStateOf("") }
@@ -604,4 +585,10 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
             }
         }
     }
+}
+
+fun startIDPoauth2(context: Context) {
+    val auth = IDPAuthenticator(context)
+    val apiService = auth.createApiService()
+    auth.associateWithIDP(apiService, context)
 }
