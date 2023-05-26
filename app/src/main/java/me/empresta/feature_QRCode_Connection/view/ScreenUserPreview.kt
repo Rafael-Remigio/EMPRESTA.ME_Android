@@ -24,9 +24,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import me.empresta.Black
 import me.empresta.BrightOrange
+import me.empresta.EMPRESTAME
 import me.empresta.Grey
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 import me.empresta.White
 import org.json.JSONArray
 import org.json.JSONObject
@@ -49,6 +51,7 @@ fun ScreenUserPreview(
     val communities: List<LinkedHashMap<String,Any>> = map["Communities"] as List<LinkedHashMap<String,Any>>
 
 
+
     // composable context
     val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
@@ -56,6 +59,21 @@ fun ScreenUserPreview(
 
 
     //text field
+
+
+    LaunchedEffect(Unit) {
+        viewModel
+            .toastMessage
+            .collect { message ->
+                Toast.makeText(
+                    context,
+                    message,
+                    Toast.LENGTH_SHORT,
+                ).show()
+
+                navController.navigate(EmprestameScreen.Feed.name)
+            }
+    }
 
     var vouchDescription by remember { mutableStateOf(TextFieldValue("")) }
 
