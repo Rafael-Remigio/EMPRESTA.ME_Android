@@ -133,9 +133,8 @@ class Repository @Inject constructor
     fun getAllFriends(): Flow<List<Friend>> {
         return FriendDAO.getAllFriends()
     }
-
+ 
     fun deleteAllFriends() {
         FriendDAO.deleteAllFriends()
-    }
-
+    }  
     }

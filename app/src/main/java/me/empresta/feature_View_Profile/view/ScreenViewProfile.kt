@@ -1,8 +1,11 @@
 package me.empresta.feature_View_Profile.view
 
+import android.util.Log
+import android.widget.ImageButton
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -29,6 +32,7 @@ import coil.compose.rememberAsyncImagePainter
 import me.empresta.BrightOrange
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 
 @Composable
 fun ScreenProfile(
@@ -39,6 +43,8 @@ fun ScreenProfile(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    var count_image_clicks = 0
+
 
     Scaffold(
         topBar = {TopAppBar(navigationIcon = {
@@ -46,7 +52,7 @@ fun ScreenProfile(
                 Icon(Icons.Filled.ArrowBack, "backIcon")
             }
         },title = {Text("Profile", textAlign = TextAlign.Center)}, backgroundColor = BrightOrange,contentColor = Black, actions = {
-            IconButton(onClick = {/* Do Something*/ }) {
+            IconButton(onClick = {navController.navigate(EmprestameScreen.Notifications.name)}) {
                 Icon(Icons.Filled.Notifications, null)
             }})},
         scaffoldState = scaffoldState,
@@ -81,28 +87,38 @@ fun ScreenProfile(
                 .padding(innerPadding).padding(horizontal = 20.dp)
         ) {
             if (viewModel.reached){
-            Spacer(modifier = Modifier.size(48.dp))
-            Image(
-                painter = rememberAsyncImagePainter("https://upload.wikimedia.org/wikipedia/commons/b/b5/1dayoldkitten.JPG"),
-                contentDescription = "avatar",
-                contentScale = ContentScale.Crop,            // crop the image if it's not a square
-                modifier = Modifier
-                    .size(128.dp)
-                    .clip(CircleShape)                       // clip to the circle shape
-                    .border(2.dp, BrightOrange, CircleShape)   // add a border (optional)
-            )
-            Spacer(modifier = Modifier.size(10.dp))
-            Text(text = viewModel.viewInfo().NickName)
-            Text(text = viewModel.viewInfo().publicKey.substring(startIndex = 0, endIndex = 33))
-            Text(text = viewModel.viewInfo().contactInfo)
+                Spacer(modifier = Modifier.size(48.dp))
 
 
-        }
+                    Image(
+                        painter = rememberAsyncImagePainter("https://upload.wikimedia.org/wikipedia/commons/b/b5/1dayoldkitten.JPG"),
+                        contentDescription = "avatar",
+                        contentScale = ContentScale.Crop,            // crop the image if it's not a square
+                        modifier = Modifier
+                            .size(128.dp)
+                            .clip(CircleShape)                       // clip to the circle shape
+                            .border(2.dp, BrightOrange, CircleShape) // add a border (optional)
+                            .clickable{
+                                count_image_clicks++
+                                if (count_image_clicks > 100) {
+                                    Log.d("yay", "amogus")
+                                }
+                              },
+                    )
+
+                Spacer(modifier = Modifier.size(10.dp))
+                Text(text = viewModel.viewInfo().NickName)
+                Text(text = viewModel.viewInfo().publicKey.substring(startIndex = 0, endIndex = 33))
+                Text(text = viewModel.viewInfo().contactInfo)
+
+
+            }
         }
     }
 
 
 }
+
 
 
 @Preview
