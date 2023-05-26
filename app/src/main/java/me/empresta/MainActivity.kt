@@ -47,6 +47,9 @@ class MainActivity : ComponentActivity() {
         super.onPause()
 
     }
+
+
+    
     
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

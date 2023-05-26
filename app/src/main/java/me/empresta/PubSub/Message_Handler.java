@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -58,8 +59,11 @@ public class Message_Handler {
 
 
     }
-    public  void Handle_Vouch(Vouch_Message message, String exchange){
+    public void Handle_Vouch(Vouch_Message message, String exchange){
 
+        System.out.println(message);
+
+        System.out.println(message);
         // Validations
         if(!message.check_nonce())
             return;
@@ -74,7 +78,7 @@ public class Message_Handler {
         //Reconstruction
 
         // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
-        repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), Integer.parseInt(message.getState()), message.getMessage()));
+        repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), message.getSender_community(), message.getReceiver_community(), Integer.parseInt(message.getState()), message.getMessage()));
 
     }
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){

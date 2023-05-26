@@ -23,10 +23,13 @@ import me.empresta.Crypto.Utils;
 import me.empresta.DAO.Account;
 import me.empresta.DAO.AccountDao;
 import me.empresta.DI.Repository;
+import me.empresta.PubSub.PubSub;
 
 public class RegisterUseCase {
      @Inject
      Repository repository;
+
+
     @Inject
     public RegisterUseCase(Repository repo){
         this.repository = repo;
@@ -35,7 +38,7 @@ public class RegisterUseCase {
         String nickName,
         String description,
         String contact
-    ) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException {
+    ) throws Exception {
 
         // Store data to the Persistent Database
 
@@ -54,7 +57,14 @@ public class RegisterUseCase {
             repository.deleteAccounts();
             //Insert Data
             repository.insertAccount(account);
+
+
         });
+
+        /*TODO*/
+        // Meter a minha public key nos friends
+
+
 
         return true;
     }

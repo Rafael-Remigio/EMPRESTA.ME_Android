@@ -10,6 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import me.empresta.DAO.AccountDao
 import me.empresta.DAO.CommunityDao
 import me.empresta.DAO.Database
+import me.empresta.DAO.FriendDAO
 import me.empresta.DAO.InfoRequestDAO
 import me.empresta.DAO.ItemAnnouncementDAO
 import me.empresta.DAO.ItemRequestDAO
@@ -61,6 +62,10 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideFriendDAO(db: Database): FriendDAO { return db.FriendDAO }
+
+    @Singleton
+    @Provides
     fun provideInfoRequestDAO(db: Database): InfoRequestDAO { return db.InfoRequestDAO }
 
     @Provides
@@ -76,8 +81,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideConnectToCommunityUseCase(repository: Repository,communityAPI:CommunityAPI,communityDao: CommunityDao): ConnectToCommunity {
-        return ConnectToCommunity(repository,communityDao)
+    fun provideConnectToCommunityUseCase(repository: Repository,pubSub: PubSub): ConnectToCommunity {
+        return ConnectToCommunity(repository,pubSub)
     }
 
     @Provides
