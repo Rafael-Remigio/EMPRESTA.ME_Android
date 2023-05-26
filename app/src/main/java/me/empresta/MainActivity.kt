@@ -34,18 +34,21 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        pubSub.start_listening("my_pub_key")
+        //pubSub.start_listening("my_pub_key")
     }
 
     override fun onResume() {
         super.onResume()
-        pubSub.start_listening("my_pub_key")
+        //pubSub.start_listening("my_pub_key")
     }
 
     override fun onPause() {
         super.onPause()
 
     }
+
+
+    
     
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

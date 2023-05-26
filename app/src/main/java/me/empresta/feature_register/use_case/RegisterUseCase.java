@@ -29,12 +29,10 @@ public class RegisterUseCase {
      @Inject
      Repository repository;
 
+
     @Inject
-    PubSub pubSub;
-    @Inject
-    public RegisterUseCase(Repository repo , PubSub pubSub){
+    public RegisterUseCase(Repository repo){
         this.repository = repo;
-        this.pubSub = pubSub;
     }
     public boolean Register(
         String nickName,
@@ -59,16 +57,12 @@ public class RegisterUseCase {
             repository.deleteAccounts();
             //Insert Data
             repository.insertAccount(account);
-            try {
-                pubSub.start_listening(keyBase58);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+
 
         });
 
         /*TODO*/
-        // Meter a minha oublic key nos friends
+        // Meter a minha public key nos friends
 
 
 

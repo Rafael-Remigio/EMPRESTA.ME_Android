@@ -1,5 +1,6 @@
 package me.empresta.feature_QRCode_Connection.view
 
+import android.os.AsyncTask
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -154,10 +155,9 @@ fun ScreenUserPreview(
 
                 Button(
                     onClick = {
-                        if (viewModel.connect(pubKey, communities,vouchDescription.text,1)){
-                            Toast.makeText(context,"Vouched successfully",Toast.LENGTH_SHORT).show()
-                        }
-                              },
+
+                            viewModel.connect(pubKey, communities,vouchDescription.text,1)
+                                                 },
                     content = {
                         Text(
                             text = "Vouch",
@@ -176,10 +176,8 @@ fun ScreenUserPreview(
 
                 Button(
                     onClick = {
-                    if (viewModel.connect(pubKey, communities, vouchDescription.text,-1)){
-                        Toast.makeText(context,"Vouched negatively",Toast.LENGTH_SHORT).show()
-                    }
-                },
+                     viewModel.connect(pubKey, communities, vouchDescription.text,-1)
+                    },
                     content = {
                     Text(
                         text = "Disapprove",

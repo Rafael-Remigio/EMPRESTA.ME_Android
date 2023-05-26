@@ -21,32 +21,39 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
+import me.empresta.DI.Repository;
+
 
 public class PubSub{
 
-    static String host = "192.168.227.52";
 
 
     @Inject
     Message_Handler message_handler;
+    @Inject
+    Repository repository;
 
     @Inject
     public PubSub(Message_Handler message_handler){
         this.message_handler = message_handler;
+
     }
 
-    public  void start_listening(String EXCHANGE_NAME)throws Exception{
+    public  void start_listening(String EXCHANGE_NAME,String host)throws Exception{
 
         Thread subscribeThread = new Thread(new Runnable() {
             @Override
             public void run() {
 
                     try {
+
                         ConnectionFactory factory = new ConnectionFactory();
                         factory.setHost(host);
                         Connection connection = factory.newConnection();
                         Channel channel = connection.createChannel();
                         channel.basicQos(1);
+
+                        System.out.println("Waiting CTRL+C");
 
                         //channel.queueDeclare(queue, false, false, false, null);
 
@@ -72,6 +79,7 @@ public class PubSub{
 
 
                     } catch (TimeoutException | IOException e) {
+                        System.out.println(e);
                         throw new RuntimeException(e);
 
                     }
@@ -86,7 +94,7 @@ public class PubSub{
         - Vouch Type
         - Description
     */
-    public static void Publish_Vouch(String my_public_key, String other_public_key, String my_communities, List<LinkedHashMap<String, Object>> other_communities, String Description, Integer state){
+    public static void Publish_Vouch(String host,String my_public_key, String other_public_key, String my_communities, List<LinkedHashMap<String, Object>> other_communities, String Description, Integer state){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -139,14 +147,15 @@ public class PubSub{
         thread.start();
     }
 
-    public static void Publish_Item_Announcement_Update(String my_public_key, String Name, String Description, String Photo){
+    public static void Publish_Item_Announcement_Update(String host, String my_public_key, String Name, String Description, String Photo){
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host);
+                    factory.setHost(host+":5672");
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
@@ -184,14 +193,14 @@ public class PubSub{
     }
 
 
-    public static void Publish_Item_Request(String my_public_key, String Name, String Description){
+    public static void Publish_Item_Request(String host,String my_public_key, String Name, String Description){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host);
+                    factory.setHost(host+":5672");
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
@@ -227,14 +236,14 @@ public class PubSub{
         thread.start();
     }
 
-    public static void Publish_Ask_Info(String my_public_key, String target_public_key, String message){
+    public static void Publish_Ask_Info(String host,String my_public_key, String target_public_key, String message){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host);
+                    factory.setHost(host+":5672");
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 

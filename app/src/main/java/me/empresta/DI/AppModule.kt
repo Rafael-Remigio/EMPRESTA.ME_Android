@@ -70,8 +70,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRegisterUseCases(repository: Repository, pubSub: PubSub): RegisterUseCase {
-        return RegisterUseCase(repository, pubSub)
+    fun provideRegisterUseCases(repository: Repository): RegisterUseCase {
+        return RegisterUseCase(repository)
     }
 
     @Provides
@@ -81,8 +81,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideConnectToCommunityUseCase(repository: Repository,communityAPI:CommunityAPI,communityDao: CommunityDao): ConnectToCommunity {
-        return ConnectToCommunity(repository,communityDao)
+    fun provideConnectToCommunityUseCase(repository: Repository,pubSub: PubSub): ConnectToCommunity {
+        return ConnectToCommunity(repository,pubSub)
     }
 
     @Provides

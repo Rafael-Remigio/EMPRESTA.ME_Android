@@ -66,16 +66,16 @@ class DisplayQRCodeView @Inject constructor(
                         = getAccount()
 
 
-                val array = ByteArray(10);
                 val communities = getCommunities()
                 var communityString: String = "";
 
                 for (i in communities){
-                    communityString.plus("{name:"+ i.name +";url: "+i.url+";},")
+                    println("sadlasjdlj")
+                    communityString += "{name:\""+ i.name +"\",url:\""+i.url+"\"}"
                 }
 
 
-                val bitMatrix = writer.encode("{NickName: \"" + personalAccount.NickName +"\"; Description: \""+personalAccount.Description+ "\"; PublicKey: \""+personalAccount.publicKey+"\"; Customization: \""+personalAccount.customization +"\"; Communities: [" +""  +  "]}", BarcodeFormat.QR_CODE, dimen,dimen)
+                val bitMatrix = writer.encode("{NickName: \"" + personalAccount.NickName +"\", Description: \""+personalAccount.Description+ "\", PublicKey: \""+personalAccount.publicKey+"\", Customization: \""+personalAccount.customization +"\", Communities: [" + communityString  +  "]}", BarcodeFormat.QR_CODE, dimen,dimen)
 
 
             val barcodeEncoder = BarcodeEncoder()
