@@ -70,8 +70,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRegisterUseCases(repository: Repository): RegisterUseCase {
-        return RegisterUseCase(repository)
+    fun provideRegisterUseCases(repository: Repository, pubSub: PubSub): RegisterUseCase {
+        return RegisterUseCase(repository, pubSub)
     }
 
     @Provides

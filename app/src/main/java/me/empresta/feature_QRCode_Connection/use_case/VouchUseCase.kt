@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class VouchUseCase @Inject constructor(private val repository: Repository,private val pubSub: PubSub) {
 
-    fun connect(pubkey: String, description:String,value:Int) : Boolean{
+    fun connect(pubkey: String, communities: List<LinkedHashMap<String, Any>>, description:String,value:Int) : Boolean{
         try {
 
 
@@ -18,7 +18,7 @@ class VouchUseCase @Inject constructor(private val repository: Repository,privat
             val mykeyBase58 = Base58.encode(keybytes)
 
 
-            PubSub.Publish_Vouch(mykeyBase58,pubkey,"com1 url","com2 url",description,value)
+            PubSub.Publish_Vouch(mykeyBase58,pubkey,"my communities", communities,description,value)
 
             return true
         }

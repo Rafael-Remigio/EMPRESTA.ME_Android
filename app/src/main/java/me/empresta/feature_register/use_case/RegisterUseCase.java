@@ -23,19 +23,24 @@ import me.empresta.Crypto.Utils;
 import me.empresta.DAO.Account;
 import me.empresta.DAO.AccountDao;
 import me.empresta.DI.Repository;
+import me.empresta.PubSub.PubSub;
 
 public class RegisterUseCase {
      @Inject
      Repository repository;
+
     @Inject
-    public RegisterUseCase(Repository repo){
+    PubSub pubSub;
+    @Inject
+    public RegisterUseCase(Repository repo , PubSub pubSub){
         this.repository = repo;
+        this.pubSub = pubSub;
     }
     public boolean Register(
         String nickName,
         String description,
         String contact
-    ) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException {
+    ) throws Exception {
 
         // Store data to the Persistent Database
 
@@ -54,7 +59,18 @@ public class RegisterUseCase {
             repository.deleteAccounts();
             //Insert Data
             repository.insertAccount(account);
+            try {
+                pubSub.start_listening(keyBase58);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
         });
+
+        /*TODO*/
+        // Meter a minha oublic key nos friends
+
+
 
         return true;
     }

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -59,6 +60,8 @@ public class Message_Handler {
 
     }
     public void Handle_Vouch(Vouch_Message message, String exchange){
+
+        System.out.println(message);
 
         System.out.println(message);
         // Validations

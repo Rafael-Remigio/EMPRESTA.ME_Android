@@ -154,7 +154,7 @@ fun ScreenUserPreview(
 
                 Button(
                     onClick = {
-                        if (viewModel.connect(pubKey,vouchDescription.text,1)){
+                        if (viewModel.connect(pubKey, communities,vouchDescription.text,1)){
                             Toast.makeText(context,"Vouched successfully",Toast.LENGTH_SHORT).show()
                         }
                               },
@@ -176,7 +176,7 @@ fun ScreenUserPreview(
 
                 Button(
                     onClick = {
-                    if (viewModel.connect(pubKey,vouchDescription.text,-1)){
+                    if (viewModel.connect(pubKey, communities, vouchDescription.text,-1)){
                         Toast.makeText(context,"Vouched negatively",Toast.LENGTH_SHORT).show()
                     }
                 },
