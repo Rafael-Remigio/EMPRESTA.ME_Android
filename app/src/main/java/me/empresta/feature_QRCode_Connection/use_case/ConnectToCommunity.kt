@@ -82,7 +82,7 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
 
             /*TODO*/
-            repository.insertFriend(Friend(keyBase58, this.url))
+            repository.insertFriend(Friend(keyBase58, this.url.substring(7,this.url.length - 6)))
 
 
 

@@ -30,9 +30,13 @@ class VouchUseCase @Inject constructor(private val repository: Repository,privat
                     // Publish Vouch Message in my exchange
                     PubSub.Publish_Vouch(community.url.substring(7,community.url.length - 6), mykeyBase58,pubkey,"my communities", communities,description,value)
 
+                    var communityUrl = "";
+
                     // Starts to listen to friend exchange
-                    var communityUrl: String = communities[0].get("url") as String
-                    pubSub.start_listening(pubkey,communityUrl.substring(7,community.url.length - 6))
+                    if (communities.isNotEmpty()){
+                        communityUrl = communities[0].get("url") as String
+                        pubSub.start_listening(pubkey,communityUrl.substring(7,community.url.length - 6))
+                    }
 
                     // Adds person to list of friends so it can subscribe to it later
                     repository.insertFriend(Friend(pubkey,communityUrl.substring(7,community.url.length - 6)));

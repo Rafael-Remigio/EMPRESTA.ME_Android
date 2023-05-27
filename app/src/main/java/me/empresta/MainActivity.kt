@@ -14,6 +14,9 @@ import com.rabbitmq.client.Channel
 import com.rabbitmq.client.Connection
 import com.rabbitmq.client.ConnectionFactory
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import me.empresta.DI.Repository
 import me.empresta.Navigation.EmprestameScreen
 import me.empresta.PubSub.PubSub
 import me.empresta.feature_QRCode_Connection.view.ScreenCommunityPreview
@@ -32,20 +35,26 @@ import me.empresta.feature_register.view.ScreenRegister
 class MainActivity : ComponentActivity() {
 
     @Inject lateinit var pubSub: PubSub
+    @Inject lateinit var repository: Repository
 
-    override fun onStart() {
-        super.onStart()
-        //pubSub.start_listening("my_pub_key")
-    }
+
+     var threads : ArrayList<Thread> = ArrayList<Thread>()
 
     override fun onResume() {
         super.onResume()
-        //pubSub.start_listening("my_pub_key")
+        GlobalScope.launch {
+            for (f in repository.getAllFriends()){
+
+                threads.add(pubSub.start_listening(f.publicKey, f.community))
+            }
+        }
     }
 
     override fun onPause() {
         super.onPause()
-
+        for (thread in threads){
+            thread.stop()
+        }
     }
 
 
