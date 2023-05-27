@@ -105,14 +105,14 @@ public class Message_Handler {
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){
 
         // Validations
-        if(!message.check_nonce())
+        /*if(!message.check_nonce())
             return;
 
         if(!message.check_sender(exchange))
             return;
 
         if(!message.check_signature())
-            return;
+            return;*/
 
         // Add this Item Announcement to the list of saved Items
         repository.insertItemAnnouncement(new ItemAnnouncement(message.getSender(), message.getName(), message.getDescription(), message.getImage()));
