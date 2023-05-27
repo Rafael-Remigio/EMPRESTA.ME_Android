@@ -1,22 +1,29 @@
 package me.empresta.feature_QRCode_Connection.use_case
 
 import android.content.Context
+import android.os.AsyncTask
+import android.os.Handler
+import android.os.Looper
 import com.google.gson.Gson
 import me.empresta.Crypto.Base58
 import me.empresta.Crypto.KeyGen
 import me.empresta.Crypto.Utils
 import me.empresta.DAO.Community
 import me.empresta.DAO.CommunityDao
+import me.empresta.DAO.Friend
 import me.empresta.DI.Repository
+import me.empresta.PubSub.PubSub
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.RemoteAPI.DTO.CommunityResponse
 import me.empresta.RemoteAPI.DTO.RegisterBody
 import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
+import retrofit2.HttpException
 import java.security.SecureRandom
 import java.security.interfaces.ECPublicKey
+import java.util.concurrent.Executors
 import javax.inject.Inject
-import retrofit2.HttpException
-class ConnectToCommunity @Inject constructor(private val repository: Repository, private val communityDao: CommunityDao) {
+
+class ConnectToCommunity @Inject constructor(private val repository: Repository,private val pubSub: PubSub,) {
 
     var url: String = ""
     var token: String? = null
@@ -69,7 +76,22 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
             val community = Community(communityName,this.url, Base58.decode(pubKey))
 
+
             repository.insertCommunity(community)
+
+
+            /*TODO*/
+            repository.insertFriend(Friend(keyBase58, this.url))
+
+
+
+            var baseUrl = this.url.substring(7,this.url.length - 6)
+            System.out.println("\n\n" + keyBase58 + " " + baseUrl + "\n\n")
+            pubSub.start_listening(keyBase58,baseUrl)
+
+
+
+            println("\n\n" + response + "\n\n")
 
             return true
         }

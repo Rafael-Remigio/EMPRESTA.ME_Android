@@ -14,36 +14,46 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
+import me.empresta.DI.Repository;
+
 
 public class PubSub{
 
-    static String host = "192.168.227.52";
 
 
     @Inject
     Message_Handler message_handler;
+    @Inject
+    Repository repository;
 
     @Inject
     public PubSub(Message_Handler message_handler){
         this.message_handler = message_handler;
+
     }
 
-    public  void start_listening(String EXCHANGE_NAME)throws Exception{
+    public  void start_listening(String EXCHANGE_NAME,String host)throws Exception{
 
         Thread subscribeThread = new Thread(new Runnable() {
             @Override
             public void run() {
 
                     try {
+
                         ConnectionFactory factory = new ConnectionFactory();
                         factory.setHost(host);
                         Connection connection = factory.newConnection();
                         Channel channel = connection.createChannel();
                         channel.basicQos(1);
+
+                        System.out.println("Waiting CTRL+C");
 
                         //channel.queueDeclare(queue, false, false, false, null);
 
@@ -69,6 +79,7 @@ public class PubSub{
 
 
                     } catch (TimeoutException | IOException e) {
+                        System.out.println(e);
                         throw new RuntimeException(e);
 
                     }
@@ -83,7 +94,7 @@ public class PubSub{
         - Vouch Type
         - Description
     */
-    public static void Publish_Vouch(String my_public_key, String other_public_key, String Description, Integer state){
+    public static void Publish_Vouch(String host,String my_public_key, String other_public_key, String my_communities, List<LinkedHashMap<String, Object>> other_communities, String Description, Integer state){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,6 +109,12 @@ public class PubSub{
 
                     int nonce = 0;
 
+                    String other_coms ="";
+
+                    for (LinkedHashMap map:other_communities) {
+                        other_coms += " " +map.get("url");
+                    }
+
                     JSONObject j_message = new JSONObject();
                     j_message.put("header", "VOUCH");
                     j_message.put("clock", "clock"); //TODO: clock
@@ -106,6 +123,8 @@ public class PubSub{
                     j_message.put("signature", "signature"); //TODO: Signature
                     j_message.put("sender", my_public_key);
                     j_message.put("receiver", other_public_key);
+                    j_message.put("sender_community", my_communities);
+                    j_message.put("receiver_community", other_coms);
                     j_message.put("state", state);
                     j_message.put("message", Description);
 
@@ -128,14 +147,15 @@ public class PubSub{
         thread.start();
     }
 
-    public static void Publish_Item_Announcement_Update(String my_public_key, String Name, String Description, String Photo){
+    public static void Publish_Item_Announcement_Update(String host, String my_public_key, String Name, String Description, String Photo){
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host);
+                    factory.setHost(host+":5672");
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
@@ -173,14 +193,14 @@ public class PubSub{
     }
 
 
-    public static void Publish_Item_Request(String my_public_key, String Name, String Description){
+    public static void Publish_Item_Request(String host,String my_public_key, String Name, String Description){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host);
+                    factory.setHost(host+":5672");
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
@@ -197,6 +217,49 @@ public class PubSub{
                     j_message.put("sender", my_public_key);
                     j_message.put("name", Name);
                     j_message.put("description", Description);
+
+                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
+
+                    System.out.println(" [x] Sent '" +  j_message + "'");
+
+                    channel.close();
+                    connection.close();
+
+                } catch (IOException | TimeoutException e) {
+                    throw new RuntimeException("Rabbitmq problem", e);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    public static void Publish_Ask_Info(String host,String my_public_key, String target_public_key, String message){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ConnectionFactory factory = new ConnectionFactory();
+
+                    factory.setHost(host+":5672");
+                    Connection connection = factory.newConnection();
+                    Channel channel = connection.createChannel();
+
+                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+                    int nonce = 0; //Nonce that needs to be randomized
+
+                    JSONObject j_message = new JSONObject();
+                    j_message.put("header", "ASK_INFO");
+                    j_message.put("clock", "clock"); //TODO: clock
+                    j_message.put("hash", "hash"); //TODO: hash of the message
+                    j_message.put("nonce", nonce);
+                    j_message.put("signature", "signature"); //TODO: Signature
+                    j_message.put("sender", my_public_key);
+                    j_message.put("receiver", target_public_key);
+                    j_message.put("message", message);
 
                     channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
 

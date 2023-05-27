@@ -23,6 +23,7 @@ import me.empresta.feature_QRCode_Connection.view.ScreenReadQRCode
 import me.empresta.feature_View_Feed.view.ScreenFeed
 import me.empresta.feature_View_Network.ScreenDisplayNetwork
 import me.empresta.feature_View_Profile.view.ScreenProfile
+import me.empresta.feature_View_Notifications.view.ScreenNotifications
 import javax.inject.Inject
 import me.empresta.feature_register.view.ScreenRegister
 
@@ -46,6 +47,9 @@ class MainActivity : ComponentActivity() {
         super.onPause()
 
     }
+
+
+    
     
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -95,6 +99,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
                     }
                     composable(route = EmprestameScreen.Profile.name) {
                         ScreenProfile(navController = navController)
+                    }
+                    composable(route = EmprestameScreen.Notifications.name){
+                        ScreenNotifications(navController = navController)
                     }
                 }
             }

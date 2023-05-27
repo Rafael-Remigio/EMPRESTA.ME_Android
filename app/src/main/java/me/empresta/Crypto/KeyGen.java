@@ -46,8 +46,7 @@ public class KeyGen {
                                     KeyProperties.DIGEST_SHA512)
                             // Only permit the private key to be used if the user authenticated
                             // within the last five minutes.
-                            .setUserAuthenticationRequired(true)
-                            .setUserAuthenticationValidityDurationSeconds(5 * 60)
+                            .setUserAuthenticationRequired(false)
                             .build());
         }
         else {

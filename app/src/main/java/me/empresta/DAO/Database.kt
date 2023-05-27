@@ -4,7 +4,7 @@ import androidx.room.RoomDatabase
 import androidx.room.Database
 
 @Database(
-    entities = [Account::class,Community::class,Vouch::class,ItemRequest::class,ItemAnnouncement::class,InfoRequest::class],
+    entities = [Account::class,Community::class,Vouch::class,ItemRequest::class,ItemAnnouncement::class,InfoRequest::class,Friend::class],
     version = 1
 )
 abstract class Database: RoomDatabase() {
@@ -12,7 +12,6 @@ abstract class Database: RoomDatabase() {
     abstract val AccountDao: AccountDao
 
     abstract val CommunityDao: CommunityDao
-
 
     abstract val VouchDAO: VouchDAO
 
@@ -22,4 +21,5 @@ abstract class Database: RoomDatabase() {
 
     abstract val InfoRequestDAO: InfoRequestDAO
 
+    abstract val FriendDAO: FriendDAO
 }

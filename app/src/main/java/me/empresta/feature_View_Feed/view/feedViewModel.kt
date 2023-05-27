@@ -13,9 +13,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import me.empresta.DAO.Account
+import kotlinx.coroutines.launch
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
+import me.empresta.PubSub.PubSub
 import me.empresta.feature_View_Feed.view.model.AvailableItem
 import javax.inject.Inject
 @HiltViewModel
@@ -31,7 +33,6 @@ class feedViewModel @Inject constructor(
          // Mock data
         GlobalScope.launch {
             Log.d("alor","asdsda")
-
 
             repository.insertItemAnnouncement(
                 ItemAnnouncement(

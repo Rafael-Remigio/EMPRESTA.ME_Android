@@ -11,7 +11,9 @@ public class Vouch_Message{
     private String clock;
     private String signature;
     private String sender;
+    private String sender_community;
     private String receiver;
+    private String receiver_community;
     private String message;
     private String nonce;
     private String hash;
@@ -24,10 +26,36 @@ public class Vouch_Message{
                 ", clock='" + clock + '\'' +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +
+                ", sender_community='" + sender_community + '\'' +
+                ", receiver_community='" + receiver_community + '\'' +
                 ", message='" + message + '\'' +
                 ", nonce='" + nonce + '\'' +
                 ", hash='" + hash + '\'' +
                 '}';
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getSender_community() {
+        return sender_community;
+    }
+
+    public void setSender_community(String sender_community) {
+        this.sender_community = sender_community;
+    }
+
+    public String getReceiver_community() {
+        return receiver_community;
+    }
+
+    public void setReceiver_community(String receiver_community) {
+        this.receiver_community = receiver_community;
     }
 
     public Vouch_Message(String header, String state, String clock, String sender, String receiver, String message, String nonce, String hash) {

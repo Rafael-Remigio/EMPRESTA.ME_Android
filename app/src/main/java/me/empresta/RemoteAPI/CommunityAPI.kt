@@ -23,7 +23,7 @@ interface CommunityAPI {
     suspend fun postAssociate(@Url url: String, @Header("password") password: String): ResponseBody
 
     @GET()
-    suspend fun getChallenge(@Url url: String, @Header("token") token: String,@Header("public_key") public_key: String): ResponseBody
+    suspend fun getChallenge(@Url url: String, @Header("token") token: String,@Header("public-key") public_key: String): ResponseBody
 
     @POST()
     suspend fun postRegister(@Url url: String, @Body body: RegisterBody): ResponseBody

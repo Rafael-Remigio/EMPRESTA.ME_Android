@@ -16,7 +16,7 @@ public class Item_Request_Message {
 
     @Override
     public String toString() {
-        return "Item_Announcement_Message{" +
+        return "Item_Request_Message{" +
                 "header='" + header + '\'' +
                 ", clock='" + clock + '\'' +
                 ", nonce='" + nonce + '\'' +

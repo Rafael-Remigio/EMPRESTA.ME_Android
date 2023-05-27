@@ -49,6 +49,8 @@ import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
 import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
+import me.empresta.Navigation.EmprestameScreen
+import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
 
 
 @Composable
@@ -144,7 +146,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* Handle notifications icon click */ }) {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Notifications.name) }) {
                         Icon(Icons.Default.Notifications, contentDescription = "Notifications")
                     }
                 },
@@ -152,17 +154,17 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         },
         bottomBar = {
             BottomBar(
-                items = listOf(
-                    BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
-                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
-                    BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
-                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.Person)
-                ),
-                navController = navController,
-                onItemClick = {
-                    navController.navigate(it.route)
-                }
-            )
+            items = listOf(
+                BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
+                BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
+                BottomNavItem(name = "Profile", route = "Profile", icon = Icons.Default.Person)
+        ),
+            navController = navController,
+            onItemClick = {
+                navController.navigate(it.route)
+            }
+        )
         }
     ) { innerPadding ->
         Column(
@@ -239,8 +241,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     }
                 }
             }
-
-            Spacer(modifier = Modifier.height(26.dp))
 
             Text(
                 text = "Looking for an item?",
@@ -382,11 +382,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     }
                 }
             }
-
-
-
-
-
         }
     }
 }
