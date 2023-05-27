@@ -198,7 +198,8 @@ public class PubSub{
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
-                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                    channel.queueDeclare(my_public_key, true, false, false, null);
+                    //channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
                     int nonce = 0; //Nonce that needs to be randomized
 
@@ -213,8 +214,9 @@ public class PubSub{
                     j_message.put("description", Description);
                     j_message.put("image", Photo);
 
-                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
-
+                    channel.basicPublish("", my_public_key,
+                            null,
+                            j_message.toString().getBytes());
                     //System.out.println(" [x] Sent '" +  j_message.toString() + "'");
 
                     channel.close();
@@ -243,7 +245,8 @@ public class PubSub{
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
-                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                    channel.queueDeclare(my_public_key, true, false, false, null);
+                    //channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
                     int nonce = 0; //Nonce that needs to be randomized
 
@@ -257,8 +260,9 @@ public class PubSub{
                     j_message.put("name", Name);
                     j_message.put("description", Description);
 
-                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
-
+                    channel.basicPublish("", my_public_key,
+                            null,
+                            j_message.toString().getBytes());
                     System.out.println(" [x] Sent '" +  j_message + "'");
 
                     channel.close();
@@ -286,7 +290,8 @@ public class PubSub{
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
-                    channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                    channel.queueDeclare(my_public_key, true, false, false, null);
+                    //channel.exchangeDeclare(my_public_key, "fanout"); //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
                     int nonce = 0; //Nonce that needs to be randomized
 
@@ -300,8 +305,9 @@ public class PubSub{
                     j_message.put("receiver", target_public_key);
                     j_message.put("message", message);
 
-                    channel.basicPublish(my_public_key, "", null, j_message.toString().getBytes()); //channel.basicPublish("", QUEUE_NAME, null, j_message.toString().getBytes());
-
+                    channel.basicPublish("", my_public_key,
+                            null,
+                            j_message.toString().getBytes());
                     System.out.println(" [x] Sent '" +  j_message + "'");
 
                     channel.close();
