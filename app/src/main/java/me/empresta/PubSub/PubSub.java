@@ -36,17 +36,17 @@ public class PubSub{
     @Inject
     public PubSub(Message_Handler message_handler){
         this.message_handler = message_handler;
-
+        this.message_handler.setPubSub(this);
     }
 
-    public  void start_listening(String EXCHANGE_NAME,String host)throws Exception{
+    public  Thread start_listening(String EXCHANGE_NAME,String host)throws Exception{
 
         Thread subscribeThread = new Thread(new Runnable() {
             @Override
             public void run() {
 
                     try {
-
+                        System.out.println("\n\n" + host + "\n\n");
                         ConnectionFactory factory = new ConnectionFactory();
                         factory.setHost(host);
                         Connection connection = factory.newConnection();
@@ -71,7 +71,11 @@ public class PubSub{
                             @Override
                             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                                 String message = new String(body, StandardCharsets.UTF_8);
-                                message_handler.Handle(message, EXCHANGE_NAME);
+                                try {
+                                    message_handler.Handle(message, EXCHANGE_NAME);
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
                                 channel.basicAck(envelope.getDeliveryTag(), false);
                             }
                         };
@@ -86,6 +90,7 @@ public class PubSub{
             }
         });
         subscribeThread.start();
+        return subscribeThread;
     }
 
     /*
@@ -112,7 +117,8 @@ public class PubSub{
                     String other_coms ="";
 
                     for (LinkedHashMap map:other_communities) {
-                        other_coms += " " +map.get("url");
+                        String url = (String) map.get("url");
+                        other_coms += url.substring(7,url.length() - 6)+" " ;
                     }
 
                     JSONObject j_message = new JSONObject();

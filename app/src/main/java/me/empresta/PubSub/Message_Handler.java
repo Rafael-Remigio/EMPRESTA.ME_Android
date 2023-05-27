@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
+import me.empresta.DAO.Friend;
 import me.empresta.DAO.InfoRequest;
 import me.empresta.DAO.ItemAnnouncement;
 import me.empresta.DAO.ItemRequest;
@@ -26,12 +27,19 @@ public class Message_Handler {
     @Inject
     Repository repository;
 
+    PubSub pubSub;
+
+
     @Inject
     public Message_Handler(Repository repo){
         this.repository = repo;
     }
 
-    public void Handle(String message, String exchange){
+    public void setPubSub(PubSub pubSub) {this.pubSub = pubSub;}
+
+
+
+    public void Handle(String message, String exchange) throws Exception {
 
 
 
@@ -59,11 +67,11 @@ public class Message_Handler {
 
 
     }
-    public void Handle_Vouch(Vouch_Message message, String exchange){
+    public void Handle_Vouch(Vouch_Message message, String exchange)  {
 
         System.out.println(message);
 
-        System.out.println(message);
+        /*
         // Validations
         if(!message.check_nonce())
             return;
@@ -71,14 +79,27 @@ public class Message_Handler {
         if(!message.check_sender(exchange))
             return;
 
-        if(!message.check_signature())
+        if(!message.che1ture())
             return;
 
-
-        //Reconstruction
+         */
 
         // Add this vouch to the list of saved vouches so that the matrix can be created later when needed
         repository.insertVouch(new Vouch(message.getSender() + message.getReceiver(), message.getSender(), message.getReceiver(), message.getSender_community(), message.getReceiver_community(), Integer.parseInt(message.getState()), message.getMessage()));
+
+        try{
+        if (repository.countFriends( message.getReceiver()) == 0) {
+            this.pubSub.start_listening(message.getReceiver(), message.getReceiver_community().split(" ")[0]);
+        }
+        }  catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+
+        repository.insertFriend(new Friend(message.getReceiver(), message.getReceiver_community().split(" ")[0]));
+
+        System.out.println("\n\n\n");
+        System.out.println(repository.getAllFriends());
 
     }
     public  void Handle_Item_Announcement(Item_Announcement_Message message, String exchange){

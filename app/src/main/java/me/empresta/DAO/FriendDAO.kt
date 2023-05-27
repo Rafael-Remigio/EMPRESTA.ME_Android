@@ -15,10 +15,13 @@ interface FriendDAO{
     fun insertFriend(friend: Friend)
 
     @Query("select * from Friend")
-    fun getAllFriends(): Flow<List<Friend>>
+    fun getAllFriends(): List<Friend>
 
     @Query("delete from Friend")
     fun deleteAllFriends()
 
+
+    @Query("select count(publicKey) from Friend where publicKey = :id")
+    fun friendExists( id:String): Int
 
 }
