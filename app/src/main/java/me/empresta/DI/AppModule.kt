@@ -20,6 +20,7 @@ import me.empresta.PubSub.PubSub
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.feature_QRCode_Connection.use_case.ConnectToCommunity
 import me.empresta.feature_QRCode_Connection.use_case.VouchUseCase
+import me.empresta.feature_View_Network.use_case.NetworkUseCase
 import me.empresta.feature_View_Profile.use_case.ProfileUseCase
 import me.empresta.feature_register.use_case.RegisterUseCase
 import retrofit2.Retrofit
@@ -107,5 +108,12 @@ object AppModule {
     @Singleton
     fun providePubSub(messageHandler: Message_Handler): PubSub {
         return PubSub(messageHandler)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideNetworkUseCase(repository: Repository, pubSub: PubSub): NetworkUseCase {
+        return NetworkUseCase(repository, pubSub)
     }
 }

@@ -14,20 +14,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import me.empresta.*
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
+import me.empresta.feature_QRCode_Connection.view.UserPreviewView
+import me.empresta.feature_View_Network.view.NetworkView
 
 
 @Composable
-fun ScreenDisplayNetwork(navController: NavController) {
+fun ScreenDisplayNetwork(navController: NavController,viewModel: NetworkView = hiltViewModel()) {
 
-    var yourData: String = "192.168.241.192:5500/basic-site.html"
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    viewModel.getCommunity()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -57,19 +61,31 @@ fun ScreenDisplayNetwork(navController: NavController) {
                         .fillMaxSize()
                         .padding(innerPadding)
                 ) {
-                    AndroidView(factory = {
-                        WebView(it).apply {
-                            layoutParams = ViewGroup.LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.MATCH_PARENT
-                            )
-                            webViewClient = WebViewClient()
-                            settings.javaScriptEnabled = true
-                            loadUrl(yourData)
-                        }
-                    }, update = {
-                        it.loadUrl(yourData)
-                    })
+                    if (viewModel.get().url != "") {
+
+                        AndroidView(factory = {
+                            WebView(it).apply {
+                                layoutParams = ViewGroup.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT
+                                )
+                                webViewClient = WebViewClient()
+                                settings.javaScriptEnabled = true
+
+                                loadUrl(viewModel.get().url + "topology?observer=" + viewModel.getAccount().publicKey)
+                            }
+                        }, update = {
+                            it.loadUrl(viewModel.get().url + "topology?observer=" + viewModel.getAccount().publicKey)
+                        })
+
+                    }
+                    else {
+                        CircularProgressIndicator(
+                            color = BrightOrange,
+                            strokeWidth = 5.dp,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
                 }
 
     }

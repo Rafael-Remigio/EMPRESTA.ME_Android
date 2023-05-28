@@ -176,11 +176,17 @@ class Repository @Inject constructor
         FriendDAO.insertFriend(friend)
     }
 
-    fun getAllFriends(): Flow<List<Friend>> {
+    fun getAllFriends(): List<Friend> {
         return FriendDAO.getAllFriends()
     }
  
     fun deleteAllFriends() {
         FriendDAO.deleteAllFriends()
-    }  
     }
+
+    fun countFriends( id: String): Int {
+        return FriendDAO.friendExists(id)
+    }
+
+
+}
