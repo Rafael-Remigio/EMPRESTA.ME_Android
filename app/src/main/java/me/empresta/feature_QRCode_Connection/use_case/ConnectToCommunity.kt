@@ -101,8 +101,8 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         }
     }
 
-    fun associateWithIDP(communityName:String,pubKey: String,context: Context): Boolean{
-
+    suspend fun associateWithIDP(authorizationCode : String,pubKey: String,context: Context): Boolean{
+        // var response =   repository.postAssociate(this.url, authorizationCode)
 
         return true
     }

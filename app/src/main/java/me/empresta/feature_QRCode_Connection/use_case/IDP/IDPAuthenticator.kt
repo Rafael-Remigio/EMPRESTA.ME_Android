@@ -39,7 +39,7 @@ interface ApiService {
 
 }
 
-class IDPAuthenticator(private val context: Context) {
+class IDPAuthenticator(private val context: Context , private val url: String) {
     val UA_OAUTH_AUTH_URI = "https://wso2-gw.ua.pt/authorize?"
     val UA_OAUTH_REDIRECT_URI = "http://localhost:3000"
     val UA_OAUTH_SCOPE = "openid"
@@ -73,7 +73,7 @@ class IDPAuthenticator(private val context: Context) {
         var authorizationCode: String? = null
 
         // Start the HTTP server
-        val server = OAuthHttpServer()
+        val server = OAuthHttpServer(url)
 
         server.start()
 
@@ -84,7 +84,6 @@ class IDPAuthenticator(private val context: Context) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uaAuthUriComplete.toString()))
         context.startActivity(intent)
 
-
         // Start the HTTP server to receive the authorization code
         server.openServer()
 
@@ -92,6 +91,7 @@ class IDPAuthenticator(private val context: Context) {
         authorizationCode = server.getReceivedCode()
         print("AUTHORIZATION CODE: $authorizationCode")
         Log.d("AUTHORIZATION CODE", "AUTHORIZATION CODE: $authorizationCode")
+
     }
 
     // Function to perform the exchangeCodeForToken request

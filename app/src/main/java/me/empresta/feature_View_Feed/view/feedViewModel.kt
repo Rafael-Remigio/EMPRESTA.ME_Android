@@ -1,24 +1,13 @@
 package me.empresta.feature_View_Feed.view
 
-import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.launch
-import me.empresta.DAO.Account
 import kotlinx.coroutines.launch
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
-import me.empresta.PubSub.PubSub
-import me.empresta.feature_View_Feed.view.model.AvailableItem
 import javax.inject.Inject
 @HiltViewModel
 class feedViewModel @Inject constructor(

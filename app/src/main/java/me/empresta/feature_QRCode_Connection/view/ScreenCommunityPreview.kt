@@ -57,7 +57,7 @@ fun ScreenCommunityPreview(
         CustomDialog(value = "", setShowDialog = {
             showDialog.value = it
         }){
-            viewModel.connectWithCommunity(it, context = context)
+            viewModel.connectWithCommunity(it, context = context,code)
         }
     }
 
@@ -123,7 +123,7 @@ fun ScreenCommunityPreview(
                     onClick = {
 
                         if (usesIDP) {
-                            viewModel.connectWithCommunity("", context = context)
+                            viewModel.connectWithCommunity("", context = context, url =code )
 
                         }
                         else {

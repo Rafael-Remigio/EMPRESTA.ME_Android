@@ -1,6 +1,5 @@
 package me.empresta.feature_register.view
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,9 +17,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import me.empresta.*
 import me.empresta.Navigation.EmprestameScreen
-import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
-import me.empresta.feature_View_Feed.view.startIDPoauth2
-
 
 @Composable
 fun ScreenRegister(
@@ -152,41 +148,11 @@ fun ScreenRegister(
                 .height(1.dp)
                 .background(color = Grey))
 
-            Text(
-                modifier = Modifier.padding(6.dp),
-                text = "Not my first Rodeo!",
-                fontSize = 15.sp,
-                color = Grey,
-            )
-
             Box(modifier = Modifier
                 .width(100.dp)
                 .height(1.dp)
                 .background(color = Grey))
         }
-
-        Box(modifier = Modifier.padding(10.dp))
-
-
-        Button(onClick = { startIDPoauth2(context) },
-            content = {Text(text = "IDP", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
-            colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
-            modifier=Modifier.width(200.dp).height(60.dp),
-            shape = RoundedCornerShape(15)
-
-            )
-
     }
-
-
-
     }
-
-
-}
-
-fun startIDPoauth2(context: Context) {
-    val auth = IDPAuthenticator(context)
-    val apiService = auth.createApiService()
-    auth.associateWithIDP(apiService, context)
 }

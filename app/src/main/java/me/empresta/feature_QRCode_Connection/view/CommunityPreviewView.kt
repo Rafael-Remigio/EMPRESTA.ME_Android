@@ -42,10 +42,11 @@ class CommunityPreviewView @Inject constructor(
 
     }
 
-    fun connectWithCommunity(password: String,context: Context){
+    fun connectWithCommunity(password: String,context: Context,url: String){
+        val authorizationCode = ""
         if (usesIDP) {
             Log.d("USE_IDP", "use idp: $usesIDP")
-            startIDPoauth2(context)
+            startIDPoauth2(context,url)
         }
 
         GlobalScope.launch {
@@ -77,8 +78,8 @@ class CommunityPreviewView @Inject constructor(
         }
     }
 
-    fun startIDPoauth2(context: Context) {
-        val auth = IDPAuthenticator(context)
+    fun startIDPoauth2(context: Context,url: String) {
+        val auth = IDPAuthenticator(context,url)
         val apiService = auth.createApiService()
         auth.associateWithIDP(apiService, context)
     }

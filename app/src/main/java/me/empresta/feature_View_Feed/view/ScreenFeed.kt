@@ -1,7 +1,13 @@
 package me.empresta.feature_View_Feed.view
 
-import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,6 +21,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Home
@@ -23,6 +30,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,14 +51,14 @@ import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
-import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
 import me.empresta.Navigation.EmprestameScreen
-import me.empresta.feature_QRCode_Connection.view.DisplayQRCodeView
 
 
 @Composable
@@ -62,6 +70,15 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+
+    val showDialog =  remember { mutableStateOf(false) }
+    if(showDialog.value){
+        CustomDialog(value = "", setShowDialog = {
+            showDialog.value = it
+        }) {
+
+        }
+    }
 
     var thislending = remember { mutableStateOf(ItemAnnouncement("","","")) }
     val showLending =  remember { mutableStateOf(false) }
@@ -152,6 +169,17 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                 },
             )
         },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {showDialog.value = true},
+                backgroundColor = BrightOrange,
+                contentColor = Black){
+
+                Icon(Icons.Filled.Add, "")
+            }
+        },
+        floatingActionButtonPosition = FabPosition.Center,
+        isFloatingActionButtonDocked = true,
         bottomBar = {
             BottomBar(
             items = listOf(
@@ -501,10 +529,12 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
             Box(
                 contentAlignment = Alignment.Center,
             ) {
-                Column(modifier = Modifier
-                    .padding(20.dp)
-                    .size(600.dp)
-                    .scrollable(rememberScrollState(), Orientation.Vertical)) {
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .size(600.dp)
+                        .scrollable(rememberScrollState(), Orientation.Vertical)
+                ) {
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -542,7 +572,10 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                     }
 
                     Spacer(modifier = Modifier.height(20.dp))
-                    Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         Icon(
                             imageVector = Icons.Default.Person,
                             contentDescription = "Avatar",
@@ -552,7 +585,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text="Peterson")
+                            Text(text = "Peterson")
                         }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
@@ -582,8 +615,160 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
     }
 }
 
-fun startIDPoauth2(context: Context) {
-    val auth = IDPAuthenticator(context)
-    val apiService = auth.createApiService()
-    auth.associateWithIDP(apiService, context)
+@Composable
+fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (String) -> Unit) {
+    var imageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    val bitmap =  remember {
+        mutableStateOf<Bitmap?>(null)
+    }
+
+    val launcher = rememberLauncherForActivityResult(contract =
+    ActivityResultContracts.GetContent()) { uri: Uri? ->
+        imageUri = uri
+    }
+    val txtFieldError = remember { mutableStateOf("") }
+    val txtField = remember { mutableStateOf(value) }
+    val passwordVisible = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    Dialog(onDismissRequest = { setShowDialog(false) }) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+        ) {
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Column(modifier = Modifier
+                    .padding(20.dp)
+                    .size(600.dp)
+                    .scrollable(rememberScrollState(), Orientation.Vertical)) {
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Create your Post",
+                            style = MaterialTheme.typography.h5,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Icon(
+                            imageVector = Icons.Filled.Cancel,
+                            contentDescription = "",
+                            tint = colorResource(R.color.darker_gray),
+                            modifier = Modifier
+                                .width(30.dp)
+                                .height(30.dp)
+                                .clickable { setShowDialog(false) }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.size(10.dp))
+
+                    Row() {
+                        Button(onClick = { /*TODO*/ }) {
+                            Text(text = "I need a ...")
+                        }
+                        Spacer(modifier = Modifier.size(10.dp))
+                        Button(onClick = { /*TODO*/ }) {
+                            Text(text = "I have a ...")
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    TextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                        ,
+                        placeholder = { Text(text = "Title") },
+                        value = txtField.value,
+                        onValueChange = {
+                            txtField.value = it.take(200)
+                        },
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(120.dp),
+                        shape = RoundedCornerShape(5.dp),
+                        value = txtField.value,
+                        placeholder = { Text(text = "Description") },
+
+                        onValueChange = { txtField.value = it },
+                        maxLines = 3,
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                        Button(
+                            onClick = {
+                                launcher.launch("image/*")
+                            },
+                            shape = RoundedCornerShape(50.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                        ) {
+                            Text(text = "Select an Image")
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.size(17.dp))
+
+                    bitmap.value?.let {  btm ->
+                        Row(horizontalArrangement = Arrangement.Center){
+                            Image(bitmap = btm.asImageBitmap(),
+                                contentDescription =null,
+                                modifier = Modifier.size(30.dp))
+                        }
+                    }
+
+                    imageUri?.let {
+                        if (Build.VERSION.SDK_INT < 28) {
+                            bitmap.value = MediaStore.Images
+                                .Media.getBitmap(context.contentResolver,it)
+
+                        } else {
+                            val source = ImageDecoder
+                                .createSource(context.contentResolver,it)
+                            bitmap.value = ImageDecoder.decodeBitmap(source)
+                        }
+
+
+                    }
+
+
+
+                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                        Button(
+                            onClick = {
+                                if (txtField.value.isEmpty()) {
+                                    txtFieldError.value = "Field can not be empty"
+                                    return@Button
+                                }
+                                setValue(txtField.value)
+                                setShowDialog(false)
+
+                            },
+                            shape = RoundedCornerShape(50.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(50.dp)
+                        ) {
+                            Text(text = "Submit")
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
