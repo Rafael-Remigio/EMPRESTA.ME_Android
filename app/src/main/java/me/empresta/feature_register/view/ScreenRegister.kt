@@ -137,22 +137,6 @@ fun ScreenRegister(
                 modifier=Modifier.width(200.dp).height(60.dp),
                 shape = RoundedCornerShape(15)
             )
-
-        Box(modifier = Modifier.padding(10.dp))
-
-        Row(horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(modifier = Modifier
-                .width(100.dp)
-                .height(1.dp)
-                .background(color = Grey))
-
-            Box(modifier = Modifier
-                .width(100.dp)
-                .height(1.dp)
-                .background(color = Grey))
-        }
     }
     }
 }
