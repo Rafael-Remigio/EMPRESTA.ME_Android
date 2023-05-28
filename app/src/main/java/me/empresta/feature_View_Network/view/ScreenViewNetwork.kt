@@ -72,10 +72,10 @@ fun ScreenDisplayNetwork(navController: NavController,viewModel: NetworkView = h
                                 webViewClient = WebViewClient()
                                 settings.javaScriptEnabled = true
 
-                                loadUrl(viewModel.get().url + "topology?observer=" + viewModel.getAccount().publicKey)
+                                loadUrl(viewModel.get().url + "network/diagram?observer=" + viewModel.getAccount().publicKey)
                             }
                         }, update = {
-                            it.loadUrl(viewModel.get().url + "topology?observer=" + viewModel.getAccount().publicKey)
+                            it.loadUrl(viewModel.get().url + "network/diagram?observer=" + viewModel.getAccount().publicKey)
                         })
 
                     }

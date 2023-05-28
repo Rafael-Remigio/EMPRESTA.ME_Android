@@ -18,6 +18,7 @@ import me.empresta.DAO.VouchDAO
 import me.empresta.DAO.Vouch
 import me.empresta.RemoteAPI.CommunityAPI
 import me.empresta.RemoteAPI.DTO.RegisterBody
+import me.empresta.RemoteAPI.DTO.VouchBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import javax.inject.Inject
@@ -46,6 +47,10 @@ class Repository @Inject constructor
 
     suspend fun postRegister(url: String,body: RegisterBody): ResponseBody {
         return communityAPI.postRegister(url +  "acc/register",body)
+    }
+
+    suspend fun postVouch(url: String,body: VouchBody): ResponseBody {
+        return communityAPI.postVouch(url +  "vouch",body)
     }
 
     suspend fun getContact(url: String,body: RegisterBody): ResponseBody {

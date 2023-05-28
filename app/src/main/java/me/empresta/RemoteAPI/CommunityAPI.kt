@@ -1,6 +1,7 @@
 package me.empresta.RemoteAPI
 
 import me.empresta.RemoteAPI.DTO.RegisterBody
+import me.empresta.RemoteAPI.DTO.VouchBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -27,5 +28,8 @@ interface CommunityAPI {
 
     @POST()
     suspend fun postRegister(@Url url: String, @Body body: RegisterBody): ResponseBody
+
+    @POST()
+    suspend fun postVouch(@Url url: String, @Body body: VouchBody): ResponseBody
 
 }

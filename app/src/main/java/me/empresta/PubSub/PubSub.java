@@ -101,6 +101,7 @@ public class PubSub{
                             finally {
                                 System.out.println(" [x] Done");
                                 GetResponse gr = channel.basicGet(EXCHANGE_NAME, false);
+                                System.out.println("\n\n\n Delivery Tag: " + gr.getEnvelope().getDeliveryTag() + "\n\n\n");
                                 channel.basicNack(gr.getEnvelope().getDeliveryTag(), false, true);
                                 //channel.basicNack(delivery.getEnvelope().getDeliveryTag(), false);
                             }

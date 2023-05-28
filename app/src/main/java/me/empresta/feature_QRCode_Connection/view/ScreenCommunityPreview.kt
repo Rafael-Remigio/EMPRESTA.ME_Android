@@ -122,14 +122,9 @@ fun ScreenCommunityPreview(
                 Button(
                     onClick = {
 
-                        if (usesIDP) {
-                            viewModel.connectWithCommunity("", context = context, url =code )
 
-                        }
-                        else {
                             showDialog.value = true
 
-                        }
                               },
                     content = {
                         Text(

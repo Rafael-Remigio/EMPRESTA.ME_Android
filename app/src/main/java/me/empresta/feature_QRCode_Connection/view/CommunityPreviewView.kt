@@ -44,10 +44,10 @@ class CommunityPreviewView @Inject constructor(
 
     fun connectWithCommunity(password: String,context: Context,url: String){
         val authorizationCode = ""
-        if (usesIDP) {
+        /*if (usesIDP) {
             Log.d("USE_IDP", "use idp: $usesIDP")
             startIDPoauth2(context,url)
-        }
+        }*/
 
         GlobalScope.launch {
             print(_state)
@@ -58,18 +58,18 @@ class CommunityPreviewView @Inject constructor(
             Log.d("USE_IDP", "use idp: $usesIDP")
             if (!_state.value.title?.let {
                     _state.value.public_key?.let { it1 ->
-                        if (usesIDP) {
+                       /* if (usesIDP) {
                             Log.d("USE_IDP", "use idp: $usesIDP")
                             connectToCommunity_useCase.associateWithIDP(
                                 it, it1, context = context
                             )
                         }
-                        else{
+                        else{*/
                             Log.d("USE_IDP", "use idp: $usesIDP")
                             connectToCommunity_useCase.associate(password,
                                 it, it1
                             )
-                        }
+                        //}
                     }
                 }!!){
                 /*TODO*/

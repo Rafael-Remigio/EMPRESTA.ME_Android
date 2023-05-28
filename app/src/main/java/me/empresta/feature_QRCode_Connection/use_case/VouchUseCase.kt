@@ -8,7 +8,7 @@ import me.empresta.Crypto.Utils
 import me.empresta.DAO.Friend
 import me.empresta.DI.Repository
 import me.empresta.PubSub.PubSub
-import org.web3j.utils.Async
+import me.empresta.RemoteAPI.DTO.VouchBody
 import java.security.interfaces.ECPublicKey
 import javax.inject.Inject
 
@@ -29,6 +29,18 @@ class VouchUseCase @Inject constructor(private val repository: Repository,privat
 
                     // Publish Vouch Message in my exchange
                     PubSub.Publish_Vouch(community.url.substring(7,community.url.length - 6), mykeyBase58,pubkey,"my communities", communities,description,value)
+
+                    var otherComs = ""
+
+                    for (map in communities) {
+                        val url = map["url"] as String
+                        otherComs += url.substring(7, url.length - 6) + " "
+                    }
+
+                    val vouch = VouchBody("VOUCH","clock","hash","nonce","signature",mykeyBase58,pubkey,"my communities",otherComs,value,description)
+
+                    repository.postVouch(community.url,vouch);
+
 
                     var communityUrl = "";
 
