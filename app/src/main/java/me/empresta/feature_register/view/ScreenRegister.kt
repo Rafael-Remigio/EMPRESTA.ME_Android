@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -17,7 +18,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import me.empresta.*
 import me.empresta.Navigation.EmprestameScreen
 
-
 @Composable
 fun ScreenRegister(
     navController: NavController,
@@ -25,7 +25,7 @@ fun ScreenRegister(
 ){
 
 
-
+    val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
@@ -137,46 +137,6 @@ fun ScreenRegister(
                 modifier=Modifier.width(200.dp).height(60.dp),
                 shape = RoundedCornerShape(15)
             )
-
-        Box(modifier = Modifier.padding(10.dp))
-
-        Row(horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(modifier = Modifier
-                .width(100.dp)
-                .height(1.dp)
-                .background(color = Grey))
-
-            Text(
-                modifier = Modifier.padding(6.dp),
-                text = "Not my first Rodeo!",
-                fontSize = 15.sp,
-                color = Grey,
-            )
-
-            Box(modifier = Modifier
-                .width(100.dp)
-                .height(1.dp)
-                .background(color = Grey))
-        }
-
-        Box(modifier = Modifier.padding(10.dp))
-
-
-        Button(onClick = { navController.navigate(EmprestameScreen.Feed.name) },
-            content = {Text(text = "Load my Data", color = White, fontWeight = FontWeight.Bold, fontSize = 15.sp)},
-            colors = ButtonDefaults.buttonColors(backgroundColor = BrightOrange) ,
-            modifier=Modifier.width(200.dp).height(60.dp),
-            shape = RoundedCornerShape(15)
-
-            )
-
     }
-
-
-
     }
-
-
 }

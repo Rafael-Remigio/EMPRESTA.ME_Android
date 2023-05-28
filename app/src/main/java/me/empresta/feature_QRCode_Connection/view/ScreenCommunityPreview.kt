@@ -48,7 +48,7 @@ fun ScreenCommunityPreview(
 ){
 
     val context = LocalContext.current
-    viewModel.getInfo(code)
+    viewModel.getInfo(code, usesIDP)
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val showDialog =  remember { mutableStateOf(false) }
@@ -57,7 +57,7 @@ fun ScreenCommunityPreview(
         CustomDialog(value = "", setShowDialog = {
             showDialog.value = it
         }){
-            viewModel.connectWithCommunity(it)
+            viewModel.connectWithCommunity(it, context = context,code)
         }
     }
 
@@ -122,7 +122,14 @@ fun ScreenCommunityPreview(
                 Button(
                     onClick = {
 
-                        showDialog.value = true
+                        if (usesIDP) {
+                            viewModel.connectWithCommunity("", context = context, url =code )
+
+                        }
+                        else {
+                            showDialog.value = true
+
+                        }
                               },
                     content = {
                         Text(

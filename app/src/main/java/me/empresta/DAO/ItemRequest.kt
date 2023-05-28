@@ -9,6 +9,7 @@ data class ItemRequest(
     val name: String,
     val description: String = ""
 ) {
+
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
     override fun equals(other: Any?): Boolean {

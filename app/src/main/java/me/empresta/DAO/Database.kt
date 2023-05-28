@@ -22,5 +22,4 @@ abstract class Database: RoomDatabase() {
     abstract val InfoRequestDAO: InfoRequestDAO
 
     abstract val FriendDAO: FriendDAO
-
 }

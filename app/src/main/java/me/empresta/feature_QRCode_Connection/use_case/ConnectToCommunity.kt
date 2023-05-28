@@ -1,5 +1,6 @@
 package me.empresta.feature_QRCode_Connection.use_case
 
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
@@ -15,6 +16,7 @@ import me.empresta.PubSub.PubSub
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.RemoteAPI.DTO.CommunityResponse
 import me.empresta.RemoteAPI.DTO.RegisterBody
+import me.empresta.feature_QRCode_Connection.use_case.IDP.IDPAuthenticator
 import retrofit2.HttpException
 import java.security.SecureRandom
 import java.security.interfaces.ECPublicKey
@@ -52,13 +54,10 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
 
     }
 
-
     suspend fun associate(password: String,communityName:String,pubKey: String): Boolean{
 
         var response =   repository.postAssociate(this.url,password)
         token =  response.string()
-
-
 
         val keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey?))
         val keyBase58 = Base58.encode(keybytes)
@@ -102,10 +101,14 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         }
     }
 
-    fun associateWithIDP(password: String,communityName:String,pubKey: String): Boolean{
+    suspend fun associateWithIDP(authorizationCode : String,pubKey: String,context: Context): Boolean{
+        // var response =   repository.postAssociate(this.url, authorizationCode)
 
         return true
     }
+
+    // Starting the IDP oauth2 flow
+
 
     private fun generateChallenge(): String{
         val random = SecureRandom()
@@ -121,6 +124,4 @@ class ConnectToCommunity @Inject constructor(private val repository: Repository,
         val challengeBytes = Base58.decode(challenge)
         return Utils.verifySignature(pubKey,challengeBytes,responseBytes)
     }
-
-
 }

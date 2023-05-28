@@ -1,6 +1,5 @@
-package me.empresta.feature_View_Feed.view
+package me.empresta.feature_QRCode_Connection.use_case.IDP
 
-import OAuthHttpServer
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -40,7 +39,7 @@ interface ApiService {
 
 }
 
-class IDPAuthenticator(private val context: Context) {
+class IDPAuthenticator(private val context: Context , private val url: String) {
     val UA_OAUTH_AUTH_URI = "https://wso2-gw.ua.pt/authorize?"
     val UA_OAUTH_REDIRECT_URI = "http://localhost:3000"
     val UA_OAUTH_SCOPE = "openid"
@@ -74,16 +73,16 @@ class IDPAuthenticator(private val context: Context) {
         var authorizationCode: String? = null
 
         // Start the HTTP server
-        val server = OAuthHttpServer()
+        val server = OAuthHttpServer(url)
 
         server.start()
+
+        Log.d("LOADURL", "Load url to webview ${uaAuthUriComplete.toString()}")
 
         // Load the authorization URL in the WebView
         webView.loadUrl(uaAuthUriComplete.toString())
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uaAuthUriComplete.toString()))
         context.startActivity(intent)
-
-        Log.d("LOADURL", "Load url to webview")
 
         // Start the HTTP server to receive the authorization code
         server.openServer()
@@ -92,6 +91,7 @@ class IDPAuthenticator(private val context: Context) {
         authorizationCode = server.getReceivedCode()
         print("AUTHORIZATION CODE: $authorizationCode")
         Log.d("AUTHORIZATION CODE", "AUTHORIZATION CODE: $authorizationCode")
+
     }
 
     // Function to perform the exchangeCodeForToken request
