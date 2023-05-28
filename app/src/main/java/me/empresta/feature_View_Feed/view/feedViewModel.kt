@@ -1,5 +1,6 @@
 package me.empresta.feature_View_Feed.view
 
+import android.app.ActivityManager.TaskDescription
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,10 +9,12 @@ import kotlinx.coroutines.launch
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
+import me.empresta.PubSub.PubSub
 import javax.inject.Inject
 @HiltViewModel
 class feedViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,    private val pubSub: PubSub
+
 ) : ViewModel()
 {
     var itemRequests: List<ItemRequest>? = null
@@ -86,6 +89,23 @@ class feedViewModel @Inject constructor(
 
     }
 
+    fun post_Lending (title: String,description: String,type:String) : Boolean{
+
+
+        GlobalScope.launch {
+
+            var com : String =  repository.getCommunities()[0].url;
+
+            if(type == "NEED"){
+                PubSub.Publish_Item_Request(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description)
+            }else{
+                PubSub.Publish_Item_Announcement_Update(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description, "category")
+            }
+        }
+
+        return true
+    }
+
     fun get_ItemRequests(): List<ItemRequest>? {
         return itemRequests
     }
@@ -94,27 +114,5 @@ class feedViewModel @Inject constructor(
         return itemAnnouncenents
     }
 
-    /*
-    @OptIn(DelicateCoroutinesApi::class)
-    operator fun invoke(): List {
 
-        try {
-            // on below line we are
-            // initializing our bitmap
-            val writer = MultiFormatWriter()
-            GlobalScope.launch{
-                val it : Account
-                        = itemAnnouncementsFlow.toList().flatten()
-            }
-
-            return
-
-        } catch (e: Exception) {
-            // on below line we
-            // are handling exception
-            e.printStackTrace()
-        }
-        return Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888)
-    }
-    */
 }

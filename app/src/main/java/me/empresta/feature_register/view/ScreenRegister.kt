@@ -1,5 +1,6 @@
 package me.empresta.feature_register.view
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,6 +25,8 @@ fun ScreenRegister(
     viewModel: RegisterViewModel = hiltViewModel()
 ){
 
+    viewModel.alreadyRegistered()
+
 
     val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
@@ -32,6 +35,20 @@ fun ScreenRegister(
     var nickName by remember { mutableStateOf(TextFieldValue("")) }
     var contact by remember { mutableStateOf(TextFieldValue("")) }
     var description by remember { mutableStateOf(TextFieldValue("")) }
+
+    LaunchedEffect(Unit) {
+        viewModel
+            .toastMessage
+            .collect { message ->
+                Toast.makeText(
+                    context,
+                    message,
+                    Toast.LENGTH_SHORT,
+                )
+
+                navController.navigate(EmprestameScreen.Feed.name)
+            }
+    }
 
     Scaffold(
         scaffoldState = scaffoldState

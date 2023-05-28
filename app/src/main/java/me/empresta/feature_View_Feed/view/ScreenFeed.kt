@@ -1,11 +1,9 @@
 package me.empresta.feature_View_Feed.view
 
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -75,9 +73,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
     if(showDialog.value){
         CustomDialog(value = "", setShowDialog = {
             showDialog.value = it
-        }) {
-
-        }
+        },viewModel)
     }
 
     var thislending = remember { mutableStateOf(ItemAnnouncement("","","")) }
@@ -616,7 +612,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
 }
 
 @Composable
-fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (String) -> Unit) {
+fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedViewModel) {
     var imageUri by remember {
         mutableStateOf<Uri?>(null)
     }
@@ -631,8 +627,13 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (Str
     }
     val txtFieldError = remember { mutableStateOf("") }
     val txtField = remember { mutableStateOf(value) }
-    val passwordVisible = remember { mutableStateOf(false) }
+    val txtFieldDescriptor = remember { mutableStateOf(value) }
+
     val context = LocalContext.current
+
+    var type : String = "HAVE"
+    var colorHave = Color.Black
+    var colorNeed = Color.Gray
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
             shape = RoundedCornerShape(16.dp),
@@ -670,11 +671,22 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (Str
                     Spacer(modifier = Modifier.size(10.dp))
 
                     Row() {
-                        Button(onClick = { /*TODO*/ }) {
+                        Button(onClick = {
+                            type= "NEED"
+                            colorNeed = BrightOrange
+                            colorHave = Color.Black
+                        }
+                        , colors = ButtonDefaults.buttonColors(backgroundColor = colorNeed),
+                        ) {
                             Text(text = "I need a ...")
                         }
                         Spacer(modifier = Modifier.size(10.dp))
-                        Button(onClick = { /*TODO*/ }) {
+                        Button(onClick = {
+                            type = "HAVE"
+                            colorHave = BrightOrange
+                            colorNeed = Color.Black
+
+                        },colors = ButtonDefaults.buttonColors(backgroundColor = colorHave)) {
                             Text(text = "I have a ...")
                         }
                     }
@@ -699,52 +711,21 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (Str
                             .fillMaxWidth()
                             .height(120.dp),
                         shape = RoundedCornerShape(5.dp),
-                        value = txtField.value,
+                        value = txtFieldDescriptor.value,
                         placeholder = { Text(text = "Description") },
 
-                        onValueChange = { txtField.value = it },
+                        onValueChange = { txtFieldDescriptor.value = it },
                         maxLines = 3,
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                        Button(
-                            onClick = {
-                                launcher.launch("image/*")
-                            },
-                            shape = RoundedCornerShape(50.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp)
-                        ) {
-                            Text(text = "Select an Image")
-                        }
-                    }
+
 
                     Spacer(modifier = Modifier.size(17.dp))
 
-                    bitmap.value?.let {  btm ->
-                        Row(horizontalArrangement = Arrangement.Center){
-                            Image(bitmap = btm.asImageBitmap(),
-                                contentDescription =null,
-                                modifier = Modifier.size(30.dp))
-                        }
-                    }
-
-                    imageUri?.let {
-                        if (Build.VERSION.SDK_INT < 28) {
-                            bitmap.value = MediaStore.Images
-                                .Media.getBitmap(context.contentResolver,it)
-
-                        } else {
-                            val source = ImageDecoder
-                                .createSource(context.contentResolver,it)
-                            bitmap.value = ImageDecoder.decodeBitmap(source)
-                        }
 
 
-                    }
 
 
 
@@ -753,9 +734,11 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, setValue: (Str
                             onClick = {
                                 if (txtField.value.isEmpty()) {
                                     txtFieldError.value = "Field can not be empty"
+                                    Toast.makeText(context,"Title tield can not be empty", Toast.LENGTH_LONG,
+                                    ).show()
                                     return@Button
                                 }
-                                setValue(txtField.value)
+                                view.post_Lending(txtField.value,txtFieldDescriptor.value,type)
                                 setShowDialog(false)
 
                             },

@@ -171,7 +171,7 @@ public class PubSub{
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    //System.out.println(" [x] Sent '" +  j_message.toString() + "'");
+                    System.out.println(" [x] Sent '" +  j_message.toString() + "'");
 
                     channel.close();
                     connection.close();
@@ -194,6 +194,9 @@ public class PubSub{
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
+
+                    System.out.println("\n\n\n"+host+"\n\n\n");
+                    System.out.println("\n\n\n"+my_public_key+"\n\n\n");
 
                     factory.setHost(host);
                     Connection connection = factory.newConnection();
@@ -218,7 +221,7 @@ public class PubSub{
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    //System.out.println(" [x] Sent '" +  j_message.toString() + "'");
+                    System.out.println(" [x] Sent '" +  j_message.toString() + "'");
 
                     channel.close();
                     connection.close();
@@ -242,7 +245,7 @@ public class PubSub{
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host+":5672");
+                    factory.setHost(host);
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
