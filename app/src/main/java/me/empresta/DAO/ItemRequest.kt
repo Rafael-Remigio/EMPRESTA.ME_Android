@@ -5,13 +5,13 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ItemRequest(
+    @PrimaryKey
+    var id: Int,
     val user: String,
     val name: String,
     val description: String = ""
 ) {
 
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

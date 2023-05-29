@@ -221,14 +221,16 @@ public class PubSub{
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    System.out.println(" [x] Sent '" +  j_message.toString() + "'");
+                    System.out.println(" [x] Sent '" +  j_message+ "'");
 
                     channel.close();
                     connection.close();
 
                 } catch (IOException | TimeoutException e) {
+                    System.out.println(e);
                     throw new RuntimeException("Rabbitmq problem", e);
                 } catch (JSONException e) {
+                    System.out.println(e);
                     throw new RuntimeException(e);
                 }
             }
@@ -273,8 +275,10 @@ public class PubSub{
                     connection.close();
 
                 } catch (IOException | TimeoutException e) {
+                    System.out.println(e);
                     throw new RuntimeException("Rabbitmq problem", e);
                 } catch (JSONException e) {
+                    System.out.println(e);
                     throw new RuntimeException(e);
                 }
             }

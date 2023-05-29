@@ -76,10 +76,10 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         },viewModel)
     }
 
-    var thislending = remember { mutableStateOf(ItemAnnouncement("","","")) }
+    var thislending = remember { mutableStateOf(ItemAnnouncement(0,"","")) }
     val showLending =  remember { mutableStateOf(false) }
 
-    var thisRequesting = remember { mutableStateOf(ItemRequest("","","")) }
+    var thisRequesting = remember { mutableStateOf(ItemRequest(0,"","")) }
     val showRequesting =  remember { mutableStateOf(false) }
 
     val imageRequestModifier: (ItemRequest) -> Modifier = { item ->
@@ -288,44 +288,46 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     .padding(start = 16.dp, end = 16.dp)
                     .fillMaxWidth()
             ) {
-                items(4) { item ->
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(horizontal = 4.dp)
-                    ) {
-                        availableItemsToBorrow?.get(item)
-                            ?.let { imageAnnouncementModifier(it) }?.let {
-                                Image(
-                                    painter = rememberImagePainter(availableItemsToBorrow?.get(item)?.image),
-                                    contentDescription = availableItemsToBorrow?.get(item)?.name,
-                                    modifier = it
-                                )
-                            }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                if (availableItemsToBorrow != null) {
+                    items(availableItemsToBorrow.size) { item ->
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.padding(horizontal = 4.dp)
                         ) {
-                            availableItemsToBorrow?.get(item)?.let {
-                                Text(
-                                    text = it.name,
-                                    style = MaterialTheme.typography.body2.copy(
-                                        fontWeight = FontWeight.Thin,
-                                        color = Color.White
-                                    ),
-                                    modifier = Modifier.padding(horizontal = 16.dp),
-                                    textAlign = TextAlign.Start
-                                )
-                            }
-                            availableItemsToBorrow?.get(item)?.let {
-                                Text(
-                                    text = it.user,
-                                    style = MaterialTheme.typography.body2.copy(
-                                        fontWeight = FontWeight.Thin,
-                                        color = Color.White
-                                    ),
-                                    modifier = Modifier.padding(horizontal = 16.dp),
-                                    textAlign = TextAlign.Start
-                                )
+                            availableItemsToBorrow?.get(item)
+                                ?.let { imageAnnouncementModifier(it) }?.let {
+                                    Image(
+                                        painter = rememberImagePainter(availableItemsToBorrow?.get(item)?.image),
+                                        contentDescription = availableItemsToBorrow?.get(item)?.name,
+                                        modifier = it
+                                    )
+                                }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                availableItemsToBorrow?.get(item)?.let {
+                                    Text(
+                                        text = it.name,
+                                        style = MaterialTheme.typography.body2.copy(
+                                            fontWeight = FontWeight.Thin,
+                                            color = Color.White
+                                        ),
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        textAlign = TextAlign.Start
+                                    )
+                                }
+                                availableItemsToBorrow?.get(item)?.let {
+                                    Text(
+                                        text = it.user,
+                                        style = MaterialTheme.typography.body2.copy(
+                                            fontWeight = FontWeight.Thin,
+                                            color = Color.White
+                                        ),
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        textAlign = TextAlign.Start
+                                    )
+                                }
                             }
                         }
                     }
@@ -363,44 +365,46 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     .width(205.dp)
                     .height(149.dp)
                     .clip(RoundedCornerShape(20.dp))
-                items(1) { item ->
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(horizontal = 4.dp)
-                    ) {
-                        availableItemsToLend?.get(item)
-                            ?.let { imageRequestModifier(it) }?.let {
-                                Image(
-                                    painter = rememberImagePainter("https://s.aolcdn.com/hss/storage/midas/1b8e6c255e1632157aaaf5bd05d9c8/205127975/06-blender-2000.jpg"),
-                                    contentDescription = availableItemsToLend?.get(item)?.name,
-                                    modifier = it
-                                )
-                            }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                if (availableItemsToLend != null) {
+                    items(availableItemsToLend.size) { item ->
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.padding(horizontal = 4.dp)
                         ) {
-                            availableItemsToLend?.get(item)?.let {
-                                Text(
-                                    text = it.name,
-                                    style = MaterialTheme.typography.body2.copy(
-                                        fontWeight = FontWeight.Light,
-                                        color = Color.White
-                                    ),
-                                    modifier = Modifier.padding(horizontal = 16.dp),
-                                    textAlign = TextAlign.Start
-                                )
-                            }
-                            availableItemsToLend?.get(item)?.let {
-                                Text(
-                                    text = it.user,
-                                    style = MaterialTheme.typography.body2.copy(
-                                        fontWeight = FontWeight.ExtraLight,
-                                        color = Color.White
-                                    ),
-                                    modifier = Modifier.padding(horizontal = 16.dp),
-                                    textAlign = TextAlign.End
-                                )
+                            availableItemsToLend?.get(item)
+                                ?.let { imageRequestModifier(it) }?.let {
+                                    Image(
+                                        painter = rememberImagePainter("https://s.aolcdn.com/hss/storage/midas/1b8e6c255e1632157aaaf5bd05d9c8/205127975/06-blender-2000.jpg"),
+                                        contentDescription = availableItemsToLend?.get(item)?.name,
+                                        modifier = it
+                                    )
+                                }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                availableItemsToLend?.get(item)?.let {
+                                    Text(
+                                        text = it.name,
+                                        style = MaterialTheme.typography.body2.copy(
+                                            fontWeight = FontWeight.Light,
+                                            color = Color.White
+                                        ),
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        textAlign = TextAlign.Start
+                                    )
+                                }
+                                availableItemsToLend?.get(item)?.let {
+                                    Text(
+                                        text = it.user,
+                                        style = MaterialTheme.typography.body2.copy(
+                                            fontWeight = FontWeight.ExtraLight,
+                                            color = Color.White
+                                        ),
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        textAlign = TextAlign.End
+                                    )
+                                }
                             }
                         }
                     }
