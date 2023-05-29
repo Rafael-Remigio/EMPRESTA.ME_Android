@@ -62,6 +62,8 @@ import me.empresta.Navigation.EmprestameScreen
 @Composable
 fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltViewModel()) {
 
+    viewModel.startListining()
+
     viewModel.getData()
 
     // Create a mutable state variable to track if the popup is shown

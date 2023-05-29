@@ -1,6 +1,7 @@
 package me.empresta.PubSub;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -49,19 +50,23 @@ public class Message_Handler {
 
         switch (header) {
             case "VOUCH":
+                Log.d("DEBUG","Received Vouch");
                 Handle_Vouch(Vouch_Message.fromJson(message), exchange);
                 break;
             case "ITEM_ANNOUNCEMENT":
+                Log.d("DEBUG","Received ITEM_ANNOUNCEMENT");
                 Handle_Item_Announcement(Item_Announcement_Message.fromJson(message), exchange);
                 break;
             case "ITEM_REQUEST":
+                Log.d("DEBUG","Received ITEM_REQUEST");
                 Handle_Item_Request(Item_Request_Message.fromJson(message), exchange);
                 break;
             case "ASK_INFO":
                 Handle_Ask_Info(Ask_Info_Message.fromJson(message),exchange);
                 break;
             default:
-                System.out.println("Header is not VOUCH, ITEM_ANNOUNCEMENT, ITEM_REQUEST, or ASK_INFO");
+                Log.d("DEBUG","Header is not VOUCH, ITEM_ANNOUNCEMENT, ITEM_REQUEST, or ASK_INFO");
+                //System.out.println("Header is not VOUCH, ITEM_ANNOUNCEMENT, ITEM_REQUEST, or ASK_INFO");
                 break;
         }
 

@@ -1,6 +1,8 @@
 package me.empresta.PubSub;
 
 
+import android.util.Log;
+
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -48,48 +50,29 @@ public class PubSub{
             public void run() {
 
                     try {
-                        System.out.println("\n\n" + host + "\n\n");
+                        //System.out.println("\n\n" + host + "\n\n");
+
+                        Log.d("DEBUG"," [x] HOST '" +  host+ "'");
+                        Log.d("DEBUG"," [x]EXCHANGE_NAME '" +  EXCHANGE_NAME+ "'");
+
                         ConnectionFactory factory = new ConnectionFactory();
                         factory.setHost(host);
                         Connection connection = factory.newConnection();
                         Channel channel = connection.createChannel();
-                        //channel.basicQos(1);
 
                         System.out.println("Waiting CTRL+C");
 
-                        //channel.queueDeclare(queue, false, false, false, null);
-
-                        // Declare the exchange
-                        //channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
-
-                        // Declare a queue and bind it to the exchange
-                        //String queueName = channel.queueDeclare().getQueue();
                         channel.queueDeclare(EXCHANGE_NAME, true, false, false, null);
 
-                        //channel.queueBind(EXCHANGE_NAME, EXCHANGE_NAME, "");
+                        Log.d("DEBUG"," Waiting for messages. To exit press CTRL+C");
 
-                        System.out.println("Waiting for messages. To exit press CTRL+C");
-
-                        // Create a consumer and start consuming messages
-                        /*Consumer consumer = new DefaultConsumer(channel) {
-                            @Override
-                            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                                String message = new String(body, StandardCharsets.UTF_8);
-                                try {
-                                    message_handler.Handle(message, EXCHANGE_NAME);
-                                } catch (Exception e) {
-                                    throw new RuntimeException(e);
-                                }
-                                channel.basicAck(envelope.getDeliveryTag(), false);
-                            }
-                        };*/
-
-                        channel.basicQos(1); // accept only one unack-ed message at a time (see below)
 
                         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                             String message = new String(delivery.getBody(), "UTF-8");
 
-                            System.out.println(" [x] Received '" + message + "'");
+
+                            Log.d("DEBUG"," [x] Received '" + message + "'");
+
                             try {
                                 message_handler.Handle(message, EXCHANGE_NAME);
                             }
@@ -99,11 +82,11 @@ public class PubSub{
 
                             }
                             finally {
-                                System.out.println(" [x] Done");
+                                Log.d("DEBUG"," [x] Done");
+
                                 GetResponse gr = channel.basicGet(EXCHANGE_NAME, false);
-                                System.out.println("\n\n\n Delivery Tag: " + gr.getEnvelope().getDeliveryTag() + "\n\n\n");
-                                channel.basicNack(gr.getEnvelope().getDeliveryTag(), false, true);
-                                //channel.basicNack(delivery.getEnvelope().getDeliveryTag(), false);
+                                Log.d("DEBUG","Delivery Tag: " + gr.getEnvelope().getDeliveryTag() );
+                                channel.basicNack(gr.getEnvelope().getDeliveryTag(), false, true); 
                             }
                         };
                         boolean autoAck = false;
@@ -195,8 +178,12 @@ public class PubSub{
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    System.out.println("\n\n\n"+host+"\n\n\n");
-                    System.out.println("\n\n\n"+my_public_key+"\n\n\n");
+                    //System.out.println("\n\n\n"+host+"\n\n\n");
+                    //System.out.println("\n\n\n"+my_public_key+"\n\n\n");
+                    Log.d("DEBUG"," [x] HOST '" +  host+ "'");
+                    Log.d("DEBUG"," [x]my_public_key '" +  my_public_key+ "'");
+
+
 
                     factory.setHost(host);
                     Connection connection = factory.newConnection();
@@ -217,12 +204,14 @@ public class PubSub{
                     j_message.put("name", Name);
                     j_message.put("description", Description);
                     j_message.put("image", Photo);
+                    //System.out.println(" [x] Almost Sent '" +  j_message+ "'");
 
+                    Log.d("DEBUG"," [x] Almost Sent '" +  j_message+ "'");
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    System.out.println(" [x] Sent '" +  j_message+ "'");
-
+                    //System.out.println(" [x] Sent '" +  j_message+ "'");
+                    Log.d("DEBUG","[x] Sent '" +  j_message+ "'");
                     channel.close();
                     connection.close();
 
@@ -246,6 +235,11 @@ public class PubSub{
             public void run() {
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
+                    //System.out.println("\n\n\n"+host+"\n\n\n");
+                    //System.out.println("\n\n\n"+my_public_key+"\n\n\n");
+                    Log.d("DEBUG"," [x] HOST '" +  host+ "'");
+                    Log.d("DEBUG"," [x]my_public_key '" +  my_public_key+ "'");
+
 
                     factory.setHost(host);
                     Connection connection = factory.newConnection();
@@ -265,12 +259,15 @@ public class PubSub{
                     j_message.put("sender", my_public_key);
                     j_message.put("name", Name);
                     j_message.put("description", Description);
+                    Log.d("DEBUG"," [x] Almost Sent '" +  j_message+ "'");
 
+                    //System.out.println(" [x] Almost Sent '" +  j_message+ "'");
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    System.out.println(" [x] Sent '" +  j_message + "'");
+                    //System.out.println(" [x] Sent '" +  j_message + "'");
 
+                    Log.d("DEBUG","[x] Sent '" +  j_message+ "'");
                     channel.close();
                     connection.close();
 

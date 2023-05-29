@@ -20,6 +20,18 @@ class feedViewModel @Inject constructor(
     var itemRequests: List<ItemRequest>? = null
     var itemAnnouncenents: List<ItemAnnouncement>? = null
 
+
+
+    var threads : ArrayList<Thread> = ArrayList<Thread>()
+    fun startListining(){
+        GlobalScope.launch {
+            for (f in repository.getAllFriends()){
+
+                threads.add(pubSub.start_listening(f.publicKey, f.community))
+            }
+        }
+    }
+
      fun getData() {
 
          // Mock data
