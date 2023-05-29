@@ -18,5 +18,7 @@ interface ItemAnnouncementDAO{
     @Query("delete from ItemAnnouncement")
     fun deleteAllItems()
 
-
+    // Get all items from the observer node
+    @Query("SELECT * FROM ItemAnnouncement WHERE user = :myPublicKey")
+    fun getMyItems(myPublicKey: String): List<ItemAnnouncement>
 }

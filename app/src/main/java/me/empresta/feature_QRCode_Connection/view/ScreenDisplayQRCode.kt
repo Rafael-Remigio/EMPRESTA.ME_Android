@@ -67,6 +67,35 @@ fun ScreenDisplayQRCode(navController: NavController,
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Feed.name) }) {
+                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                    }
+                },
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "CONNECT",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h6.copy(
+                                fontWeight = FontWeight.Light,
+                                color = Color.White
+                            )
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Notifications.name) }) {
+                        Icon(Icons.Default.Notifications, contentDescription = "Notifications")
+                    }
+                },
+            )
+        },
         bottomBar = {
             BottomBar(
                 items = listOf(
