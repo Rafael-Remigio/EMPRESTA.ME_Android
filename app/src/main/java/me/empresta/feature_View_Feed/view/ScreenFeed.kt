@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Home
@@ -145,6 +146,11 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         scaffoldState = scaffoldState,
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Feed.name) }) {
+                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                    }
+                },
                 title = {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -196,7 +202,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(7.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

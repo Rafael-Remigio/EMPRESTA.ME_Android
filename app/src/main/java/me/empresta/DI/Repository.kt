@@ -140,6 +140,11 @@ class Repository @Inject constructor
         }
     }
 
+    // Get Items from the observer node
+    fun getObserverItems(myPublicKey: String): List<ItemAnnouncement> {
+        return itemAnnouncementDAO.getMyItems(myPublicKey)
+    }
+
     fun getAllItemRequests(): List<ItemRequest> {
         return itemRequestDAO.getAllItems()
     }

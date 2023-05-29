@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -63,6 +64,35 @@ fun ScreenCommunityPreview(
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.ShowQR.name) }) {
+                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                    }
+                },
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "JOIN COMMUNITY",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h6.copy(
+                                fontWeight = FontWeight.Light,
+                                color = Color.White
+                            )
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Notifications.name) }) {
+                        Icon(Icons.Default.Notifications, contentDescription = "Notifications")
+                    }
+                },
+            )
+        },
         bottomBar = {
             BottomBar(
                 items = listOf(
@@ -102,7 +132,9 @@ fun ScreenCommunityPreview(
                     style = MaterialTheme.typography.h2,
                     fontWeight = FontWeight.Bold,
                     color = White,
-                    modifier = Modifier.padding(start = 5.dp, top = 100.dp)
+                    modifier = Modifier
+                        .padding(start = 5.dp, top = 100.dp)
+                        .align(Alignment.CenterHorizontally)
                 )
             }
             viewModel.get().bio?.let {
@@ -111,7 +143,9 @@ fun ScreenCommunityPreview(
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Normal,
                     color = White,
-                    modifier = Modifier.padding(start = 5.dp, top = 20.dp)
+                    modifier = Modifier
+                        .padding(start = 5.dp, top = 20.dp)
+                        .align(Alignment.CenterHorizontally)
 
                 )
             }

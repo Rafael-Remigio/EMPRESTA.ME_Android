@@ -7,13 +7,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.AutoGraph
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,6 +27,7 @@ import androidx.navigation.NavController
 import me.empresta.*
 import me.empresta.Navigation.BottomBar
 import me.empresta.Navigation.BottomNavItem
+import me.empresta.Navigation.EmprestameScreen
 import me.empresta.feature_QRCode_Connection.view.UserPreviewView
 import me.empresta.feature_View_Network.view.NetworkView
 
@@ -35,12 +42,41 @@ fun ScreenDisplayNetwork(navController: NavController,viewModel: NetworkView = h
 
     Scaffold(
         scaffoldState = scaffoldState,
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Feed.name) }) {
+                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                    }
+                },
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "NETWORK",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h6.copy(
+                                fontWeight = FontWeight.Light,
+                                color = Color.White
+                            )
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { navController.navigate(EmprestameScreen.Notifications.name) }) {
+                        Icon(Icons.Default.Notifications, contentDescription = "Notifications")
+                    }
+                },
+            )
+        },
         bottomBar = {
             BottomBar(
                 items = listOf(
                     BottomNavItem(name = "Feed", route = "Feed", icon = Icons.Default.Home),
                     BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
-                    BottomNavItem(name = "Qr", route = "ShowQR", icon = Icons.Default.QrCode),
+                    BottomNavItem(name = "Network", route = "Network", icon = Icons.Default.AutoGraph),
                     BottomNavItem(name = "Profile", route = "Profile", icon = Icons.Default.Person)
                 ),
                 navController = navController,
