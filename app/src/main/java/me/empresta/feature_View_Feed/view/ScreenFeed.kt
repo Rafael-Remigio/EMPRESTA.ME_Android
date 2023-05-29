@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -54,6 +55,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
 import me.empresta.Navigation.EmprestameScreen
@@ -112,18 +114,15 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
 
             LendingDialog(thislending.value,value = "", setShowDialog = {
                 showLending.value = it
-            }) {
+            },viewModel)
 
-            }
     }
 
     if(showRequesting.value){
-
         BorrowingDialog(thisRequesting.value,value = "", setShowDialog = {
-            showLending.value = it
-        }) {
+            showRequesting.value = it
+        },viewModel)
 
-        }
     }
 
     /*
@@ -417,10 +416,12 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
 }
 
 @Composable
-fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean) -> Unit, setValue: (String) -> Unit) {
+fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean) -> Unit, view: feedViewModel) {
     val txtFieldError = remember { mutableStateOf("") }
     val txtField = remember { mutableStateOf(value) }
     val context = LocalContext.current
+    val txtFieldDescriptor = remember { mutableStateOf(value) }
+
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         androidx.compose.material3.Surface(
             shape = RoundedCornerShape(16.dp),
@@ -489,19 +490,31 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text="Peterson")
+                            Text(text=item.user)
                         }
                     }
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp),
+                        shape = RoundedCornerShape(5.dp),
+                        value = txtFieldDescriptor.value,
+                        placeholder = { Text(text = "Description") },
+
+                        onValueChange = { txtFieldDescriptor.value = it },
+                        maxLines = 3,
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                if (txtField.value.isEmpty()) {
-                                    txtFieldError.value = "Field can not be empty"
-                                    return@Button
-                                }
-                                setValue(txtField.value)
+
+                                /*TODO*/
+                                // view SOMETHING
+                                view.ask_for_info(item.user, txtFieldDescriptor.value)
                                 setShowDialog(false)
 
                             },
@@ -520,10 +533,12 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
 }
 
 @Composable
-fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) -> Unit, setValue: (String) -> Unit) {
+fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) -> Unit, view: feedViewModel) {
     val txtFieldError = remember { mutableStateOf("") }
     val txtField = remember { mutableStateOf(value) }
     val context = LocalContext.current
+    val txtFieldDescriptor = remember { mutableStateOf(value) }
+
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         androidx.compose.material3.Surface(
             shape = RoundedCornerShape(16.dp),
@@ -535,7 +550,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                     modifier = Modifier
                         .padding(20.dp)
                         .size(600.dp)
-                        .scrollable(rememberScrollState(), Orientation.Vertical)
+                        .verticalScroll(rememberScrollState())
                 ) {
 
                     Row(
@@ -587,19 +602,34 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text = "Peterson")
+                            Text(text = item.user)
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp),
+                        shape = RoundedCornerShape(5.dp),
+                        value = txtFieldDescriptor.value,
+                        placeholder = { Text(text = "Description") },
+
+                        onValueChange = { txtFieldDescriptor.value = it },
+                        maxLines = 3,
+                    )
+
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                         Button(
                             onClick = {
-                                if (txtField.value.isEmpty()) {
-                                    txtFieldError.value = "Field can not be empty"
-                                    return@Button
-                                }
-                                setValue(txtField.value)
+
+
+                                /*TODO*/
+                                // view SOMETHING
+                                view.ask_for_info(item.user, txtFieldDescriptor.value)
                                 setShowDialog(false)
 
                             },

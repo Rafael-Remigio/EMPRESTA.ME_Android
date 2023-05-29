@@ -184,7 +184,7 @@ fun ScreenNotifications(
         infoRequestsFlow?.forEach {
             singleNotification(
                 name = it.sender,
-                message= it.message
+                message= it.message,viewModel
             )
 
             Spacer(modifier = Modifier.size(20.dp))
@@ -203,6 +203,7 @@ fun singleNotification(
     //notification: Notification,
     name: String,
     message: String,
+    viewModel:NotificationViewModel
     //onAccept: (String) -> Unit,
     //onRefuse: (String) -> Unit
     //account: AccountDao
@@ -253,7 +254,15 @@ fun singleNotification(
                 Row(
                 ) {
                     Button(
-                        onClick = {/*onAccept()*/; Log.d("yay", "botao 1") },
+                        onClick = {
+
+                            /*onAccept()*/;
+
+                            viewModel.postInfo(name)
+
+                            Log.d("yay", "botao 1")
+
+                          },
                         content = {
                             Text(
                                 text = "Accept",
@@ -270,7 +279,12 @@ fun singleNotification(
 
 
                     Button(
-                        onClick = {/*onRemove()*/; Log.d("yay", "botao 2") },
+                        onClick = {
+
+                            /*onRemove()*/;
+                            Log.d("yay", "botao 2")
+
+                        },
                         content = {
                             Text(
                                 text = "Refuse",

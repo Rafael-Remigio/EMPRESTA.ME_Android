@@ -53,6 +53,11 @@ class Repository @Inject constructor
         return communityAPI.postVouch(url +  "vouch",body)
     }
 
+
+    suspend fun postPermitInfo(url: String,host: String,guest:String,response: String): ResponseBody {
+        return communityAPI.postPermitInfo(url +  "acc/permit-info",host,guest,response)
+    }
+
     suspend fun getContact(url: String,body: RegisterBody): ResponseBody {
         return communityAPI.postRegister(url +  "acc/register",body)
     }

@@ -147,12 +147,12 @@ public class Message_Handler {
 
     public  void Handle_Ask_Info(Ask_Info_Message message, String exchange){
 
-        String my_pblk = "my_pub_key"; //TODO: get the actual public key
+        String my_pblk = exchange; //TODO: get the actual public key
 
         if(!message.check_receiver(my_pblk))
             return;
-
-        /*Validations
+        /*
+        Validations
         if(!message.check_nonce())-2+3
             return;
 

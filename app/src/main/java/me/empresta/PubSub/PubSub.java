@@ -86,7 +86,7 @@ public class PubSub{
 
                                 GetResponse gr = channel.basicGet(EXCHANGE_NAME, false);
                                 Log.d("DEBUG","Delivery Tag: " + gr.getEnvelope().getDeliveryTag() );
-                                channel.basicNack(gr.getEnvelope().getDeliveryTag(), false, true); 
+                                channel.basicNack(gr.getEnvelope().getDeliveryTag(), false, true);
                             }
                         };
                         boolean autoAck = false;
@@ -291,7 +291,7 @@ public class PubSub{
                 try {
                     ConnectionFactory factory = new ConnectionFactory();
 
-                    factory.setHost(host+":5672");
+                    factory.setHost(host);
                     Connection connection = factory.newConnection();
                     Channel channel = connection.createChannel();
 
@@ -313,7 +313,7 @@ public class PubSub{
                     channel.basicPublish("", my_public_key,
                             null,
                             j_message.toString().getBytes());
-                    System.out.println(" [x] Sent '" +  j_message + "'");
+                    Log.d("DEBUG","[x] Sent '" +  j_message+ "'");
 
                     channel.close();
                     connection.close();
