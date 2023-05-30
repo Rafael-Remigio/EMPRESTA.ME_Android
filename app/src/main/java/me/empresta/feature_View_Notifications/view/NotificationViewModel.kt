@@ -26,8 +26,8 @@ class NotificationViewModel @Inject constructor(
     init{
         // Mock data
         GlobalScope.launch{
-            repository.deleteAllInfoRequests()
 
+            /*
             repository.insertInfoRequest(
                 InfoRequest(
                     "Shor Manel",
@@ -61,7 +61,7 @@ class NotificationViewModel @Inject constructor(
                     "Shor Manel",
                     "e viva o Puorto!"
                 )
-            )
+            )*/
 
             val a = getInfoRequests()
         }
@@ -74,6 +74,25 @@ class NotificationViewModel @Inject constructor(
              info = repository.getAllInfoRequests()
          }
          return
+
+    }
+
+    fun postInfo(guestPK: String) {
+
+        GlobalScope.launch {
+            val account = repository.getAccount()
+
+            repository.getCommunities().forEach(){ community ->
+                Log.d("DEBUG",
+                    "\n Response v"
+                );
+                Log.d("DEBUG",
+                    repository.postPermitInfo(community.url,account.publicKey,guestPK,"").toString()
+                );
+
+            }
+        }
+        return
 
     }
 

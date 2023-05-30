@@ -32,4 +32,8 @@ interface CommunityAPI {
     @POST()
     suspend fun postVouch(@Url url: String, @Body body: VouchBody): ResponseBody
 
+
+    @POST()
+    suspend fun postPermitInfo(@Url url: String,  @Header("host-key") host: String,@Header("guest-key") guest: String,@Header("response") response: String): ResponseBody
+
 }

@@ -131,6 +131,16 @@ class feedViewModel @Inject constructor(
         return true
     }
 
+    fun ask_for_info(target_key:String, message:String) : Boolean{
+
+        GlobalScope.launch {
+            var com : String =  repository.getCommunities()[0].url;
+            PubSub.Publish_Ask_Info(com.substring(7,com.length - 6), repository.getAccount().publicKey, target_key, message)
+        }
+
+        return true
+    }
+
     fun get_ItemRequests(): List<ItemRequest>? {
         return itemRequests
     }
