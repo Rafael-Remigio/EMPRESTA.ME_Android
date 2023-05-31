@@ -2,10 +2,13 @@ package me.empresta.feature_View_Feed.view
 
 import android.app.ActivityManager.TaskDescription
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.ViewModel
 import coil.compose.ImagePainter
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +24,8 @@ class feedViewModel @Inject constructor(
 
 ) : ViewModel()
 {
+
+    val names_map = mutableMapOf<String, String>()
     var itemRequests: List<ItemRequest>? = null
     var itemAnnouncenents: List<ItemAnnouncement>? = null
 
@@ -173,4 +178,38 @@ class feedViewModel @Inject constructor(
 
     }
 
+    fun getInfo(guestPK: String) {
+
+        var res: String? = null;
+
+        GlobalScope.launch {
+            val account = repository.getAccount()
+
+            for (community in repository.getCommunities()) {
+
+                try {
+                    res = repository.requestInfo(community.url,account.publicKey,guestPK).string()
+                    if (res != null){
+                        val gson = Gson()
+                        val jsonObject = gson.fromJson(res, JsonObject::class.java)
+                        //_state.value = jsonObject.get("alias").asString
+                        names_map[guestPK] = jsonObject.get("alias").asString
+                        Log.d("DEBUG",
+                            names_map.keys!!.toString()
+                        );
+                        break
+                    }
+
+                }catch (e: Exception)
+                {
+                    println(e)
+                }
+            }
+
+
+        }
+
+
+    }
+    fun get_name(p_k : String) = if (names_map.containsKey(p_k)){names_map[p_k]}else{"Anónimo"}
 }

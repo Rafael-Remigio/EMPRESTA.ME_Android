@@ -210,7 +210,7 @@ fun ScreenProfile(
                             availableItemsToBorrow?.get(item)
                                 ?.let { imageAnnouncementModifier(it) }?.let {
                                     Image(
-                                        painter = rememberImagePainter(availableItemsToBorrow?.get(item)?.image),
+                                        painter = rememberImagePainter(availableItemsToBorrow?.get(item)?.category),
                                         contentDescription = availableItemsToBorrow?.get(item)?.name,
                                         modifier = it
                                     )

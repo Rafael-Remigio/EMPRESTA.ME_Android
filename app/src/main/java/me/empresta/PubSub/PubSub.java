@@ -170,7 +170,7 @@ public class PubSub{
         thread.start();
     }
 
-    public static void Publish_Item_Announcement_Update(String host, String my_public_key, String Name, String Description, String Photo){
+    public static void Publish_Item_Announcement_Update(String host, String my_public_key, String Name, String Description, String category){
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -203,7 +203,7 @@ public class PubSub{
                     j_message.put("sender", my_public_key);
                     j_message.put("name", Name);
                     j_message.put("description", Description);
-                    j_message.put("image", Photo);
+                    j_message.put("category", category);
                     //System.out.println(" [x] Almost Sent '" +  j_message+ "'");
 
                     Log.d("DEBUG"," [x] Almost Sent '" +  j_message+ "'");
