@@ -9,7 +9,8 @@ data class ItemRequest(
     var id: Int,
     val user: String,
     val name: String,
-    val description: String = ""
+    val description: String = "",
+    val category: String
 ) {
 
     override fun equals(other: Any?): Boolean {

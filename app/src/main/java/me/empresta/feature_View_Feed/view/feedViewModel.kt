@@ -2,7 +2,10 @@ package me.empresta.feature_View_Feed.view
 
 import android.app.ActivityManager.TaskDescription
 import android.util.Log
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.ViewModel
+import coil.compose.ImagePainter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -10,6 +13,7 @@ import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
 import me.empresta.PubSub.PubSub
+import me.empresta.R
 import javax.inject.Inject
 @HiltViewModel
 class feedViewModel @Inject constructor(
@@ -36,11 +40,12 @@ class feedViewModel @Inject constructor(
 
          // Mock data
         GlobalScope.launch {
+
             Log.d("alor","asdsda")
             var user : String = "Joana";
             var name : String = "Blender";
             var description : String = "This is a blender";
-            var image : String = "https://s.aolcdn.com/hss/storage/midas/1b8e6c255e1632157aaaf5bd05d9c8/205127975/06-blender-2000.jpg";
+            var image : String = "Home and Garden";
             repository.insertItemAnnouncement(
 
                 ItemAnnouncement((user + name+ description).hashCode(),
@@ -54,7 +59,7 @@ class feedViewModel @Inject constructor(
             user = "John";
             name  = "Bike";
             description  = "This is a bike";
-            image  = "https://th.bing.com/th/id/R.5bcdf75c71d0e9fd9cc8142fcb3307e3?rik=vknt2Qh16ObY0g&riu=http%3a%2f%2f1.bp.blogspot.com%2f-ADXEt7Ian14%2fTkke0CXr5qI%2fAAAAAAAAAC4%2fbhkwY7YYRL4%2fs1600%2fDSC00108.jpg&ehk=Grp1rsJauyAnZGkGd72mW2gI6O0qqXyjajhjfXX6HrY%3d&risl=&pid=Img";
+            image  = "Clothing and Accessories";
             repository.insertItemAnnouncement(
                 ItemAnnouncement(
                     (user+name+description).hashCode(),
@@ -69,7 +74,7 @@ class feedViewModel @Inject constructor(
             user  = "Teles";
             name  = "DND Set";
             description = "This is a Dungeons and Dragons Set";
-            image = "https://th.bing.com/th/id/R.1b87091133e762c641b49977ecaec156?rik=CK4S2lHxfUYw%2bw&pid=ImgRaw&r=0";
+            image = "Electronics";
             repository.insertItemAnnouncement(
                 ItemAnnouncement(
                     (user+name+description).hashCode(),
@@ -87,9 +92,9 @@ class feedViewModel @Inject constructor(
 
 
 
-            repository.insertItemRequest(ItemRequest("JohnBikeThis is a bike".hashCode(),"John", "Bike", "This is a bike"))
-            repository.insertItemRequest(ItemRequest("MariaBikeThis is a bike".hashCode(),"Maria", "Bike", "This is a bike"))
-            repository.insertItemRequest(ItemRequest("TaylorBikeThis is a bike".hashCode(),"Taylor", "Bike", "This is a bike"))
+            repository.insertItemRequest(ItemRequest("JohnBikeThis is a bike".hashCode(),"John", "Bike", "This is a bike","Clothing and Accessories"))
+            repository.insertItemRequest(ItemRequest("MariaBikeThis is a bike".hashCode(),"Maria", "Bike", "This is a bike","Electronics"))
+            repository.insertItemRequest(ItemRequest("TaylorBikeThis is a bike".hashCode(),"Taylor", "Bike", "This is a bike","Home and Garden"))
 
             // Get the list of available items to lend (from the database) -> Correspondents to ItemRequests
             itemRequests = repository.getAllItemRequests()
@@ -110,11 +115,11 @@ class feedViewModel @Inject constructor(
           */
 
         //PubSub.Publish_Item_Announcement_Update("my_pub_key","Signature","Item Name", "Item Description", "Photo");
-        //PubSub.Publish_Item_Request("my_pub_key","Signature","Item Name", "issuer_pub_key");
+        //PubSub.Publish_Item_Request("my_pub_key","Signature","Item Name", "issuer_pub_key");*/
 
     }
 
-    fun post_Lending (title: String,description: String,type:String) : Boolean{
+    fun post_Lending (title: String,description: String,type:String,category: String) : Boolean{
 
 
         GlobalScope.launch {
@@ -122,9 +127,9 @@ class feedViewModel @Inject constructor(
             var com : String =  repository.getCommunities()[0].url;
 
             if(type.equals("NEED")){
-                PubSub.Publish_Item_Request(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description)
+                PubSub.Publish_Item_Request(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description,category)
             }else{print("\n\n" + type + "\n\n")
-                PubSub.Publish_Item_Announcement_Update(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description, "category")
+                PubSub.Publish_Item_Announcement_Update(com.substring(7,com.length - 6), repository.getAccount().publicKey, title, description, category)
             }
         }
 
@@ -149,5 +154,23 @@ class feedViewModel @Inject constructor(
         return itemAnnouncenents
     }
 
+
+    fun getImageByCategory( category: String): Int {
+        /*TODO*/
+        //Return images from the actual category
+
+        when (category) {
+            "Clothing and Accessories" -> return R.drawable.clothing_image
+            "Electronics" -> return R.drawable.eletronics_image
+            "Sports and Fitness" -> return R.drawable.sports_image
+            "Books and Media" -> return  R.drawable.books_image
+            "Home and Garden" -> return  R.drawable.tools_image
+            "Kitchen" -> return R.drawable.kitchen_image
+            else -> { // Note the block
+                return  R.drawable.ic_launcher_foreground
+            }
+        }
+
+    }
 
 }

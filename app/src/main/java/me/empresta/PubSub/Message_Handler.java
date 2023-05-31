@@ -120,7 +120,7 @@ public class Message_Handler {
             return;*/
 
         // Add this Item Announcement to the list of saved Items
-        repository.insertItemAnnouncement(new ItemAnnouncement((message.getSender()+message.getName()+message.getDescription()).hashCode(), message.getSender(), message.getName(), message.getDescription(), message.getImage()));
+        repository.insertItemAnnouncement(new ItemAnnouncement((message.getSender()+message.getName()+message.getDescription()).hashCode(), message.getSender(), message.getName(), message.getDescription(), message.getCategory()));
         System.out.println("\n----\n\n");
         System.out.println(repository.getAllItemAnnouncements());
         System.out.println("\n----\n\n");
@@ -139,7 +139,7 @@ public class Message_Handler {
             return;*/
 
         // Add this Item Request to the list of saved Items
-        repository.insertItemRequest(new ItemRequest((message.getSender()+message.getName()+message.getDescription()).hashCode(), message.getSender(), message.getName(), message.getDescription()));
+        repository.insertItemRequest(new ItemRequest((message.getSender()+message.getName()+message.getDescription()).hashCode(), message.getSender(), message.getName(), message.getDescription(),message.getCategory()));
         System.out.println("\n----\n\n");
         System.out.println(repository.getAllItemRequests());
         System.out.println("\n----\n\n");
