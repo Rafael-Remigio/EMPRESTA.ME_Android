@@ -15,7 +15,7 @@ public class Item_Announcement_Message {
     private String sender;
     private String description;
     private String name;
-    private String image;
+    private String category;
 
     @Override
     public String toString() {
@@ -28,7 +28,7 @@ public class Item_Announcement_Message {
                 ", sender='" + sender + '\'' +
                 ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
+                ", image='" + category + '\'' +
                 '}';
     }
 
@@ -121,12 +121,12 @@ public class Item_Announcement_Message {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getCategory() {
+        return category;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
 

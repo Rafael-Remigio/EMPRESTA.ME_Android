@@ -229,7 +229,7 @@ public class PubSub{
     }
 
 
-    public static void Publish_Item_Request(String host,String my_public_key, String Name, String Description){
+    public static void Publish_Item_Request(String host,String my_public_key, String Name, String Description,String category){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -259,6 +259,8 @@ public class PubSub{
                     j_message.put("sender", my_public_key);
                     j_message.put("name", Name);
                     j_message.put("description", Description);
+                    j_message.put("category", category);
+
                     Log.d("DEBUG"," [x] Almost Sent '" +  j_message+ "'");
 
                     //System.out.println(" [x] Almost Sent '" +  j_message+ "'");

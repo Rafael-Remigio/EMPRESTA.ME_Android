@@ -37,8 +37,8 @@ class MainActivity : ComponentActivity() {
     @Inject lateinit var pubSub: PubSub
     @Inject lateinit var repository: Repository
 
-
-     var threads : ArrayList<Thread> = ArrayList<Thread>()
+    /*
+    var threads : ArrayList<Thread> = ArrayList<Thread>()
 
     override fun onResume() {
         super.onResume()
@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
         for (thread in threads){
             thread.stop()
         }
-    }
+    }*/
 
 
     

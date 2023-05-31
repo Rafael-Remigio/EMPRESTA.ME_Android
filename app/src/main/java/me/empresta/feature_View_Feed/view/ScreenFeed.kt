@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -51,8 +52,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
@@ -78,10 +83,10 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         },viewModel)
     }
 
-    var thislending = remember { mutableStateOf(ItemAnnouncement(0,"","")) }
+    var thislending = remember { mutableStateOf(ItemAnnouncement(0,"","","","")) }
     val showLending =  remember { mutableStateOf(false) }
 
-    var thisRequesting = remember { mutableStateOf(ItemRequest(0,"","")) }
+    var thisRequesting = remember { mutableStateOf(ItemRequest(0,"","","","")) }
     val showRequesting =  remember { mutableStateOf(false) }
 
     val imageRequestModifier: (ItemRequest) -> Modifier = { item ->
@@ -126,20 +131,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
         }
     }
 
-    /*
-    // Define mutable state variables
-    val availableItemsToLend = mutableStateOf<List<ItemRequest>>(emptyList())
-    val availableItemsToBorrow = mutableStateOf<List<ItemAnnouncement>>(emptyList())
 
-    Log.d("GET ITEM", "Getting Available Items and Announcements")
-
-    // Update the mutable state variables
-    availableItemsToLend.value = viewModel.getItemRequests()!!
-    availableItemsToBorrow.value = viewModel.getItemAnnouncements()!!
-
-    Log.d("TO LEND", "Available Items to lend ${availableItemsToLend.value}")
-    Log.d("TO BORROW", "Available Items to lend ${availableItemsToBorrow.value}")
-    */
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -250,7 +242,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
             Spacer(modifier = Modifier.height(16.dp))
 
             LazyRow {
-                items(listOf("Books", "Electronics", "Tools", "Kitchen")) { category ->
+                items(listOf("Clothing and Accessories", "Electronics", "Home and Garden", "Sports and Fitness","Books and Media","Kitchen")) { category ->
                     Button(
                         onClick = { /* Handle button click */ },
                         modifier = Modifier
@@ -299,7 +291,11 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                             availableItemsToBorrow?.get(item)
                                 ?.let { imageAnnouncementModifier(it) }?.let {
                                     Image(
-                                        painter = rememberImagePainter(availableItemsToBorrow?.get(item)?.image),
+                                        painter = painterResource(id = viewModel.getImageByCategory(
+                                            // get vector by category
+                                            availableItemsToLend?.get(item)!!.category
+
+                                        )),
                                         contentDescription = availableItemsToBorrow?.get(item)?.name,
                                         modifier = it
                                     )
@@ -360,9 +356,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
             ) {
                 val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
                 val availableItemsToLend = viewModel.get_ItemRequests()
-                Log.d("AVSJIHSIHQS", "AAAAAAAAAA $availableItemsToBorrow")
 
-                Log.d("AVSJIHSIHQS", "BBBBBBBBBBBBB $availableItemsToLend")
                 val imageModifier = Modifier
                     .width(205.dp)
                     .height(149.dp)
@@ -376,7 +370,11 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                             availableItemsToLend?.get(item)
                                 ?.let { imageRequestModifier(it) }?.let {
                                     Image(
-                                        painter = rememberImagePainter("https://s.aolcdn.com/hss/storage/midas/1b8e6c255e1632157aaaf5bd05d9c8/205127975/06-blender-2000.jpg"),
+                                        painter = painterResource(id = viewModel.getImageByCategory(
+                                            // get vector by category
+                                            availableItemsToLend?.get(item)!!.category
+
+                                        )),
                                         contentDescription = availableItemsToLend?.get(item)?.name,
                                         modifier = it
                                     )
@@ -457,7 +455,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                     Spacer(modifier = Modifier.size(10.dp))
 
                     Image(
-                        painter = rememberAsyncImagePainter(item.image),
+                        painter = rememberAsyncImagePainter(item.category),
                         contentDescription = "",
                         contentScale = ContentScale.FillBounds,            // crop the image if it's not a square
                         modifier = Modifier
@@ -617,6 +615,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedViewModel) {
     var imageUri by remember {
@@ -631,15 +630,27 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
     ActivityResultContracts.GetContent()) { uri: Uri? ->
         imageUri = uri
     }
+
+
     val txtFieldError = remember { mutableStateOf("") }
     val txtField = remember { mutableStateOf(value) }
     val txtFieldDescriptor = remember { mutableStateOf(value) }
 
     val context = LocalContext.current
 
-    var type : String = "HAVE"
-    var colorHave = Color.Black
-    var colorNeed = Color.Gray
+    var type = remember { mutableStateOf("HAVE") }
+    var colorHave = remember { mutableStateOf(BrightOrange) }
+    var colorNeed = remember { mutableStateOf(Color.Black) }
+
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+    val listItems = arrayOf("Clothing and Accessories", "Electronics", "Home and Garden", "Sports and Fitness","Books and Media","Kitchen")
+    // remember the selected item
+    var selectedItem by remember {
+        mutableStateOf(listItems[0])
+    }
+
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Surface(
             shape = RoundedCornerShape(16.dp),
@@ -678,21 +689,21 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
 
                     Row() {
                         Button(onClick = {
-                            type= "NEED"
-                            colorNeed = BrightOrange
-                            colorHave = Color.Black
+                            type.value = "NEED"
+                            colorNeed.value = BrightOrange
+                            colorHave.value = Color.Black
                         }
-                        , colors = ButtonDefaults.buttonColors(backgroundColor = colorNeed),
+                        , colors = ButtonDefaults.buttonColors(backgroundColor = colorNeed.value),
                         ) {
                             Text(text = "I need a ...")
                         }
                         Spacer(modifier = Modifier.size(10.dp))
                         Button(onClick = {
-                            type = "HAVE"
-                            colorHave = BrightOrange
-                            colorNeed = Color.Black
+                            type.value = "HAVE"
+                            colorHave.value = BrightOrange
+                            colorNeed.value = Color.Black
 
-                        },colors = ButtonDefaults.buttonColors(backgroundColor = colorHave)) {
+                        },colors = ButtonDefaults.buttonColors(backgroundColor = colorHave.value)) {
                             Text(text = "I have a ...")
                         }
                     }
@@ -728,10 +739,49 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
 
 
 
+
+                    // box
+                    ExposedDropdownMenuBox(
+                        expanded = expanded,
+                        onExpandedChange = {
+                            expanded = !expanded
+                        }
+                    ) {
+                        // text field
+                        TextField(
+                            value = selectedItem,
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text(text = "Label") },
+                            trailingIcon = {
+                                ExposedDropdownMenuDefaults.TrailingIcon(
+                                    expanded = expanded
+                                )
+                            },
+                            colors = ExposedDropdownMenuDefaults.textFieldColors()
+                        )
+
+                        // menu
+                        ExposedDropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            // this is a column scope
+                            // all the items are added vertically
+                            listItems.forEach { selectedOption ->
+                                // menu item
+                                DropdownMenuItem(onClick = {
+                                    selectedItem = selectedOption
+                                    Toast.makeText(context, selectedOption, Toast.LENGTH_SHORT).show()
+                                    expanded = false
+                                }) {
+                                    Text(text = selectedOption)
+                                }
+                            }
+                        }
+                    }
+
                     Spacer(modifier = Modifier.size(17.dp))
-
-
-
 
 
 
@@ -744,7 +794,7 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
                                     ).show()
                                     return@Button
                                 }
-                                view.post_Lending(txtField.value,txtFieldDescriptor.value,type)
+                                view.post_Lending(txtField.value,txtFieldDescriptor.value,type.value,selectedItem)
                                 setShowDialog(false)
 
                             },

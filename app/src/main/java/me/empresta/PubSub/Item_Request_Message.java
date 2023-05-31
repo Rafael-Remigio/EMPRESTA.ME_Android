@@ -13,20 +13,11 @@ public class Item_Request_Message {
     private String description;
     private String name;
 
+    private String category;
 
-    @Override
-    public String toString() {
-        return "Item_Request_Message{" +
-                "header='" + header + '\'' +
-                ", clock='" + clock + '\'' +
-                ", nonce='" + nonce + '\'' +
-                ", hash='" + hash + '\'' +
-                ", signature='" + signature + '\'' +
-                ", sender='" + sender + '\'' +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+
+
+
 
     public static Item_Request_Message fromJson(String json) {
         Gson gson = new Gson();
@@ -105,6 +96,10 @@ public class Item_Request_Message {
         return description;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -116,6 +111,11 @@ public class Item_Request_Message {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 
 }
 
