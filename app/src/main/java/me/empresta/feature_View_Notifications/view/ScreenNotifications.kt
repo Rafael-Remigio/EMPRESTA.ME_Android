@@ -258,9 +258,8 @@ fun singleNotification(
 
                             /*onAccept()*/;
 
-                            viewModel.postInfo(name)
+                            viewModel.permitInfo(name);
 
-                            Log.d("yay", "botao 1")
 
                           },
                         content = {
@@ -280,9 +279,8 @@ fun singleNotification(
 
                     Button(
                         onClick = {
-
-                            /*onRemove()*/;
-                            Log.d("yay", "botao 2")
+                            println("Request Info v")
+                            println(viewModel.getInfo(name))
 
                         },
                         content = {

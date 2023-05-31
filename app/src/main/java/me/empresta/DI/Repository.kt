@@ -54,8 +54,12 @@ class Repository @Inject constructor
     }
 
 
-    suspend fun postPermitInfo(url: String,host: String,guest:String,response: String): ResponseBody {
-        return communityAPI.postPermitInfo(url +  "acc/permit-info",host,guest,response)
+    suspend fun postPermitInfo(url: String,host: String,guest:String): ResponseBody {
+        return communityAPI.postPermitInfo(url +  "acc/permit-info",host,guest)
+    }
+
+    suspend fun requestInfo(url: String,host: String,guest:String): ResponseBody {
+        return communityAPI.requestInfo(url +  "acc/request-info",host,guest)
     }
 
     suspend fun getContact(url: String,body: RegisterBody): ResponseBody {

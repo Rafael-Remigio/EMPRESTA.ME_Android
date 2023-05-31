@@ -4,6 +4,7 @@ import android.provider.Settings.Global
 import android.util.Log
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import me.empresta.DAO.InfoRequest
@@ -13,7 +14,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
+import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.feature_QRCode_Connection.view.UserPreviewView
+import okhttp3.ResponseBody
 
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
@@ -77,7 +80,7 @@ class NotificationViewModel @Inject constructor(
 
     }
 
-    fun postInfo(guestPK: String) {
+    fun permitInfo(guestPK: String) {
 
         GlobalScope.launch {
             val account = repository.getAccount()
@@ -87,12 +90,47 @@ class NotificationViewModel @Inject constructor(
                     "\n Response v"
                 );
                 Log.d("DEBUG",
-                    repository.postPermitInfo(community.url,account.publicKey,guestPK,"").toString()
+                    repository.postPermitInfo(community.url,account.publicKey,guestPK).toString()
                 );
 
             }
         }
         return
+
+    }
+
+    fun getInfo(guestPK: String): ResponseBody? {
+
+        var res: ResponseBody? = null;
+
+        GlobalScope.launch {
+            val account = repository.getAccount()
+            /*
+            for (community in repository.getCommunities()) {
+
+                try {
+                    res = repository.requestInfo(community.url,account.publicKey,guestPK)
+                    Log.d("DEBUG",
+                        res.toString()
+                    );
+                    if (res != null){
+                        break
+                    }
+
+                }catch (e: Exception)
+                {
+                    println(e)
+                }
+            }
+            */
+            try {
+                res = repository.requestInfo(repository.getCommunities()[0].url,account.publicKey,guestPK)
+            }catch (e: Exception)
+            {
+                println(e)
+            }
+        }
+        return res;
 
     }
 
