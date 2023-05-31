@@ -2,9 +2,11 @@ package me.empresta.feature_View_Notifications.view
 
 import android.provider.Settings.Global
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import me.empresta.DAO.InfoRequest
@@ -17,12 +19,18 @@ import kotlinx.coroutines.launch
 import me.empresta.RemoteAPI.DTO.CommunityInfo
 import me.empresta.feature_QRCode_Connection.view.UserPreviewView
 import okhttp3.ResponseBody
+import org.json.JSONObject
 
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
     private val repository: Repository
 
 ): ViewModel() {
+
+
+
+    private val _state = mutableStateOf("None")
+
 
     public var info: List<InfoRequest>? = null
 
@@ -99,21 +107,24 @@ class NotificationViewModel @Inject constructor(
 
     }
 
-    fun getInfo(guestPK: String): ResponseBody? {
+    fun getInfo(guestPK: String) {
 
-        var res: ResponseBody? = null;
+        var res: String? = null;
 
         GlobalScope.launch {
             val account = repository.getAccount()
-            /*
+
             for (community in repository.getCommunities()) {
 
                 try {
-                    res = repository.requestInfo(community.url,account.publicKey,guestPK)
+                    res = repository.requestInfo(community.url,account.publicKey,guestPK).string()
                     Log.d("DEBUG",
-                        res.toString()
+                        res!!
                     );
                     if (res != null){
+                        val gson = Gson()
+                        val jsonObject = gson.fromJson(res, JsonObject::class.java)
+                        _state.value = jsonObject.get("alias").asString
                         break
                     }
 
@@ -122,17 +133,15 @@ class NotificationViewModel @Inject constructor(
                     println(e)
                 }
             }
-            */
-            try {
-                res = repository.requestInfo(repository.getCommunities()[0].url,account.publicKey,guestPK)
-            }catch (e: Exception)
-            {
-                println(e)
-            }
+
+
         }
-        return res;
+
 
     }
+
+    fun get() = _state.value
+
 
 
 }

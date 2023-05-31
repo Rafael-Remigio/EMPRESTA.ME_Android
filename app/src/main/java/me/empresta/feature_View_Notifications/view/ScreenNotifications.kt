@@ -238,14 +238,14 @@ fun singleNotification(
                 modifier = Modifier.padding(horizontal = 5.dp)
             ){
                 Text(
-                    name + " requested your number",
+                    if(viewModel.get() == "None"){name}else{viewModel.get()} + " requested your number",
                     fontSize = 14.sp,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
                 )
 
                 Text(
-                    "'$message' - $name",
+                    message +  " - " + if(viewModel.get() == "None"){name}else{viewModel.get()},
                     fontSize = 12.sp,
                     modifier = Modifier
                         .padding(bottom = 5.dp)
@@ -285,7 +285,7 @@ fun singleNotification(
                         },
                         content = {
                             Text(
-                                text = "Refuse",
+                                text = viewModel.get() ,
                                 color = White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp
