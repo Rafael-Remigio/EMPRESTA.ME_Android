@@ -37,44 +37,7 @@ class NotificationViewModel @Inject constructor(
     init{
         // Mock data
         GlobalScope.launch{
-
-            /*
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "ola"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Casemiro",
-                    "preciso da torradeira, a minha estragou-se"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "saudaçoes camarada!"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Juan",
-                    "holla"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "e viva o Puorto!"
-                )
-            )*/
-
-            val a = getInfoRequests()
+           getInfoRequests()
         }
     }
 
@@ -85,7 +48,6 @@ class NotificationViewModel @Inject constructor(
              info = repository.getAllInfoRequests()
          }
          return
-
     }
 
     fun permitInfo(guestPK: String) {

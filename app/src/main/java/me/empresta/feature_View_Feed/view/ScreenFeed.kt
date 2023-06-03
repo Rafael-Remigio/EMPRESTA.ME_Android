@@ -132,6 +132,9 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
     }
 
 
+    val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
+    val availableItemsToLend = viewModel.get_ItemRequests()
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -279,8 +282,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
             Spacer(modifier = Modifier.height(16.dp))
 
 
-            val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
-            val availableItemsToLend = viewModel.get_ItemRequests()
             // Horizontal scrolling showcase
             LazyRow(
                 modifier = Modifier
@@ -322,7 +323,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                                 }
                                 availableItemsToBorrow?.get(item)?.let {
                                     Text(
-                                        text = it.user,
+                                        text = viewModel.get_name(it.user),
                                         style = MaterialTheme.typography.body2.copy(
                                             fontWeight = FontWeight.Thin,
                                             color = Color.White
@@ -359,8 +360,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     .padding(start = 16.dp, end = 16.dp)
                     .fillMaxWidth()
             ) {
-                val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
-                val availableItemsToLend = viewModel.get_ItemRequests()
 
                 val imageModifier = Modifier
                     .width(205.dp)
@@ -401,7 +400,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                                 }
                                 availableItemsToLend?.get(item)?.let {
                                     Text(
-                                        text = it.user,
+                                        text = viewModel.get_name(it.user),
                                         style = MaterialTheme.typography.body2.copy(
                                             fontWeight = FontWeight.ExtraLight,
                                             color = Color.White
@@ -826,7 +825,7 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
                             onClick = {
                                 if (txtField.value.isEmpty()) {
                                     txtFieldError.value = "Field can not be empty"
-                                    Toast.makeText(context,"Title tield can not be empty", Toast.LENGTH_LONG,
+                                    Toast.makeText(context,"Title field can not be empty", Toast.LENGTH_LONG,
                                     ).show()
                                     return@Button
                                 }
