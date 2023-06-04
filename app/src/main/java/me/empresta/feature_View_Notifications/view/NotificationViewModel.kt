@@ -32,7 +32,8 @@ class NotificationViewModel @Inject constructor(
     private val _state = mutableStateOf("None")
 
 
-    public var info: List<InfoRequest>? = null
+    var info : MutableList<InfoRequest> = mutableListOf()
+
 
     init{
         // Mock data
@@ -43,14 +44,14 @@ class NotificationViewModel @Inject constructor(
 
 
 
-     suspend fun getInfoRequests() {
+    suspend fun getInfoRequests() {
          GlobalScope.launch {
-             info = repository.getAllInfoRequests()
+             info = repository.getAllInfoRequests().toMutableList()
          }
          return
     }
 
-    fun permitInfo(guestPK: String) {
+    fun permitInfo(guestPK: String,infoRequest: InfoRequest) {
 
         GlobalScope.launch {
             val account = repository.getAccount()
@@ -65,6 +66,17 @@ class NotificationViewModel @Inject constructor(
 
             }
         }
+        info.remove(infoRequest)
+
+        return
+
+    }
+
+    fun denyInfo(guestPK: String,infoRequest: InfoRequest) {
+
+
+        //info.remove(infoRequest)
+
         return
 
     }
@@ -101,6 +113,7 @@ class NotificationViewModel @Inject constructor(
 
 
     }
+
 
     fun get() = _state.value
 

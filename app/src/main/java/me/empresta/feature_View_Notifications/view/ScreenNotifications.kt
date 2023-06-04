@@ -1,6 +1,7 @@
 package me.empresta.feature_View_Notifications.view
 
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -77,6 +78,7 @@ import io.reactivex.Notification
 import me.empresta.DAO.InfoRequest
 
 
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 fun ScreenNotifications(
     navController: NavController,
@@ -172,7 +174,7 @@ fun ScreenNotifications(
         Spacer(modifier = Modifier.size(48.dp))
 
 
-        var infoRequestsFlow by remember { mutableStateOf<List<InfoRequest>?>(null) }
+        var infoRequestsFlow by remember { mutableStateOf<MutableList<InfoRequest>?>(null) }
 
 
         LaunchedEffect(Unit) {
@@ -181,8 +183,9 @@ fun ScreenNotifications(
             infoRequestsFlow = viewModel.info
         }
 
-        infoRequestsFlow?.forEach {
+        viewModel.info?.forEach {
             singleNotification(
+                info = it,
                 name = it.sender,
                 message= it.message,viewModel
             )
@@ -201,6 +204,7 @@ fun ScreenNotifications(
 @Composable
 fun singleNotification(
     //notification: Notification,
+    info: InfoRequest,
     name: String,
     message: String,
     viewModel:NotificationViewModel
@@ -223,7 +227,7 @@ fun singleNotification(
             //.padding(vertical= 10.dp)
         ) {
             Image(
-                painter = rememberAsyncImagePainter("https://upload.wikimedia.org/wikipedia/commons/b/b5/1dayoldkitten.JPG"),
+                painter = rememberAsyncImagePainter("https://img.freepik.com/free-icon/user_318-159711.jpg"),
                 contentDescription = "avatar",
                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                 modifier = Modifier
@@ -258,7 +262,7 @@ fun singleNotification(
 
                             /*onAccept()*/;
 
-                            viewModel.permitInfo(name);
+                            viewModel.permitInfo(name,info);
 
 
                           },
@@ -279,13 +283,13 @@ fun singleNotification(
 
                     Button(
                         onClick = {
-                            println("Request Info v")
+                            println("Request Info")
                             println(viewModel.getInfo(name))
 
                         },
                         content = {
                             Text(
-                                text = viewModel.get() ,
+                                text = "Deny" ,
                                 color = White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp
