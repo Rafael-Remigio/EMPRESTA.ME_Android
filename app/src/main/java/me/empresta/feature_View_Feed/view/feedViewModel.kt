@@ -26,6 +26,7 @@ class feedViewModel @Inject constructor(
 {
 
     val names_map = mutableMapOf<String, String>()
+    val contact_map = mutableMapOf<String, String>()
     var itemRequests: List<ItemRequest>? = null
     var itemAnnouncenents: List<ItemAnnouncement>? = null
 
@@ -35,7 +36,6 @@ class feedViewModel @Inject constructor(
     fun startListining(){
         GlobalScope.launch {
             for (f in repository.getAllFriends()){
-
                 threads.add(pubSub.start_listening(f.publicKey, f.community))
             }
         }
@@ -108,24 +108,30 @@ class feedViewModel @Inject constructor(
             itemAnnouncenents = repository.getAllItemAnnouncements()
             print("itemAnnouncements: $itemAnnouncenents")
             Log.d("ITEM", "Announcements $itemAnnouncenents")
+
+            for (i in itemRequests!!){
+                names_map[i.user] = "Anonymous"
+                contact_map[i.user] = ""
+
+            }
+            for (i in itemAnnouncenents!!){
+                names_map[i.user] = "Anonymous"
+                contact_map[i.user] = ""
             }
 
-        /*
-          PubSub.Publish_Vouch("my_pub_key","other_pub_key","Vouch description", 0);
-          PubSub.Publish_Item_Request("my_pub_key","Dnd Set","Vouch description");
-          PubSub.Publish_Item_Announcement_Update("my_pub_key","Bikleta","Vouch description","image_url");
-          PubSub.Publish_Item_Request("my_pub_key","Dnd Set","Vouch description");
-          PubSub.Publish_Item_Announcement_Update("my_pub_key","Bikleta","Vouch description","image_url");
-          PubSub.Publish_Vouch("my_pub_key","other_pub_key","Vouch description", 0);
-          */
+            for (name in names_map.keys){
+                getInfo(name);
+            }
 
-        //PubSub.Publish_Item_Announcement_Update("my_pub_key","Signature","Item Name", "Item Description", "Photo");
-        //PubSub.Publish_Item_Request("my_pub_key","Signature","Item Name", "issuer_pub_key");*/
+            Log.d("DEBUG", "new map" + names_map.toString())
+
+        }
 
     }
 
     fun post_Lending (title: String,description: String,type:String,category: String) : Boolean{
 
+        Log.d("DEBUG",category)
 
         GlobalScope.launch {
 
@@ -159,20 +165,17 @@ class feedViewModel @Inject constructor(
         return itemAnnouncenents
     }
 
-
     fun getImageByCategory( category: String): Int {
-        /*TODO*/
-        //Return images from the actual category
 
-        when (category) {
-            "Clothing and Accessories" -> return R.drawable.clothing_image
-            "Electronics" -> return R.drawable.eletronics_image
-            "Sports and Fitness" -> return R.drawable.sports_image
-            "Books and Media" -> return  R.drawable.books_image
-            "Home and Garden" -> return  R.drawable.tools_image
-            "Kitchen" -> return R.drawable.kitchen_image
+        return when (category) {
+            "Clothing and Accessories" -> R.drawable.clothing_image
+            "Electronics" -> R.drawable.eletronics_image
+            "Sports and Fitness" -> R.drawable.sports_image
+            "Books and Media" -> R.drawable.books_image
+            "Home and Garden" -> R.drawable.tools_image
+            "Kitchen" -> R.drawable.kitchen_image
             else -> { // Note the block
-                return  R.drawable.ic_launcher_foreground
+                R.drawable.ic_launcher_foreground
             }
         }
 
@@ -189,20 +192,20 @@ class feedViewModel @Inject constructor(
 
                 try {
                     res = repository.requestInfo(community.url,account.publicKey,guestPK).string()
-                    if (res != null){
-                        val gson = Gson()
-                        val jsonObject = gson.fromJson(res, JsonObject::class.java)
-                        //_state.value = jsonObject.get("alias").asString
-                        names_map[guestPK] = jsonObject.get("alias").asString
-                        Log.d("DEBUG",
-                            names_map.keys!!.toString()
-                        );
-                        break
-                    }
+                    val gson = Gson()
+                    val jsonObject = gson.fromJson(res, JsonObject::class.java)
+                    //_state.value = jsonObject.get("alias").asString
+                    names_map[guestPK] = jsonObject.get("alias").asString
+                    contact_map[guestPK] = jsonObject.get("contact").asString
+                    Log.d("DEBUG",
+                        names_map.keys!!.toString()
+                    );
+                    Log.d("DEBUG",names_map.toString())
+                    break
 
                 }catch (e: Exception)
                 {
-                    println(e)
+                    Log.d("DEBUG","error" + e)
                 }
             }
 
@@ -211,5 +214,24 @@ class feedViewModel @Inject constructor(
 
 
     }
-    fun get_name(p_k : String) = if (names_map.containsKey(p_k)){names_map[p_k]}else{"Anónimo"}
+    fun get_name(p_k : String): String {
+
+        if (names_map.containsKey(p_k)){
+            return names_map[p_k]!!
+        }
+        else {
+            return "Anonymous"
+        }
+    }
+
+
+    fun get_contact(p_k : String): String {
+
+        if (contact_map.containsKey(p_k)){
+            return contact_map[p_k]!!
+        }
+        else {
+            return ""
+        }
+    }
 }

@@ -32,63 +32,26 @@ class NotificationViewModel @Inject constructor(
     private val _state = mutableStateOf("None")
 
 
-    public var info: List<InfoRequest>? = null
+    var info : MutableList<InfoRequest> = mutableListOf()
+
 
     init{
         // Mock data
         GlobalScope.launch{
-
-            /*
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "ola"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Casemiro",
-                    "preciso da torradeira, a minha estragou-se"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "saudaçoes camarada!"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Juan",
-                    "holla"
-                )
-            )
-
-            repository.insertInfoRequest(
-                InfoRequest(
-                    "Shor Manel",
-                    "e viva o Puorto!"
-                )
-            )*/
-
-            val a = getInfoRequests()
+           getInfoRequests()
         }
     }
 
 
 
-     suspend fun getInfoRequests() {
+    suspend fun getInfoRequests() {
          GlobalScope.launch {
-             info = repository.getAllInfoRequests()
+             info = repository.getAllInfoRequests().toMutableList()
          }
          return
-
     }
 
-    fun permitInfo(guestPK: String) {
+    fun permitInfo(guestPK: String,infoRequest: InfoRequest) {
 
         GlobalScope.launch {
             val account = repository.getAccount()
@@ -103,6 +66,17 @@ class NotificationViewModel @Inject constructor(
 
             }
         }
+        info.remove(infoRequest)
+
+        return
+
+    }
+
+    fun denyInfo(guestPK: String,infoRequest: InfoRequest) {
+
+
+        //info.remove(infoRequest)
+
         return
 
     }
@@ -139,6 +113,7 @@ class NotificationViewModel @Inject constructor(
 
 
     }
+
 
     fun get() = _state.value
 

@@ -132,6 +132,9 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
     }
 
 
+    val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
+    val availableItemsToLend = viewModel.get_ItemRequests()
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -279,8 +282,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
             Spacer(modifier = Modifier.height(16.dp))
 
 
-            val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
-            val availableItemsToLend = viewModel.get_ItemRequests()
             // Horizontal scrolling showcase
             LazyRow(
                 modifier = Modifier
@@ -322,7 +323,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                                 }
                                 availableItemsToBorrow?.get(item)?.let {
                                     Text(
-                                        text = it.user,
+                                        text = viewModel.get_name(it.user),
                                         style = MaterialTheme.typography.body2.copy(
                                             fontWeight = FontWeight.Thin,
                                             color = Color.White
@@ -359,8 +360,6 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                     .padding(start = 16.dp, end = 16.dp)
                     .fillMaxWidth()
             ) {
-                val availableItemsToBorrow = viewModel.get_ItemAnnouncements()
-                val availableItemsToLend = viewModel.get_ItemRequests()
 
                 val imageModifier = Modifier
                     .width(205.dp)
@@ -401,7 +400,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                                 }
                                 availableItemsToLend?.get(item)?.let {
                                     Text(
-                                        text = it.user,
+                                        text = viewModel.get_name(it.user),
                                         style = MaterialTheme.typography.body2.copy(
                                             fontWeight = FontWeight.ExtraLight,
                                             color = Color.White
@@ -494,7 +493,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text=item.user)
+                            Text(text=view.get_name(item.user))
                         }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
@@ -527,7 +526,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                                 .fillMaxWidth()
                                 .height(50.dp)
                         ) {
-                            Text(text = "Request")
+                            Text(text = "Request Info")
                         }
                     }
                 }
@@ -606,7 +605,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text = item.user)
+                            Text(text = view.get_name(item.user))
                         }
                     }
 
@@ -626,25 +625,31 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                        Button(
-                            onClick = {
+                    if (view.get_contact(item.user) == ""){
+                        Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                            Button(
+                                onClick = {
 
 
-                                /*TODO*/
-                                // view SOMETHING
-                                view.ask_for_info(item.user, txtFieldDescriptor.value)
-                                setShowDialog(false)
+                                    view.ask_for_info(item.user, txtFieldDescriptor.value)
+                                    setShowDialog(false)
 
-                            },
-                            shape = RoundedCornerShape(50.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp)
-                        ) {
-                            Text(text = "Borrow")
+                                },
+                                shape = RoundedCornerShape(50.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(50.dp)
+                            ) {
+                                Text(text = "Request User's Info")
+                            }
                         }
                     }
+                    else {
+                        Text(text = view.get_contact(item.user))
+                    }
+
+
+
                 }
             }
         }
@@ -826,7 +831,7 @@ fun CustomDialog(value: String, setShowDialog: (Boolean) -> Unit, view: feedView
                             onClick = {
                                 if (txtField.value.isEmpty()) {
                                     txtFieldError.value = "Field can not be empty"
-                                    Toast.makeText(context,"Title tield can not be empty", Toast.LENGTH_LONG,
+                                    Toast.makeText(context,"Title field can not be empty", Toast.LENGTH_LONG,
                                     ).show()
                                     return@Button
                                 }
