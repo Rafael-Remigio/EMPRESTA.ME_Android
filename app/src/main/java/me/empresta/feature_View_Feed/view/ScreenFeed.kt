@@ -493,7 +493,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text=item.user)
+                            Text(text=view.get_name(item.user))
                         }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
@@ -526,7 +526,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                                 .fillMaxWidth()
                                 .height(50.dp)
                         ) {
-                            Text(text = "Request")
+                            Text(text = "Request Info")
                         }
                     }
                 }
@@ -605,7 +605,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                                 .clip(RoundedCornerShape(20.dp))
                         )
                         Column() {
-                            Text(text = item.user)
+                            Text(text = view.get_name(item.user))
                         }
                     }
 
@@ -625,25 +625,31 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                        Button(
-                            onClick = {
+                    if (view.get_contact(item.user) == ""){
+                        Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                            Button(
+                                onClick = {
 
 
-                                /*TODO*/
-                                // view SOMETHING
-                                view.ask_for_info(item.user, txtFieldDescriptor.value)
-                                setShowDialog(false)
+                                    view.ask_for_info(item.user, txtFieldDescriptor.value)
+                                    setShowDialog(false)
 
-                            },
-                            shape = RoundedCornerShape(50.dp),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp)
-                        ) {
-                            Text(text = "Borrow")
+                                },
+                                shape = RoundedCornerShape(50.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(50.dp)
+                            ) {
+                                Text(text = "Request User's Info")
+                            }
                         }
                     }
+                    else {
+                        Text(text = view.get_contact(item.user))
+                    }
+
+
+
                 }
             }
         }

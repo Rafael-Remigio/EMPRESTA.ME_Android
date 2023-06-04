@@ -26,6 +26,7 @@ class feedViewModel @Inject constructor(
 {
 
     val names_map = mutableMapOf<String, String>()
+    val contact_map = mutableMapOf<String, String>()
     var itemRequests: List<ItemRequest>? = null
     var itemAnnouncenents: List<ItemAnnouncement>? = null
 
@@ -110,9 +111,12 @@ class feedViewModel @Inject constructor(
 
             for (i in itemRequests!!){
                 names_map[i.user] = "Anonymous"
+                contact_map[i.user] = ""
+
             }
             for (i in itemAnnouncenents!!){
                 names_map[i.user] = "Anonymous"
+                contact_map[i.user] = ""
             }
 
             for (name in names_map.keys){
@@ -192,6 +196,7 @@ class feedViewModel @Inject constructor(
                     val jsonObject = gson.fromJson(res, JsonObject::class.java)
                     //_state.value = jsonObject.get("alias").asString
                     names_map[guestPK] = jsonObject.get("alias").asString
+                    contact_map[guestPK] = jsonObject.get("contact").asString
                     Log.d("DEBUG",
                         names_map.keys!!.toString()
                     );
@@ -216,6 +221,17 @@ class feedViewModel @Inject constructor(
         }
         else {
             return "Anonymous"
+        }
+    }
+
+
+    fun get_contact(p_k : String): String {
+
+        if (contact_map.containsKey(p_k)){
+            return contact_map[p_k]!!
+        }
+        else {
+            return ""
         }
     }
 }
