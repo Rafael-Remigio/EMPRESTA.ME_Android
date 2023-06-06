@@ -38,4 +38,9 @@ interface CommunityAPI {
     @GET()
     suspend fun requestInfo(@Url url: String,  @Header("host-key") host: String,@Header("guest-key") guest: String): ResponseBody
 
+
+    @GET()
+    suspend fun requestTopology(@Url url: String): ResponseBody
+
+
 }

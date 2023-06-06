@@ -38,9 +38,8 @@ class NotificationViewModel @Inject constructor(
 
     init{
         // Mock data
-        GlobalScope.launch{
-           getInfoRequests()
-        }
+        getInfoRequests()
+        
     }
 
 

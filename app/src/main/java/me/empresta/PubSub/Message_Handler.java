@@ -1,5 +1,7 @@
 package me.empresta.PubSub;
 
+import static android.os.AsyncTask.execute;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -7,6 +9,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.interfaces.ECPublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +20,10 @@ import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
+import kotlinx.coroutines.GlobalScope;
+import me.empresta.Crypto.Base58;
+import me.empresta.Crypto.KeyGen;
+import me.empresta.Crypto.Utils;
 import me.empresta.DAO.Friend;
 import me.empresta.DAO.InfoRequest;
 import me.empresta.DAO.ItemAnnouncement;
@@ -145,11 +155,12 @@ public class Message_Handler {
         System.out.println("\n----\n\n");
     }
 
-    public  void Handle_Ask_Info(Ask_Info_Message message, String exchange){
+    public  void Handle_Ask_Info(Ask_Info_Message message, String exchange) throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException {
 
-        String my_pblk = exchange; //TODO: get the actual public key
+        byte[] keybytes = Utils.uncompressedToCompressed(Utils.toUncompressedPoint((ECPublicKey) KeyGen.getPubKey()));
+        String keyBase58 = Base58.encode(keybytes) ;//TODO: get the actual public key
 
-        if(!message.check_receiver(my_pblk))
+        if(!message.check_receiver(keyBase58))
             return;
         /*
         Validations
@@ -165,7 +176,9 @@ public class Message_Handler {
         System.out.println(message);
         // Add this Ask_Info to the list of Info requests
         repository.insertInfoRequest(new InfoRequest(message.getSender(), message.getMessage()));
-        System.out.println("[From DB]" + repository.getAllInfoRequests());
+        System.out.println("[From DB]" );
+
+
     }
 
 }

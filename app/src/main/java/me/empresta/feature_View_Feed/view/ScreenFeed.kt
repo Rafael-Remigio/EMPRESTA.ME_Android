@@ -428,13 +428,15 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         androidx.compose.material3.Surface(
             shape = RoundedCornerShape(16.dp),
+            color = Black
+
         ) {
             Box(
                 contentAlignment = Alignment.Center,
             ) {
                 Column(modifier = Modifier
                     .padding(20.dp)
-                    .size(600.dp)
+                    .size(400.dp)
                     .scrollable(rememberScrollState(), Orientation.Vertical)) {
 
                     Row(
@@ -460,16 +462,7 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                     }
                     Spacer(modifier = Modifier.size(10.dp))
 
-                    Image(
-                        painter = rememberAsyncImagePainter(item.category),
-                        contentDescription = "",
-                        contentScale = ContentScale.FillBounds,            // crop the image if it's not a square
-                        modifier = Modifier
-                            .size(400.dp, 300.dp)
-                            .clip(RoundedCornerShape(CornerSize(20.dp)))  // add a border (optional)
-                    )
 
-                    Spacer(modifier = Modifier.height(20.dp))
 
                     item.name?.let {
                         Text(
@@ -495,40 +488,51 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                         Column() {
                             Text(text=view.get_name(item.user))
                         }
+                        Text(style = MaterialTheme.typography.h5,
+                            color = BrightOrange,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                     }
-                    Spacer(modifier = Modifier.height(20.dp))
 
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp),
-                        shape = RoundedCornerShape(5.dp),
-                        value = txtFieldDescriptor.value,
-                        placeholder = { Text(text = "Description") },
 
-                        onValueChange = { txtFieldDescriptor.value = it },
-                        maxLines = 3,
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
+                    if (view.get_contact(item.user) == ""){
+                        Spacer(modifier = Modifier.height(20.dp))
 
-                    Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                        Button(
-                            onClick = {
-
-                                /*TODO*/
-                                // view SOMETHING
-                                view.ask_for_info(item.user, txtFieldDescriptor.value)
-                                setShowDialog(false)
-
-                            },
-                            shape = RoundedCornerShape(50.dp),
+                        OutlinedTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(50.dp)
-                        ) {
-                            Text(text = "Request Info")
+                                .height(60.dp),
+                            shape = RoundedCornerShape(5.dp),
+                            value = txtFieldDescriptor.value,
+                            placeholder = { Text(text = "Description") },
+
+                            onValueChange = { txtFieldDescriptor.value = it },
+                            maxLines = 3,
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                            Button(
+                                onClick = {
+
+
+                                    view.ask_for_info(item.user, txtFieldDescriptor.value)
+                                    setShowDialog(false)
+
+                                },
+                                shape = RoundedCornerShape(50.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(50.dp)
+                            ) {
+                                Text(text = "Request User's Info")
+                            }
                         }
                     }
+                    else {
+                        Text(text = view.get_contact(item.user))
+                    }
+
+
                 }
             }
         }
@@ -545,6 +549,8 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         androidx.compose.material3.Surface(
             shape = RoundedCornerShape(16.dp),
+            color = Black
+
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -552,7 +558,7 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                 Column(
                     modifier = Modifier
                         .padding(20.dp)
-                        .size(600.dp)
+                        .size(400.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
 
@@ -607,25 +613,31 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                         Column() {
                             Text(text = view.get_name(item.user))
                         }
+                        Text(style = MaterialTheme.typography.h5,
+                            color = BrightOrange,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
 
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp),
-                        shape = RoundedCornerShape(5.dp),
-                        value = txtFieldDescriptor.value,
-                        placeholder = { Text(text = "Description") },
 
-                        onValueChange = { txtFieldDescriptor.value = it },
-                        maxLines = 3,
-                    )
-
-                    Spacer(modifier = Modifier.height(20.dp))
 
                     if (view.get_contact(item.user) == ""){
+                        Spacer(modifier = Modifier.height(20.dp))
+
+                        OutlinedTextField(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(60.dp),
+                            shape = RoundedCornerShape(5.dp),
+                            value = txtFieldDescriptor.value,
+                            placeholder = { Text(text = "Description") },
+
+                            onValueChange = { txtFieldDescriptor.value = it },
+                            maxLines = 3,
+                        )
+
+                        Spacer(modifier = Modifier.height(20.dp))
                         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
                             Button(
                                 onClick = {
@@ -648,6 +660,11 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                         Text(text = view.get_contact(item.user))
                     }
 
+
+                    Text(style = MaterialTheme.typography.h5,
+                        color = BrightOrange,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold,text = view.getScore(item.user))
 
 
                 }

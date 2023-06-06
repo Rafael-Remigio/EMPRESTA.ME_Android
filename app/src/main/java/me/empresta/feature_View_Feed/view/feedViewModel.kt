@@ -1,23 +1,24 @@
 package me.empresta.feature_View_Feed.view
 
-import android.app.ActivityManager.TaskDescription
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.ViewModel
-import coil.compose.ImagePainter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import me.empresta.Crypto.Base58
+import me.empresta.Crypto.KeyGen
+import me.empresta.Crypto.Utils
+import me.empresta.DAO.Community
 import me.empresta.DAO.ItemAnnouncement
 import me.empresta.DAO.ItemRequest
 import me.empresta.DI.Repository
 import me.empresta.PubSub.PubSub
 import me.empresta.R
+import java.security.interfaces.ECPublicKey
 import javax.inject.Inject
+
 @HiltViewModel
 class feedViewModel @Inject constructor(
     private val repository: Repository,    private val pubSub: PubSub
@@ -29,8 +30,7 @@ class feedViewModel @Inject constructor(
     val contact_map = mutableMapOf<String, String>()
     var itemRequests: List<ItemRequest>? = null
     var itemAnnouncenents: List<ItemAnnouncement>? = null
-
-
+    val keyValues = mutableMapOf<String, String>()
 
     var threads : ArrayList<Thread> = ArrayList<Thread>()
     fun startListining(){
@@ -103,11 +103,14 @@ class feedViewModel @Inject constructor(
 
             // Get the list of available items to lend (from the database) -> Correspondents to ItemRequests
             itemRequests = repository.getAllItemRequests()
-            print("itemRequests: $itemRequests")
-            Log.d("ITEM", "Requests $itemRequests")
+            //print("itemRequests: $itemRequests")
+            //Log.d("ITEM", "Requests $itemRequests")
             itemAnnouncenents = repository.getAllItemAnnouncements()
-            print("itemAnnouncements: $itemAnnouncenents")
-            Log.d("ITEM", "Announcements $itemAnnouncenents")
+            //print("itemAnnouncements: $itemAnnouncenents")
+            //Log.d("ITEM", "Announcements $itemAnnouncenents")
+
+            Log.d("DEBUG",repository.getAccount().publicKey)
+
 
             for (i in itemRequests!!){
                 names_map[i.user] = "Anonymous"
@@ -124,7 +127,27 @@ class feedViewModel @Inject constructor(
             }
 
             Log.d("DEBUG", "new map" + names_map.toString())
+            try {
 
+                val keybytes =
+                    Utils.uncompressedToCompressed(Utils.toUncompressedPoint(KeyGen.getPubKey() as ECPublicKey))
+                val keyBase58 = Base58.encode(keybytes) //TODO: get the actual public key
+
+
+                var community : Community = repository.getCommunities ()[0]
+                var res = repository.requestTopology(community.url + "network/topology?observer="+keyBase58).string()
+                val gson = Gson()
+                val jsonObject = gson.fromJson(res, JsonObject::class.java)
+
+                for (i in  jsonObject.get("nodes").asJsonArray){
+                    keyValues.put(i.asJsonObject.get("name").asString, i.asJsonObject.get("reputation").asString)
+                    println("HERE BUT GOOD" +i.asJsonObject.get("name")  + i.asJsonObject.get("reputation"))
+                }
+
+            }
+            catch (e: Exception){
+                println("HERE" +  e.toString())
+            }
         }
 
     }
@@ -224,6 +247,21 @@ class feedViewModel @Inject constructor(
         }
     }
 
+
+
+    fun getScore(p_k : String): String {
+        println("CAT"+ p_k + keyValues)
+        if (keyValues.containsKey(p_k)){
+            println("Getting to here " +   keyValues.get(p_k).toString())
+
+            return keyValues.get(p_k).toString()
+        }
+        else {
+            println("Getting to here tho")
+
+            return "NA"
+        }
+    }
 
 
 

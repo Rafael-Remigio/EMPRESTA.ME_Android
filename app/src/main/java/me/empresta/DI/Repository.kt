@@ -62,6 +62,11 @@ class Repository @Inject constructor
         return communityAPI.requestInfo(url +  "acc/request-info",host,guest)
     }
 
+
+    suspend fun requestTopology(url: String): ResponseBody {
+        return communityAPI.requestTopology(url)
+    }
+
     suspend fun getContact(url: String,body: RegisterBody): ResponseBody {
         return communityAPI.postRegister(url +  "acc/register",body)
     }
