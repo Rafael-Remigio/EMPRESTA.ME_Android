@@ -4,6 +4,7 @@ import android.provider.Settings.Global
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -32,7 +33,7 @@ class NotificationViewModel @Inject constructor(
     private val _state = mutableStateOf("None")
 
 
-    var info : MutableList<InfoRequest> = mutableListOf()
+    var info = MutableLiveData<MutableList<InfoRequest>>(mutableListOf())
 
 
     init{
@@ -44,9 +45,9 @@ class NotificationViewModel @Inject constructor(
 
 
 
-    suspend fun getInfoRequests() {
+     fun getInfoRequests() {
          GlobalScope.launch {
-             info = repository.getAllInfoRequests().toMutableList()
+             info.postValue(repository.getAllInfoRequests().toMutableList())
          }
          return
     }
@@ -66,16 +67,17 @@ class NotificationViewModel @Inject constructor(
 
             }
         }
-        info.remove(infoRequest)
-
+        println("Log -> " + info.value?.size)
+        info.value = info.value?.filter { it != infoRequest }?.toMutableList()
+        println("Log -> " + info.value?.size)
         return
 
     }
 
-    fun denyInfo(guestPK: String,infoRequest: InfoRequest) {
+    fun denyInfo(infoRequest: InfoRequest) {
 
 
-        //info.remove(infoRequest)
+        info.value = info.value?.filter { it != infoRequest }?.toMutableList()
 
         return
 

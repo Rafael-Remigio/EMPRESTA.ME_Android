@@ -299,7 +299,7 @@ fun ScreenFeed(navController: NavController, viewModel: feedViewModel = hiltView
                                     Image(
                                         painter = painterResource(id = viewModel.getImageByCategory(
                                             // get vector by category
-                                            availableItemsToLend?.get(item)!!.category
+                                            availableItemsToBorrow?.get(item)!!.category
 
                                         )),
                                         contentDescription = availableItemsToBorrow?.get(item)?.name,
