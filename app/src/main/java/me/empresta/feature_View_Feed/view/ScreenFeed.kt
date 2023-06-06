@@ -65,6 +65,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import me.empresta.R
 import me.empresta.Navigation.EmprestameScreen
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 @Composable
@@ -487,11 +488,12 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                         )
                         Column() {
                             Text(text=view.get_name(item.user))
+
+                            Text(style = MaterialTheme.typography.h5,
+                                color = BrightOrange,
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                         }
-                        Text(style = MaterialTheme.typography.h5,
-                            color = BrightOrange,
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                     }
 
 
@@ -529,7 +531,9 @@ fun LendingDialog(item:ItemAnnouncement, value: String, setShowDialog: (Boolean)
                         }
                     }
                     else {
-                        Text(text = view.get_contact(item.user))
+                        Spacer(modifier = Modifier.size(20.dp))
+
+                        Text(style = MaterialTheme.typography.h5,modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center,text = view.get_contact(item.user))
                     }
 
 
@@ -612,11 +616,13 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                         )
                         Column() {
                             Text(text = view.get_name(item.user))
+
+
+                            Text(style = MaterialTheme.typography.h5,
+                                color = BrightOrange,
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                         }
-                        Text(style = MaterialTheme.typography.h5,
-                            color = BrightOrange,
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,text = view.getScore(item.user))
                     }
 
 
@@ -657,14 +663,12 @@ fun BorrowingDialog(item:ItemRequest, value: String, setShowDialog: (Boolean) ->
                         }
                     }
                     else {
-                        Text(text = view.get_contact(item.user))
+                        Spacer(modifier = Modifier.size(20.dp))
+
+                        Text(style = MaterialTheme.typography.h5,modifier = Modifier.fillMaxWidth(),text = view.get_contact(item.user))
                     }
 
 
-                    Text(style = MaterialTheme.typography.h5,
-                        color = BrightOrange,
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold,text = view.getScore(item.user))
 
 
                 }
