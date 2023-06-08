@@ -184,7 +184,7 @@ items to help others and build trust. EMPRESTA.ME also targets
 The architecture we developed aims to provide solutions for both our
 functional and non-functional requirements.
 
-![Example figure](images/architecture.png){#fig:example width="60%"}
+![Example figure](images/architecture.png)
 
 As explained earlier, every user should have stored a view of the trust
 topology that matches their connections and interests. Additionally,
@@ -221,8 +221,7 @@ We use RabbitMQ as a message broker, specifically leveraging the
 Publish/Subscribe patterns to handle message distribution between peers.
 
 A topic is assigned to each user in the network, which holds exclusive
-publishing rights for messages [4](#fig:example2){reference-type="ref"
-reference="fig:example2"}. Users utilize these topics to disseminate
+publishing rights for messages [4](#fig:example2). Users utilize these topics to disseminate
 various messages, such as vouches, to interested parties. Concurrently,
 users have the ability to subscribe to topics belonging to other users,
 enabling them to receive updates and notifications. This mechanism
@@ -233,7 +232,7 @@ In addition to expressing interest in specific participants, users may
 have a requirement to receive notifications from any user within a
 specified distance threshold on the trust topology. To address this, we
 employ a method we call Topology Spreading
-[5](#fig:example3){reference-type="ref" reference="fig:example3"}. This
+[5](#fig:example3). This
 process involves users recursively probing the leaf nodes in their trust
 topology for neighboring nodes until the distance threshold is
 surpassed. By employing this approach, users can effectively expand
